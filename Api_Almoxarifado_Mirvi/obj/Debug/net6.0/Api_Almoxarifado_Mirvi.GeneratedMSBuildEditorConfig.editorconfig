@@ -1,0 +1,65 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Api_Almoxarifado_Mirvi
+build_property.RootNamespace = Api_Almoxarifado_Mirvi
+build_property.ProjectDir = C:\Users\Cristian\Documents\SistemWarehouse\Api_Almoxarifado_Mirvi\Api_Almoxarifado_Mirvi\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Cristian\Documents\SistemWarehouse\Api_Almoxarifado_Mirvi\Api_Almoxarifado_Mirvi
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/Documents/SistemWarehouse/Api_Almoxarifado_Mirvi/Api_Almoxarifado_Mirvi/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-yxevlo7hn2
