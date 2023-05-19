@@ -18,7 +18,6 @@
             Nome = nome;
             Prateleiras = prateleiras;
         }
-
         public void AddEnderecos(Produto pr)
         {
             Produto.Add(pr);

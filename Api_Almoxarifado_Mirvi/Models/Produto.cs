@@ -8,7 +8,8 @@ namespace Api_Almoxarifado_Mirvi.Models
     public class Produto
     {
         public int Id { get; set; }
-        public string Local { get; set; }
+        public Enderecos? Enderecos { get; set; }
+        public Prateleiras Prateleiras { get; set; }
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus status { get; set; }
@@ -29,21 +30,20 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? S_N { get; set; }
         public string? Valor { get; set; }
         public string? Modelo { get; set; }
-        public Enderecos? Enderecos { get; set; }
-        public Prateleiras Prateleiras { get; set; }
 
         public Produto()
         {
         }
 
-        public Produto(int id, string local, string descricao, string categoria, ProdutoStatus status,
-            DateTime data, string codigoDeCompra, string uso, string c_STalisca, string hpn,
-            string referencia, string h225_H300, string fornecedor, string diametro, string comprimento,
-            string conexao, string medida, string fabricante, string marca, string n, string valor,
-            string modelo, Enderecos? enderecos, Prateleiras prateleiras)
+        public Produto(int id, Enderecos? enderecos, Prateleiras prateleiras, string descricao, 
+            string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra, 
+            string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300,
+            string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida,
+            string? fabricante, string? marca, string? n, string? valor, string? modelo)
         {
             Id = id;
-            Local = local;
+            Enderecos = enderecos;
+            Prateleiras = prateleiras;
             Descricao = descricao;
             Categoria = categoria;
             this.status = status;
@@ -64,8 +64,6 @@ namespace Api_Almoxarifado_Mirvi.Models
             S_N = n;
             Valor = valor;
             Modelo = modelo;
-            Enderecos = enderecos;
-            Prateleiras = prateleiras;
         }
     }
 }

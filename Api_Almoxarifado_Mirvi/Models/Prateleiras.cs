@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string SubDivisoes { get; set; }
         public Corredores Corredores { get; set; }
         public ICollection<Enderecos> Enderecos { get; set; }
         public ICollection<Produto> Produto { get; set; }
@@ -13,13 +12,14 @@
         {
         }
 
-        public Prateleiras(int id, string nome, string subDivisoes, Corredores corredores)
+        public Prateleiras(int id, string nome, Corredores corredores)
         {
             Id = id;
             Nome = nome;
-            SubDivisoes = subDivisoes;
             Corredores = corredores;
         }
+
+
 
         public void AddProdutoPrateleira(Produto pr)
         {
