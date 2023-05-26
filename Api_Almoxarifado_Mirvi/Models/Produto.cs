@@ -1,6 +1,6 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.Enums;
 using MessagePack;
-using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Api_Almoxarifado_Mirvi.Models
@@ -8,8 +8,10 @@ namespace Api_Almoxarifado_Mirvi.Models
     public class Produto
     {
         public int Id { get; set; }
-        public Enderecos? Enderecos { get; set; }
-        public Prateleiras Prateleiras { get; set; }
+        public Endereco? Enderecos { get; set; }
+        public int? EnderecosId { get; set; }
+        public Prateleira Prateleiras { get; set; }
+        public int PrateleirasId { get; set; }
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus status { get; set; }
@@ -35,8 +37,8 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int id, Enderecos? enderecos, Prateleiras prateleiras, string descricao, 
-            string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra, 
+        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao,
+            string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra,
             string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300,
             string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida,
             string? fabricante, string? marca, string? n, string? valor, string? modelo)

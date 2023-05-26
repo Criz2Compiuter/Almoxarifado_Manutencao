@@ -1,4 +1,5 @@
-﻿namespace Api_Almoxarifado_Mirvi.Models;
+﻿using Api_Almoxarifado_Mirvi.Models.Enums;
+namespace Api_Almoxarifado_Mirvi.Models;
 
 public class SeedingService
 {
@@ -9,31 +10,45 @@ public class SeedingService
         _context = context;
     }
 
-    public void Seed()
+    public void Seed(IServiceProvider serviceProvider)
     {
         if (_context.Almoxarifado.Any() ||
-            _context.Corredores.Any() ||
-            _context.Prateleiras.Any() ||
-            _context.Enderecos.Any() ||
-            _context.Produtos.Any())
+            _context.Corredor.Any() ||
+            _context.Prateleira.Any() ||
+            _context.Endereco.Any() ||
+            _context.Produto.Any())
         {
             return; //O Banco de dados ja foi populado
         }
 
         Almoxarifado a1 = new Almoxarifado(1, "Mirvi Brasil");
 
-        Corredores c1 = new Corredores(1, "A", a1);
-        Corredores c2 = new Corredores(2, "B", a1);
-        Corredores c3 = new Corredores(3, "C", a1);
+        Corredor c1 = new Corredor(1, "A", a1);
+        Corredor c2 = new Corredor(2, "B",a1);
+        Corredor c3 = new Corredor(3, "C", a1);
 
-        Prateleiras p1 = new Prateleiras(1, "A1", c1);
-        Prateleiras p2 = new Prateleiras(2, "A2", c2);
-        Prateleiras p3 = new Prateleiras(3, "A3", c3);
+        Prateleira p1 = new Prateleira(1, "A1", c1);
+        Prateleira p2 = new Prateleira(2, "A2", c2);
+        Prateleira p3 = new Prateleira(3, "A3", c3);
 
-        Enderecos e1 = new Enderecos(1, "AF1", p1);
-        Enderecos e2 = new Enderecos(2, "AF2", p2);
-        Enderecos e3 = new Enderecos(3, "AF3", p3);
+        Endereco e1 = new Endereco(1, "AF1", p1);
+        Endereco e2 = new Endereco(2, "AF2", p2);
+        Endereco e3 = new Endereco(3, "AF3", p3);
 
-        Produto pr1 = new Produto(1, p1, "Parafuso", 0, 17.15, );
+        Produto pr1 = new Produto(1, e1, p1, "M8", "", ProdutoStatus.NoLimite, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        Produto pr2 = new Produto(2, e2, p2, "M5", "", (ProdutoStatus)1, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        Produto pr3 = new Produto(3, e3, p3, "M6", "", (ProdutoStatus)2, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+
+        _context.Almoxarifado.AddRange(a1);
+
+        _context.Corredor.AddRange(c1, c2, c3);
+
+        _context.Prateleira.AddRange(p1, p2, p3);
+
+        _context.Endereco.AddRange(e1, e2, e3);
+
+        _context.Produto.AddRange(pr1, pr2, pr3);
+
+        _context.SaveChanges();
     }
 }

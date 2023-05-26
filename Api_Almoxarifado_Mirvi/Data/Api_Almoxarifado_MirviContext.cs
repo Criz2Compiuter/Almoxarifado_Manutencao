@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Models;
 
-namespace Api_Almoxarifado_Mirvi.Data
+namespace Api_Almoxarifado_Mirvi.Models
 {
     public class Api_Almoxarifado_MirviContext : DbContext
     {
@@ -15,9 +15,9 @@ namespace Api_Almoxarifado_Mirvi.Data
         }
 
         public DbSet<Almoxarifado> Almoxarifado { get; set; } = default!;
-        public DbSet<Corredores> Corredores { get; set; }
-        public DbSet<Prateleiras> Prateleiras { get; set; }
-        public DbSet<Enderecos> Enderecos { get; set; }
-        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Corredor> Corredor { get; set; }
+        public DbSet<Prateleira> Prateleira { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Produto> Produto { get; set; }
     }
 }

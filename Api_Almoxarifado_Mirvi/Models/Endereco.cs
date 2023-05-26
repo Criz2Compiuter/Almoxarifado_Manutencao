@@ -1,18 +1,19 @@
 ﻿namespace Api_Almoxarifado_Mirvi.Models
 {
-    public class Enderecos
+    public class Endereco
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public Prateleiras Prateleiras { get; set; }
+        public Prateleira Prateleiras { get; set; }
+        public int PrateleirasId { get; set; }
         public ICollection<Produto>? Produto { get; set; }
 
-        public Enderecos()
+        public Endereco()
         {
             
         }
 
-        public Enderecos(int id, string nome, Prateleiras prateleiras)
+        public Endereco(int id, string nome, Prateleira prateleiras)
         {
             Id = id;
             Nome = nome;

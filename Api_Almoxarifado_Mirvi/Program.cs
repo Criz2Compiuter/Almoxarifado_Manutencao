@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Api_Almoxarifado_Mirvi.Data;
+using Api_Almoxarifado_Mirvi.Models;
 using Microsoft.Extensions.Options;
+using Api_Almoxarifado_Mirvi.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Api_Almoxarifado_Mirvi
 {
@@ -16,10 +18,28 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddDbContext<Api_Almoxarifado_MirviContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+            builder.Services.AddScoped<SeedingService>();
+            builder.Services.AddScoped<AlmoxarifadoService>();
+            builder.Services.AddScoped<CorredorService>();
+            builder.Services.AddScoped<PrateleiraService>();
+            builder.Services.AddScoped<EnderecoService>();
+            builder.Services.AddScoped<ProdutoService>();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+
+                // Resolve the SeedingService from the service provider
+                var seedingService = serviceProvider.GetRequiredService<SeedingService>();
+
+                // Call the Seed method on the SeedingService
+                seedingService.Seed(serviceProvider);
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

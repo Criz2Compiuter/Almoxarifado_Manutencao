@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public ICollection<Corredores> Corredores { get; set; } = new List<Corredores>();
+        public ICollection<Corredor> Corredor { get; set; } = new List<Corredor>();
 
         public Almoxarifado()
         {

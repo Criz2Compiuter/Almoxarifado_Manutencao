@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Api_Almoxarifado_Mirvi.Data;
+using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Models;
+using Api_Almoxarifado_Mirvi.Services;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
@@ -22,9 +23,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         // GET: Almoxarifados
         public async Task<IActionResult> Index()
         {
-              return _context.Almoxarifado != null ? 
-                          View(await _context.Almoxarifado.ToListAsync()) :
-                          Problem("Entity set 'Api_Almoxarifado_MirviContext.Almoxarifado'  is null.");
+            return _context.Almoxarifado != null ?
+                        View(await _context.Almoxarifado.ToListAsync()) :
+                        Problem("Entity set 'Api_Almoxarifado_MirviContext.Almoxarifado'  is null.");
         }
 
         // GET: Almoxarifados/Details/5
@@ -150,14 +151,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 _context.Almoxarifado.Remove(almoxarifado);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AlmoxarifadoExists(int id)
         {
-          return (_context.Almoxarifado?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Almoxarifado?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
