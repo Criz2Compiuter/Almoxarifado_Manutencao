@@ -4,6 +4,7 @@ using Api_Almoxarifado_Mirvi.Models;
 using Microsoft.Extensions.Options;
 using Api_Almoxarifado_Mirvi.Services;
 using Microsoft.Extensions.Configuration;
+using System.Globalization;
 
 namespace Api_Almoxarifado_Mirvi
 {
@@ -17,7 +18,7 @@ namespace Api_Almoxarifado_Mirvi
 
             builder.Services.AddDbContext<Api_Almoxarifado_MirviContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
+            
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<AlmoxarifadoService>();
             builder.Services.AddScoped<CorredorService>();
@@ -40,6 +41,16 @@ namespace Api_Almoxarifado_Mirvi
                 // Call the Seed method on the SeedingService
                 seedingService.Seed(serviceProvider);
             }
+
+            var ptBR = new CultureInfo("pt-BR");
+            var localizationOption = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(ptBR),
+                SupportedCultures = new List<CultureInfo> { ptBR },
+                SupportedUICultures = new List<CultureInfo> { ptBR }
+            };
+
+            app.UseRequestLocalization(localizationOption);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

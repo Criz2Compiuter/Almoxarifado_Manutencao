@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Endereco>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Endereco";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <table class="table tavle-striped table-hover">
     <thead>
@@ -19,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Produto)
+                @Html.DisplayNameFor(model => model.Prateleiras)
             </th>
         </tr>
     </thead>
@@ -34,7 +31,7 @@
                     @Html.DisplayFor(modelitem => item.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelitem => item.Produto)
+                    @Html.DisplayFor(modelitem => item.Prateleiras.Nome)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
@@ -45,3 +42,6 @@
         }
     </tbody>
 </table>
+<p>
+    <a class="btn btn-success" asp-action="Create">Criar novo Endereco</a>
+</p>

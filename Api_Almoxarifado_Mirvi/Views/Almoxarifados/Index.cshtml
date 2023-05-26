@@ -1,12 +1,9 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Almoxarifado>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Almoxarifados";
 }
 <h2>@ViewData["Title"]</h2>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <table class="table table-striped table-hover">
     <thead>
@@ -38,3 +35,7 @@
         }
     </tbody>
 </table>
+<hr />
+<p>
+    <a asp-action="Create">Criar um novo almoxarifado</a>
+</p>

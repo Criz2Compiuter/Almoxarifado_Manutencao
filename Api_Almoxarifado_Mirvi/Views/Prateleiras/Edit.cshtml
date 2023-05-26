@@ -1,0 +1,31 @@
+﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroPrateleira
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Prateleira</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Prateleira.Id" />
+            <div class="form-group">
+                <label asp-for="Prateleira.Id" class="control-label"></label>
+                <input asp-for="Prateleira.Id" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Prateleira.Nome" class="control-label"></label>
+                <input asp-for="Prateleira.Nome" class="form-control" />
+            </div>
+            <div class="form-group">
+                <p>Corredor das prateleiras</p>
+                <select asp-for="Prateleira.CorredorId" asp-items="@(new SelectList(Model.Corredor, "Id", "Descricao"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

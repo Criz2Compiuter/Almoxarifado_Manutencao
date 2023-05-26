@@ -37,11 +37,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao,
-            string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra,
-            string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300,
-            string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida,
-            string? fabricante, string? marca, string? n, string? valor, string? modelo)
+        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo)
         {
             Id = id;
             Enderecos = enderecos;

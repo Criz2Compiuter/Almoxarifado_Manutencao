@@ -26,7 +26,7 @@
         {
             Produto.Add(pr);
         }
-
+        
         public void RemoveProdutoPrateleira(Produto pr)
         {
             Produto.Remove(pr);
