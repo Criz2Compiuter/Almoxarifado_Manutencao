@@ -15,6 +15,9 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus status { get; set; }
+        [Display(Name = "Data")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime Data { get; set; }
         public string? CodigoDeCompra { get; set; }
         public string? Uso { get; set; }
@@ -32,12 +35,14 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? S_N { get; set; }
         public string? Valor { get; set; }
         public string? Modelo { get; set; }
+        [DisplayFormat(DataFormatString =  "{0:F2}")]
+        public int Quantidade { get; set; }
 
         public Produto()
         {
         }
 
-        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo)
+        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status, DateTime data, string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo, int quantidade)
         {
             Id = id;
             Enderecos = enderecos;
@@ -62,6 +67,7 @@ namespace Api_Almoxarifado_Mirvi.Models
             S_N = n;
             Valor = valor;
             Modelo = modelo;
+            Quantidade = quantidade;
         }
     }
 }
