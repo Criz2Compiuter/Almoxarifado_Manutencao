@@ -19,35 +19,35 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _almoxarifadoService = almoxarifadoService;
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var list = _corredorService.FindAll();
+            var list = await _corredorService.FindAllAsync();
             return View(list);
         }
         
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var almorifados = _almoxarifadoService.FindAll();
+            var almorifados = await _almoxarifadoService.FindAllAsync();
             var ViewModel = new FormularioCadastroCorredor { Almoxarifados = almorifados };
             return View(ViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Corredor corredor)
+        public async Task<IActionResult> Create(Corredor corredor)
         {
-            _corredorService.Insert(corredor);
+            await _corredorService.InsertAsync(corredor);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _corredorService.FindById(id.Value);
+            var obj = await _corredorService.FindByIdAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id fornecido nao encontrado" });
@@ -58,19 +58,19 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _corredorService.Remove(id);
+            await _corredorService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var obj = _corredorService.FindById(id.Value);
+            var obj = await _corredorService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return NotFound();
@@ -79,27 +79,27 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _corredorService.FindById(id.Value);
+            var obj = await _corredorService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id fornecido nao encontrado" }); ;
             }
 
-            List<Almoxarifado> almoxarifados = _almoxarifadoService.FindAll();
+            List<Almoxarifado> almoxarifados = await _almoxarifadoService.FindAllAsync();
             FormularioCadastroCorredor viewModel = new FormularioCadastroCorredor { Corredor = obj, Almoxarifados = almoxarifados };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Corredor corredor)
+        public async Task<IActionResult> Edit(int id, Corredor corredor)
         {
             if (id != corredor.Id)
             {
@@ -107,7 +107,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
             try
             {
-                _corredorService.Update(corredor);
+                await _corredorService.UpdateAsync(corredor);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

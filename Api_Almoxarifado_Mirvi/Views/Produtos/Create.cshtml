@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="All" class="text_danger"></div>
             <div class="form-group">
                 <label asp-for="Produto.Id" class="control-label"></label>
                 <input asp-for="Produto.Id" class="form-control" />
@@ -17,14 +18,17 @@
             <div class="form-group">
                 <label asp-for="Produto.Descricao" class="control-label"></label>
                 <input asp-for="Produto.Descricao" class="form-control" />
+                <span asp-validation-for="Produto.Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Produto.EnderecosId" class="control-label"></label>
                 <input asp-for="Produto.EnderecosId" class="form-control" />
+                <span asp-validation-for="Produto.EnderecosId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Produto.PrateleirasId" class="control-label"></label>
                 <input asp-for="Produto.PrateleirasId" class="form-control" />
+                <span asp-validation-for="Produto.PrateleirasId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -32,3 +36,8 @@
         </form>
     </div>
 </div>
+@section Scripts{
+    @{
+        {await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+}

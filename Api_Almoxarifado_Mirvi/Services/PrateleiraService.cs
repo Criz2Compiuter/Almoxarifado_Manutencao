@@ -13,39 +13,47 @@ namespace Api_Almoxarifado_Mirvi.Services
             _context = context;
         }
 
-        public List<Prateleira> FindAll()
+        public async Task<List<Prateleira>> FindAllAsync()
         {
-            return _context.Prateleira.ToList();
+            return await _context.Prateleira.OrderBy(x => x.Nome).ToListAsync();
         }
 
-        public void Insert(Prateleira obj)
+        public async Task InsertAsync(Prateleira obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Prateleira FindById(int id)
+        public async Task<Prateleira> FindByIdAsync(int id)
         {
-            return _context.Prateleira.Include(obj => obj.Corredor).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Prateleira.Include(obj => obj.Corredor).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Prateleira.Find(id);
-            _context.Prateleira.Remove(obj);
-            _context.SaveChanges();
+            try
+            {
+                var obj = _context.Prateleira.Find(id);
+                _context.Prateleira.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
         }
 
-        public void Update(Prateleira obj)
+        public async Task UpdateAsync(Prateleira obj)
         {
-            if (!_context.Prateleira.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Prateleira.AnyAsync(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id nao encontrado");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {

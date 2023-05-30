@@ -13,39 +13,47 @@ namespace Api_Almoxarifado_Mirvi.Services
             _context = context;
         }
 
-        public List<Corredor> FindAll()
+        public async Task<List<Corredor>> FindAllAsync()
         {
-            return _context.Corredor.ToList();
+            return await _context.Corredor.ToListAsync();
         }
 
-        public void Insert(Corredor obj)
+        public async Task InsertAsync(Corredor obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Corredor FindById(int id)
+        public async Task<Corredor> FindByIdAsync(int id)
         {
-            return _context.Corredor.Include(obj => obj.Almoxarifado).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Corredor.Include(obj => obj.Almoxarifado).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Corredor.Find(id);
-            _context.Corredor.Remove(obj);
-            _context.SaveChanges();
+            try
+            {
+                var obj = _context.Corredor.Find(id);
+                _context.Corredor.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
         }
 
-        public void Update(Corredor obj)
+        public async Task UpdateAsync(Corredor obj)
         {
-            if (!_context.Corredor.Any(x => x.Id == obj.Id))
+            bool hasAny = _context.Corredor.Any(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id nao encontrado");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {

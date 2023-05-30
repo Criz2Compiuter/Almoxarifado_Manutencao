@@ -7,11 +7,13 @@ namespace Api_Almoxarifado_Mirvi.Models
 {
     public class Produto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public Endereco? Enderecos { get; set; }
         public int? EnderecosId { get; set; }
         public Prateleira Prateleiras { get; set; }
         public int PrateleirasId { get; set; }
+        [Required(ErrorMessage = "{0} nao informado")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage ="A {0} do produto deve ter de {1} a {2} caracter")]
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus status { get; set; }
@@ -35,7 +37,8 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? S_N { get; set; }
         public string? Valor { get; set; }
         public string? Modelo { get; set; }
-        [DisplayFormat(DataFormatString =  "{0:F2}")]
+        [DisplayFormat(DataFormatString =  "{0}")]
+        [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
         public int Quantidade { get; set; }
 
         public Produto()

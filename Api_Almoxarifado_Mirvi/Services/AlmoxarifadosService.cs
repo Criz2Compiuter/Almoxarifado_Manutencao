@@ -1,6 +1,7 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Api_Almoxarifado_Mirvi.Services
 {
@@ -13,34 +14,42 @@ namespace Api_Almoxarifado_Mirvi.Services
             _context = context;
         }
 
-        public List<Almoxarifado> FindAll()
+        public async Task<List<Almoxarifado>> FindAllAsync()
         {
-            return _context.Almoxarifado.OrderBy(x => x.Nome).ToList();
+            return await _context.Almoxarifado.OrderBy(x => x.Nome).ToListAsync();
         }
 
-        public void Insert(Almoxarifado obj)
+        public async Task InsertAsync(Almoxarifado obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Almoxarifado.Find(id);
-            _context.Almoxarifado.Remove(obj);
-            _context.SaveChanges();
+            try
+            {
+                var obj = await _context.Almoxarifado.FindAsync(id);
+                _context.Almoxarifado.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
         }
 
-        public void Update(Almoxarifado obj)
+        public async Task UpdateAsync(Almoxarifado obj)
         {
-            if (!_context.Almoxarifado.Any(x => x.Id == obj.Id))
+            bool hasAny = _context.Almoxarifado.Any(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id nao encontrado");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {

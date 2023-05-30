@@ -18,33 +18,33 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _prateleiraService = prateleiraService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _enderecoService.FindAll();
+            var list = await _enderecoService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Endereco endereco)
+        public async Task<IActionResult> Create(Endereco endereco)
         {
-            _enderecoService.Insert(endereco);
+            await _enderecoService.InsertAsync(endereco);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _enderecoService.FindById(id.Value);
+            var obj = await _enderecoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -55,20 +55,20 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _enderecoService.Remove(id);
+            await _enderecoService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _enderecoService.FindById(id.Value);
+            var obj = await _enderecoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -77,27 +77,27 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _enderecoService.FindById(id.Value);
+            var obj = await _enderecoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id fornecido nao encontrado" }); ;
             }
 
-            List<Prateleira> prateleiras = _prateleiraService.FindAll();
+            List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
             FormularioCadastroEndereco viewModel = new FormularioCadastroEndereco { Endereco = obj, Prateleira = prateleiras };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Endereco endereco)
+        public async Task<IActionResult> Edit(int id, Endereco endereco)
         {
             if (id != endereco.Id)
             {
@@ -105,7 +105,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
             try
             {
-                _enderecoService.Update(endereco);
+                await _enderecoService.UpdateAsync(endereco);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
@@ -114,7 +114,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public IActionResult Error(string message)
+        public async Task<IActionResult> Error(string message)
         {
             var viewModel = new ErrorViewModel
             {

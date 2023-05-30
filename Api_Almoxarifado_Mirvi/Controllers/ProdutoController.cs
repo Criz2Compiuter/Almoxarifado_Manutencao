@@ -20,35 +20,39 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _enderecoService = enderecoService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _produtoService.FindAll();
+            var list = await _produtoService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var prateleiras = _prateleiraService.FindAll();
+            var prateleiras = await _prateleiraService.FindAllAsync();
             var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Produto produto)
+        public async Task<IActionResult> Create(Produto produto)
         {
-            _produtoService.Insert(produto);
+            if (!ModelState.IsValid)
+            {
+                return View(produto);
+            }
+            await _produtoService.InsertAsync(produto);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao foi fornecido" });
             }
 
-            var obj = _produtoService.FindById(id.Value);
+            var obj = _produtoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -59,20 +63,27 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _produtoService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _produtoService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegreityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
+            }
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _produtoService.FindById(id.Value);
+            var obj = await _produtoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -81,45 +92,52 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = _produtoService.FindById(id.Value);
+            var obj = await _produtoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" }); ;
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
 
-            List<Prateleira> prateleiras = _prateleiraService.FindAll();
-            List<Endereco>? enderecos = _enderecoService.FindAll();
+            List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
+            List<Endereco>? enderecos = await _enderecoService.FindAllAsync();
             FormularioCadastroProduto viewModel = new FormularioCadastroProduto { Produto = obj, Prateleira = prateleiras, Endereco = enderecos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit (int id, Produto produto)
+        public async Task<IActionResult> Edit(int id, Produto produto)
         {
-            if(id != produto.Id)
+            if (!ModelState.IsValid)
+            {
+                var prateleiras = await _prateleiraService.FindAllAsync();
+                var enderecos = await _enderecoService.FindAllAsync();
+                var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Produto = produto };
+                return View(viewModel);
+            }
+            if (id != produto.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Id fornecido nao correspondem" });
             }
             try
             {
-                _produtoService.Update(produto);
+                await _produtoService.UpdateAsync(produto);
                 return RedirectToAction(nameof(Index));
             }
-            catch(ApplicationException e)
+            catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
 
-        public IActionResult Error(string message)
+        public async Task<IActionResult> Error(string message)
         {
             var viewModel = new ErrorViewModel
             {

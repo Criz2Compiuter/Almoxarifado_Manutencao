@@ -13,39 +13,47 @@ namespace Api_Almoxarifado_Mirvi.Services
             _context = context;
         }
 
-        public List<Endereco> FindAll()
+        public async Task<List<Endereco>> FindAllAsync()
         {
             return _context.Endereco.ToList();
         }
 
-        public void Insert(Endereco obj)
+        public async Task InsertAsync(Endereco obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Endereco FindById(int id)
+        public async Task<Endereco> FindByIdAsync(int id)
         {
-            return _context.Endereco.Include(obj => obj.Prateleiras).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Endereco.Include(obj => obj.Prateleiras).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Endereco.Find(id);
-            _context.Endereco.Remove(obj);
-            _context.SaveChanges();
+            try
+            {
+                var obj = _context.Endereco.Find(id);
+                _context.Endereco.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
         }
 
-        public void Update(Endereco obj)
+        public async Task UpdateAsync(Endereco obj)
         {
-            if (!_context.Endereco.Any(x => x.Id == obj.Id))
+            bool hasAny = _context.Endereco.Any(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id nao encontrado");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {
