@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oJhacHMzJrrR/HlViI3uBUxfz5Epy/hfY6PHIgTKQEKiIjWo5WzMt7QL13UzbpXZHrAw+nudX2mpivTKDUt+Ag==",
+  "dgSpecHash": "AKxHimzVdQs8J8h2EkIT0PvMiXbbRDQdq1iFlNggjUcd0OOu74hO8xHfOeHdwUZLpmj5M8n0yzByRuKUGEOFCQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+  "projectFilePath": "C:\\Users\\Cristian\\Documents\\SistemWarehouse\\test\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Cristian\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
