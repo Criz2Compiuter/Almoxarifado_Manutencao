@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <p>Corredor das prateleiras</p>
-                <select asp-for="Prateleira.CorredorId" asp-items="@(new SelectList(Model.Corredor, "Id", "Descricao"))" class="form-control"></select>
+                <select asp-for="Prateleira.CorredorId" asp-items="@(new SelectList(Model.Corredores, "Id", "Descricao"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

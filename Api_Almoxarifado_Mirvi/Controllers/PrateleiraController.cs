@@ -1,6 +1,7 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -27,8 +28,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Create()
         {
             var corredores = await _corredorService.FindAllAsync();
-            var viewModel = new FormularioCadastroPrateleira { Corredor = corredores };
-            return View();
+            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -59,8 +60,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _prateleiraService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _prateleiraService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegreityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -93,7 +101,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             List<Corredor> corredores = await _corredorService.FindAllAsync();
-            FormularioCadastroPrateleira viewModel = new FormularioCadastroPrateleira { Prateleira = obj, Corredor = corredores};
+            FormularioCadastroPrateleira viewModel = new FormularioCadastroPrateleira { Prateleira = obj, Corredores = corredores};
             return View(viewModel);
         }
 
@@ -101,6 +109,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Prateleira prateleira)
         {
+            if (!ModelState.IsValid)
+            {
+                var corredores = await _corredorService.FindAllAsync();
+                var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira };
+            }
             if (id != prateleira.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Ids fornecido nao correspondem" });

@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Corredor>> FindAllAsync()
         {
-            return await _context.Corredor.ToListAsync();
+            return await _context.Corredor.OrderBy(x => x.Descricao).ToListAsync();
         }
 
         public async Task InsertAsync(Corredor obj)
@@ -37,7 +37,7 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Corredor.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException e)
+            catch (IntegreityException e)
             {
                 throw new IntegreityException(e.Message);
             }
@@ -55,9 +55,9 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (IntegreityException e)
             {
-                throw new DbConcurrencyException(e.Message);
+                throw new IntegreityException(e.Message);
             }
         }
     }

@@ -3,6 +3,6 @@
     public class FormularioCadastroPrateleira
     {
         public Prateleira Prateleira { get; set; }
-        public ICollection<Corredor> Corredor { get; set; }
+        public ICollection<Corredor> Corredores { get; set; }
     }
 }

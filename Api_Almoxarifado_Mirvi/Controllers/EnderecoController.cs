@@ -1,6 +1,7 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -26,7 +27,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View();
+            var prateleiras = await _prateleiraService.FindAllAsync();
+            var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras };
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -57,8 +60,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _enderecoService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _enderecoService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegreityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -99,9 +109,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Endereco endereco)
         {
+            if (!ModelState.IsValid)
+            {
+                var prateleiras = await _prateleiraService.FindAllAsync();
+                var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Endereco = endereco };
+            }
             if (id != endereco.Id)
             {
-                return RedirectToAction(nameof(Error), new { message = "Os Ids fornecido nao correspondem" });
+                return RedirectToAction(nameof(Error), new { message = "Os Id fornecido nao correspondem" });
             }
             try
             {

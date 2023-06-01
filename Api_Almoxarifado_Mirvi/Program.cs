@@ -25,6 +25,7 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddScoped<PrateleiraService>();
             builder.Services.AddScoped<EnderecoService>();
             builder.Services.AddScoped<ProdutoService>();
+            builder.Services.AddScoped<BuscasService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

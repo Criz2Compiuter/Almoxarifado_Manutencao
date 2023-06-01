@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Endereco>> FindAllAsync()
         {
-            return _context.Endereco.ToList();
+            return await _context.Endereco.ToListAsync();
         }
 
         public async Task InsertAsync(Endereco obj)
@@ -37,7 +37,7 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Endereco.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException e)
+            catch (IntegreityException e)
             {
                 throw new IntegreityException(e.Message);
             }
@@ -55,9 +55,9 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (IntegreityException e)
             {
-                throw new DbConcurrencyException(e.Message);
+                throw new IntegreityException(e.Message);
             }
         }
     }

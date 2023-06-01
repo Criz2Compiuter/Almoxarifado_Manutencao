@@ -28,8 +28,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create()
         {
+            var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras };
+            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos };
             return View(viewModel);
         }
 
@@ -37,10 +38,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Produto produto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(produto);
-            }
             await _produtoService.InsertAsync(produto);
             return RedirectToAction(nameof(Index));
         }
@@ -52,7 +49,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id nao foi fornecido" });
             }
 
-            var obj = _produtoService.FindByIdAsync(id.Value);
+            var obj = await _produtoService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -72,7 +69,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
             catch (IntegreityException e)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
 

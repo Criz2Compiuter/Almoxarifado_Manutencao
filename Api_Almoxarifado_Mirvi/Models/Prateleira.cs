@@ -41,5 +41,10 @@
         {
             Endereco.Remove(end);
         }
+
+        public double TotalObjeto(DateTime initial, DateTime final)
+        {
+            return Produto.Where(sr => sr.Data >= initial && sr.Data <= final).Sum(sr => sr.Quantidade);
+        }
     }
 }

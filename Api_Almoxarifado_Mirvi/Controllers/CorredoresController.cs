@@ -1,8 +1,8 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging.Signing;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -19,7 +19,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _almoxarifadoService = almoxarifadoService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var list = await _corredorService.FindAllAsync();
             return View(list);
@@ -60,20 +60,28 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _corredorService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _corredorService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegreityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
             var obj = await _corredorService.FindByIdAsync(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
 
             return View(obj);
@@ -101,6 +109,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Corredor corredor)
         {
+            if (!ModelState.IsValid)
+            {
+                var almoxarifado = await _almoxarifadoService.FindAllAsync();
+                var viewModel = new FormularioCadastroCorredor { Almoxarifados = almoxarifado, Corredor = corredor };
+            }
             if (id != corredor.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Ids fornecido nao correspondem" });

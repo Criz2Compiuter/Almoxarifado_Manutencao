@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     [DbContext(typeof(Api_Almoxarifado_MirviContext))]
-    [Migration("20230524133247_PrimeiraMigration")]
+    [Migration("20230601113624_PrimeiraMigration")]
     partial class PrimeiraMigration
     {
         /// <inheritdoc />
@@ -99,7 +99,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Produto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -123,7 +123,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Diametro")
                         .HasColumnType("longtext");
@@ -153,6 +154,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<int>("PrateleirasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
