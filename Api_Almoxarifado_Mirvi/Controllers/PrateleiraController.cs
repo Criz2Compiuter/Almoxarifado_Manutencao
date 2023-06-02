@@ -36,6 +36,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Prateleira prateleira)
         {
+            if (!ModelState.IsValid)
+            {
+                var corredores = await _corredorService.FindAllAsync();
+                var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira };
+                return View(viewModel);
+            }
             await _prateleiraService.InsertAsync(prateleira);
             return RedirectToAction(nameof(Index));
         }

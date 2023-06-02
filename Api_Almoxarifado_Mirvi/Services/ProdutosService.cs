@@ -39,7 +39,7 @@ namespace Api_Almoxarifado_Mirvi.Services
             }
             catch (DbUpdateException e)
             {
-                throw new IntegreityException(e.Message);
+                throw new IntegreityException("Produto nao pode ser deletado");
             }
         }
 
@@ -55,9 +55,9 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             } 
-            catch (DbUpdateConcurrencyException e) 
+            catch (DbUpdateException e) 
             {
-                throw new DbConcurrencyException(e.Message);
+                throw new IntegreityException(e.Message);
             }
         }
     }

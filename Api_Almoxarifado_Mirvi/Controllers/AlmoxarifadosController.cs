@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Exceptions;
+using Api_Almoxarifado_Mirvi.Models.ViewModels;
+using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
@@ -142,23 +145,40 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Almoxarifado == null)
+            try
             {
-                return Problem("Entity set 'Api_Almoxarifado_MirviContext.Almoxarifado'  is null.");
-            }
-            var almoxarifado = await _context.Almoxarifado.FindAsync(id);
-            if (almoxarifado != null)
-            {
-                _context.Almoxarifado.Remove(almoxarifado);
-            }
+                if (_context.Almoxarifado == null)
+                {
+                    return Problem("Entity set 'Api_Almoxarifado_MirviContext.Almoxarifado'  is null.");
+                }
+                var almoxarifado = await _context.Almoxarifado.FindAsync(id);
+                if (almoxarifado != null)
+                {
+                    _context.Almoxarifado.Remove(almoxarifado);
+                }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Esse almoxarifado nao pode ser deletado pois esta cadastro com objetos dentro" });
+            }
         }
 
         private bool AlmoxarifadoExists(int id)
         {
             return (_context.Almoxarifado?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        public async Task<IActionResult> Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

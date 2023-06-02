@@ -33,13 +33,13 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             try
             {
-                var obj = _context.Corredor.Find(id);
+                var obj = await _context.Corredor.FindAsync(id);
                 _context.Corredor.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (IntegreityException e)
+            catch (DbUpdateException e)
             {
-                throw new IntegreityException(e.Message);
+                throw new IntegreityException("Esse corredor nao pode ser deletado pois a objetos nele");
             }
         }
 
@@ -55,7 +55,7 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (IntegreityException e)
+            catch (DbUpdateException e)
             {
                 throw new IntegreityException(e.Message);
             }

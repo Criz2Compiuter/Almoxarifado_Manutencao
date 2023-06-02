@@ -36,6 +36,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Endereco endereco)
         {
+            if (!ModelState.IsValid)
+            {
+                var prateleiras = await _prateleiraService.FindAllAsync();
+                var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Endereco = endereco };
+                return View(viewModel);
+            }
             await _enderecoService.InsertAsync(endereco);
             return RedirectToAction(nameof(Index));
         }

@@ -1,4 +1,4 @@
-﻿@model Api_Almoxarifado_Mirvi.Models.Almoxarifado
+﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroAlmoxarifado
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,13 +10,11 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="All" class="text_danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <label asp-for="Almoxarifado.Nome" class="control-label"></label>
+                <input asp-for="Almoxarifado.Nome" class="form-control" />
+                <span asp-validation-for="Almoxarifado.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -24,3 +22,9 @@
         </form>
     </div>
 </div>
+<div><a asp-action="Index">Voltar para lista</a></div>
+@section Scripts{
+    @{
+        { await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+}

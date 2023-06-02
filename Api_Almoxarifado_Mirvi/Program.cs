@@ -20,12 +20,12 @@ namespace Api_Almoxarifado_Mirvi
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
             
             builder.Services.AddScoped<SeedingService>();
-            builder.Services.AddScoped<AlmoxarifadoService>();
             builder.Services.AddScoped<CorredorService>();
             builder.Services.AddScoped<PrateleiraService>();
             builder.Services.AddScoped<EnderecoService>();
             builder.Services.AddScoped<ProdutoService>();
             builder.Services.AddScoped<BuscasService>();
+            builder.Services.AddScoped<AlmoxarifadoService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

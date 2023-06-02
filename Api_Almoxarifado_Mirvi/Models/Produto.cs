@@ -13,7 +13,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public Prateleira Prateleiras { get; set; }
         public int PrateleirasId { get; set; }
         [Required(ErrorMessage = "{0} nao informado")]
-        [StringLength(50, MinimumLength = 1, ErrorMessage ="A {0} do produto deve ter de {1} a {2} caracter")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage ="A {0} do produto deve ter de {2} a {1} caracter")]
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus status { get; set; }

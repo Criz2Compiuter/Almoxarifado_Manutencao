@@ -1,8 +1,12 @@
-﻿namespace Api_Almoxarifado_Mirvi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Api_Almoxarifado_Mirvi.Models
 {
     public class Endereco
     {
         public int Id { get; set; }
+        [Required(ErrorMessage ="Insira o {0} do endereco para cadastro")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "O {0} do endereco deve ter no maximo 20 caracter")]
         public string Nome { get; set; }
         public Prateleira Prateleiras { get; set; }
         public int PrateleirasId { get; set; }

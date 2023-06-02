@@ -1,4 +1,6 @@
-﻿namespace Api_Almoxarifado_Mirvi.Services.Exceptions
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Api_Almoxarifado_Mirvi.Services.Exceptions
 {
     public class IntegreityException : ApplicationException
     {

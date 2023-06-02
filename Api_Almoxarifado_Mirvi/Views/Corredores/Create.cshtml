@@ -11,12 +11,10 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Corredor.Id" class="control-label"></label>
-                <input asp-for="Corredor.Id" class="form-control" />
-            </div>
             <div class="form-group">
                 <label asp-for="Corredor.Descricao" class="control-label"></label>
                 <input asp-for="Corredor.Descricao" class="form-control" />
+                <span asp-validation-for="Corredor.Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Corredor.AlmoxarifadoId" class="control-label"></label>
@@ -28,3 +26,9 @@
         </form>
     </div>
 </div>
+<div><a asp-action="Index">Voltar para lista</a></div>
+@section Scripts{
+    @{
+        { await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+}

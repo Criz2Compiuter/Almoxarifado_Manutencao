@@ -3,6 +3,7 @@ using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers

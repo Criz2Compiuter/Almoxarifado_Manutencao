@@ -3,6 +3,7 @@ using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -24,7 +25,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var list = await _corredorService.FindAllAsync();
             return View(list);
         }
-        
+
         public async Task<IActionResult> Create()
         {
             var almorifados = await _almoxarifadoService.FindAllAsync();
@@ -36,19 +37,25 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Corredor corredor)
         {
-            await _corredorService.InsertAsync(corredor);
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)
+            {
+                await _corredorService.InsertAsync(corredor);
+                return RedirectToAction(nameof(Index));
+            }
+            var almorifados = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroCorredor { Almoxarifados = almorifados};
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
             var obj = await _corredorService.FindByIdAsync(id.Value);
-            if(obj == null)
+            if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id fornecido nao encontrado" });
             }

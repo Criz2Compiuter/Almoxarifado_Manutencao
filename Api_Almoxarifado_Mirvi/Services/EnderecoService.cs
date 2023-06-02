@@ -37,9 +37,9 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Endereco.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (IntegreityException e)
+            catch (DbUpdateException e)
             {
-                throw new IntegreityException(e.Message);
+                throw new IntegreityException("Nao e possivel deletar esse endereco pois a objetos dentro dele");
             }
         }
 
@@ -55,7 +55,7 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (IntegreityException e)
+            catch (DbUpdateException e)
             {
                 throw new IntegreityException(e.Message);
             }

@@ -33,13 +33,13 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             try
             {
-                var obj = _context.Prateleira.Find(id);
+                var obj = await _context.Prateleira.FindAsync(id);
                 _context.Prateleira.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException e)
             {
-                throw new IntegreityException(e.Message);
+                throw new IntegreityException("Nao e possivel remover essa prateleira pois a objetos dentro dela");
             }
         }
 
@@ -55,9 +55,9 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException e)
+            catch (DbUpdateException e)
             {
-                throw new DbConcurrencyException(e.Message);
+                throw new IntegreityException(e.Message);
             }
         }
     }

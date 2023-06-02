@@ -25,6 +25,11 @@ namespace Api_Almoxarifado_Mirvi.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Almoxarifado> FindByIdAsync(int id)
+        {
+            return await _context.Almoxarifado.FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
         public async Task RemoveAsync(int id)
         {
             try
@@ -33,7 +38,7 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Almoxarifado.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch(IntegreityException e)
+            catch(DbUpdateException e)
             {
                 throw new IntegreityException(e.Message);
             }
