@@ -29,6 +29,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create()
         {
+            if (!ModelState.IsValid)
+            {
+
+            }
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
             var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos };

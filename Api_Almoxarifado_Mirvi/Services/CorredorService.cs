@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Corredor>> FindAllAsync()
         {
-            return await _context.Corredor.OrderBy(x => x.Descricao).ToListAsync();
+            return await _context.Corredor.Include(obj => obj.Almoxarifado).OrderBy(x => x.Descricao).ToListAsync();
         }
 
         public async Task InsertAsync(Corredor obj)

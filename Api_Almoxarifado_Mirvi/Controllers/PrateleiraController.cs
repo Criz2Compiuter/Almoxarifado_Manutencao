@@ -38,12 +38,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var corredores = await _corredorService.FindAllAsync();
-                var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira };
-                return View(viewModel);
+                await _prateleiraService.InsertAsync(prateleira);
+                return RedirectToAction(nameof(Index));
             }
-            await _prateleiraService.InsertAsync(prateleira);
-            return RedirectToAction(nameof(Index));
+            var corredores = await _corredorService.FindAllAsync();
+            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int? id)
