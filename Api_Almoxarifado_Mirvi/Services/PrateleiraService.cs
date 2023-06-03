@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Prateleira>> FindAllAsync()
         {
-            return await _context.Prateleira.OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Prateleira.Include(obj => obj.Corredor).OrderBy(x => x.Nome).ToListAsync();
         }
 
         public async Task InsertAsync(Prateleira obj)

@@ -23,7 +23,7 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddScoped<CorredorService>();
             builder.Services.AddScoped<PrateleiraService>();
             builder.Services.AddScoped<EnderecoService>();
-            builder.Services.AddScoped<ProdutoService>();
+            builder.Services.AddScoped<ProdutosService>();
             builder.Services.AddScoped<BuscasService>();
             builder.Services.AddScoped<AlmoxarifadoService>();
 

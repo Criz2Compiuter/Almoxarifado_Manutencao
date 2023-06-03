@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Endereco>> FindAllAsync()
         {
-            return await _context.Endereco.ToListAsync();
+            return await _context.Endereco.Include(obj => obj.Prateleiras).ToListAsync();
         }
 
         public async Task InsertAsync(Endereco obj)

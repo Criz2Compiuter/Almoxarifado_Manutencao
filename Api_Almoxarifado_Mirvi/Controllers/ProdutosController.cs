@@ -11,10 +11,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
     public class ProdutosController : Controller
     {
 
-        private readonly ProdutoService _produtoService;
+        private readonly ProdutosService _produtoService;
         private readonly PrateleiraService _prateleiraService;
         private readonly EnderecoService _enderecoService;
-        public ProdutosController(ProdutoService produtoService, PrateleiraService prateleiraService, EnderecoService enderecoService)
+        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, EnderecoService enderecoService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;

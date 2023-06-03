@@ -45,7 +45,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task UpdateAsync(Corredor obj)
         {
-            bool hasAny = _context.Corredor.Any(x => x.Id == obj.Id);
+            bool hasAny = await _context.Corredor.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
             {
                 throw new NotFoundException("Id nao encontrado");
