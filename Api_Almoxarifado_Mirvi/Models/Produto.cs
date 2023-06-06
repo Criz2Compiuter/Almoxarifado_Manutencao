@@ -20,6 +20,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Display(Name = "Data")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
+        [Required(ErrorMessage = "{0} não informado")]
         public DateTime Data { get; set; }
         public string? CodigoDeCompra { get; set; }
         public string? Uso { get; set; }
@@ -39,6 +40,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? Modelo { get; set; }
         [DisplayFormat(DataFormatString =  "{0}")]
         [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
+        [Required(ErrorMessage = "{0} não informado")]
         public int Quantidade { get; set; }
 
         public Produto()
