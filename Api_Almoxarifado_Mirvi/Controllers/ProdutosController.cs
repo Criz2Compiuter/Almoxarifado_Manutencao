@@ -1,4 +1,5 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
+using Api_Almoxarifado_Mirvi.Models.Enums;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
@@ -29,10 +30,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create()
         {
-            if (!ModelState.IsValid)
-            {
-
-            }
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
             var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos };
@@ -117,7 +114,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Produto produto)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var enderecos = await _enderecoService.FindAllAsync();
@@ -147,6 +144,33 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             };
             return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Atualizar(int id, int quantidade)
+        {
+            var produto = await _produtoService.FindByIdAsync(id);
+            if (produto == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
+            }
+
+            // Lógica para atualizar o status do produto com base na quantidade
+            if (quantidade > 0)
+            {
+                produto.AtualizaStatus(ProdutoStatus.Indisponivel);
+            }
+            else if(quantidade >= 1 && quantidade <= 10)
+            {
+                produto.AtualizaStatus(ProdutoStatus.LimiteBaixo);
+            }else if(quantidade > 10)
+            {
+                produto.AtualizaStatus(ProdutoStatus.Disponivel);
+            }
+
+            await _produtoService.UpdateAsync(produto);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

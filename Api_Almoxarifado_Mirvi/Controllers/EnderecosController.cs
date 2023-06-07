@@ -116,10 +116,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Endereco endereco)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Endereco = endereco };
+                return View(viewModel);
             }
             if (id != endereco.Id)
             {

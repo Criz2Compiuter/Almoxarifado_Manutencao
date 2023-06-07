@@ -1086,3 +1086,11 @@ C:\Users\crisf\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\D
 C:\Users\crisf\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.pdb
 C:\Users\crisf\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.genruntimeconfig.cache
 C:\Users\crisf\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\ref\Api_Almoxarifado_Mirvi.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

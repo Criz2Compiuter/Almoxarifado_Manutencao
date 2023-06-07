@@ -2,8 +2,8 @@
 {
     public enum ProdutoStatus : int
     {
-        NoLimite = 0,
-        AcimaDoLimite = 1,
-        AbaixoDoLimite = 2
+        Indisponivel = 0,
+        LimiteBaixo = 1,
+        Disponivel = 2
     }
 }

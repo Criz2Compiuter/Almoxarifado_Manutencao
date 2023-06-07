@@ -18,10 +18,13 @@
                 @Html.DisplayNameFor(model => model.Enderecos)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.status)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
             </th>
         </tr>
     </thead>
@@ -39,15 +42,24 @@
                     @Html.DisplayFor(modelitem => item.Enderecos.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelitem => item.status)
+                    @Html.DisplayFor(modelitem => item.Status)
                 </td>
                 <td>
                     @Html.DisplayFor(modelitem => item.Data)
                 </td>
                 <td>
+                    @Html.EditorFor(modelitem => item.Quantidade)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <td>
+                    <form method="post" action="@Url.Action("Atualizar")">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="number" name="quantidade" value="@item.Quantidade" />
+                        <input type="submit" value="Atualizar" />
+                    </form>
                 </td>
             </tr>
         }

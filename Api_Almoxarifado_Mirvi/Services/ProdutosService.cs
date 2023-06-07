@@ -1,6 +1,8 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using Api_Almoxarifado_Mirvi.Models.Enums;
 
 namespace Api_Almoxarifado_Mirvi.Services
 {
@@ -59,6 +61,43 @@ namespace Api_Almoxarifado_Mirvi.Services
             {
                 throw new IntegreityException(e.Message);
             }
+        }
+
+        public async Task AtualizarProduto(Produto obj)
+        {
+            bool hasAny = _context.Produto.Any(x => x.Id == obj.Id);
+            if (!hasAny)
+            {
+                throw new NotFoundException("Produto nao encontrado");
+            }
+            try
+            {
+                _context.Update(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+
+                throw new IntegreityException(e.Message);
+            }
+        }
+
+        public async Task AtualizarStatusPorQuantidade(Produto produto)
+        {
+            if (produto.Quantidade <= 0)
+            {
+                produto.AtualizaStatus(ProdutoStatus.Indisponivel);
+            }
+            else if (produto.Quantidade <= 10)
+            {
+                produto.AtualizaStatus(ProdutoStatus.LimiteBaixo);
+            }
+            else
+            {
+                produto.AtualizaStatus(ProdutoStatus.Disponivel);
+            }
+
+            await UpdateAsync(produto);
         }
     }
 }

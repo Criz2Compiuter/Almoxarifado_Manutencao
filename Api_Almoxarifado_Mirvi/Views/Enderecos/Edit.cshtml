@@ -12,12 +12,9 @@
         <form asp-action="Edit">
             <input type="hidden" asp-for="Endereco.Id" />
             <div class="form-group">
-                <label asp-for="Endereco.Id" class="control-label"></label>
-                <input asp-for="Endereco.Id" class="form-control" />
-            </div>
-            <div class="form-group">
                 <label asp-for="Endereco.Nome" class="control-label"></label>
                 <input asp-for="Endereco.Nome" class="form-control" />
+                <span asp-validation-for="Endereco.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <p>Prateleira do Endereco</p>
