@@ -159,19 +159,21 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 }
 
                 produto.Quantidade = quantidade;
-                if (quantidade < 0)
+                if (quantidade <= 1)
                 {
                     produto.Status = ProdutoStatus.Indisponivel;
+                    produto.Data = DateTime.Now;
                 }
-                else if (quantidade >= 1 && quantidade <= 15)
+                else if (quantidade > 1 && quantidade < 15)
                 {
                     produto.Status = ProdutoStatus.LimiteBaixo;
+                    produto.Data = DateTime.Now;
                 }
-                else if (quantidade > 15)
+                else if (quantidade >= 15)
                 {
                     produto.Status = ProdutoStatus.Disponivel;
+                    produto.Data = DateTime.Now;
                 }
-
                 await _produtoService.AtualizarProduto(produto);
                 return RedirectToAction(nameof(Index));
             }

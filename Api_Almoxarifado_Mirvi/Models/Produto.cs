@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         }
 
         public int? Id { get; set; }
-        public Endereco? Enderecos { get; set; }
+        public Endereco? Enderecos { get; set; } 
         public int? EnderecosId { get; set; }
         public Prateleira Prateleiras { get; set; }
         public int PrateleirasId { get; set; }
@@ -84,6 +84,11 @@ namespace Api_Almoxarifado_Mirvi.Models
             Modelo = modelo;
             Quantidade = quantidade;
             Status = status;
+        }
+
+        internal IEnumerable<object> ToList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Api_Almoxarifado_Mirvi.Services;
+﻿using Api_Almoxarifado_Mirvi.Models.Enums;
+using Api_Almoxarifado_Mirvi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -44,6 +45,16 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
             ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
             var result = await _buscasService.FindByDateGroupingAsync(minDate, maxDate);
+            return View(result);
+        }
+        public async Task<IActionResult> StatusSearch(ProdutoStatus? produtoStatus)
+        {
+            if (!produtoStatus.HasValue)
+            {
+                produtoStatus = ProdutoStatus.Indisponivel;
+            }
+            ViewData["ProdutoStatus"] = produtoStatus.Value.ToString("Indisponivel");
+            var result = await _buscasService.FindByStatusAsync(produtoStatus);
             return View(result);
         }
     }

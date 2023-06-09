@@ -27,7 +27,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -45,7 +46,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
@@ -62,7 +64,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<int>("PrateleirasId")
                         .HasColumnType("int");
@@ -85,7 +88,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("Id");
 
@@ -162,14 +166,14 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<string>("S_N")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Uso")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Valor")
                         .HasColumnType("longtext");
-
-                    b.Property<int>("status")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
