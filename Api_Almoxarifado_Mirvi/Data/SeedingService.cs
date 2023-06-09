@@ -35,7 +35,7 @@ public class SeedingService
         Endereco e2 = new Endereco(2, "AF2", p2);
         Endereco e3 = new Endereco(3, "AF3", p3);
 
-        Produto pr1 = new Produto(1, e1, p1, "M8", "", ProdutoStatus.NoLimite, new DateTime(2023, 2, 17), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 1);
+        Produto pr1 = new Produto(1, e1, p1, "M8", "", ProdutoStatus.Disponivel, new DateTime(2023, 2, 17), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 1);
         Produto pr2 = new Produto(2, e2, p2, "M5", "", (ProdutoStatus)1, new DateTime(2023, 5, 7), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 1);
         Produto pr3 = new Produto(3, e3, p3, "M6", "", (ProdutoStatus)2, new DateTime(2022, 6, 1), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 1);
 

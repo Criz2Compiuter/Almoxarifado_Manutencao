@@ -81,23 +81,5 @@ namespace Api_Almoxarifado_Mirvi.Services
                 throw new IntegreityException(e.Message);
             }
         }
-
-        public async Task AtualizarStatusPorQuantidade(Produto produto)
-        {
-            if (produto.Quantidade <= 0)
-            {
-                produto.AtualizaStatus(ProdutoStatus.Indisponivel);
-            }
-            else if (produto.Quantidade <= 10)
-            {
-                produto.AtualizaStatus(ProdutoStatus.LimiteBaixo);
-            }
-            else
-            {
-                produto.AtualizaStatus(ProdutoStatus.Disponivel);
-            }
-
-            await UpdateAsync(produto);
-        }
     }
 }

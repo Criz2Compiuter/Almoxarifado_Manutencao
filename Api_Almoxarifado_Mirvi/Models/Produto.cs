@@ -85,11 +85,5 @@ namespace Api_Almoxarifado_Mirvi.Models
             Quantidade = quantidade;
             Status = status;
         }
-
-        public void AtualizaStatus(ProdutoStatus produtoStatus)
-        {
-            Status = produtoStatus;
-            Data = DateTime.Now;
-        }
     }
 }

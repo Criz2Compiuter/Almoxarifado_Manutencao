@@ -9,149 +9,149 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Api_Almoxarifado_Mirvi
 build_property.RootNamespace = Api_Almoxarifado_Mirvi
-build_property.ProjectDir = C:\Users\Cristian\source\repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\
+build_property.ProjectDir = C:\Users\crisf\OneDrive\Documentos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Cristian\source\repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi
+build_property.MSBuildProjectDirectory = C:\Users\crisf\OneDrive\Documentos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Create.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Delete.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Details.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Edit.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Almoxarifados/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/GroupingSearch.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/GroupingSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXEdyb3VwaW5nU2VhcmNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/SimpleSearch.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/SimpleSearch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXFNpbXBsZVNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Create.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Delete.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Details.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Edit.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Create.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Delete.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Details.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Edit.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Enderecos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kZXJlY29zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Privacy.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Create.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Delete.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Details.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Edit.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Create.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Delete.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Details.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Edit.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Index.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/Error.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/_ViewImports.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/_ViewStart.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/_Layout.cshtml]
+[C:/Users/crisf/OneDrive/Documentos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-yxevlo7hn2

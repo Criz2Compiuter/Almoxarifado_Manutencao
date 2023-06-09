@@ -150,27 +150,35 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Atualizar(int id, int quantidade)
         {
-            var produto = await _produtoService.FindByIdAsync(id);
-            if (produto == null)
+            try
             {
-                return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
-            }
+                var produto = await _produtoService.FindByIdAsync(id);
+                if (produto == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
+                }
 
-            // Lógica para atualizar o status do produto com base na quantidade
-            if (quantidade > 0)
-            {
-                produto.AtualizaStatus(ProdutoStatus.Indisponivel);
-            }
-            else if(quantidade >= 1 && quantidade <= 10)
-            {
-                produto.AtualizaStatus(ProdutoStatus.LimiteBaixo);
-            }else if(quantidade > 10)
-            {
-                produto.AtualizaStatus(ProdutoStatus.Disponivel);
-            }
+                produto.Quantidade = quantidade;
+                if (quantidade < 0)
+                {
+                    produto.Status = ProdutoStatus.Indisponivel;
+                }
+                else if (quantidade >= 1 && quantidade <= 15)
+                {
+                    produto.Status = ProdutoStatus.LimiteBaixo;
+                }
+                else if (quantidade > 15)
+                {
+                    produto.Status = ProdutoStatus.Disponivel;
+                }
 
-            await _produtoService.UpdateAsync(produto);
-            return RedirectToAction(nameof(Index));
+                await _produtoService.AtualizarProduto(produto);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
     }
 }
