@@ -161,6 +161,71 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "ProdutoImportante",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    EnderecosId = table.Column<int>(type: "int", nullable: true),
+                    PrateleirasId = table.Column<int>(type: "int", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Categoria = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProdutoStatusImportante = table.Column<int>(type: "int", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CodigoDeCompra = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Uso = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    C_STalisca = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Hpn = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Referencia = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    H225_H300 = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fornecedor = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Diametro = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Comprimento = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Conexao = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Medida = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Fabricante = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Marca = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    S_N = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Valor = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Modelo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdutoImportante", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProdutoImportante_Endereco_EnderecosId",
+                        column: x => x.EnderecosId,
+                        principalTable: "Endereco",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProdutoImportante_Prateleira_PrateleirasId",
+                        column: x => x.PrateleirasId,
+                        principalTable: "Prateleira",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Corredor_AlmoxarifadoId",
                 table: "Corredor",
@@ -185,6 +250,16 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 name: "IX_Produto_PrateleirasId",
                 table: "Produto",
                 column: "PrateleirasId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdutoImportante_EnderecosId",
+                table: "ProdutoImportante",
+                column: "EnderecosId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdutoImportante_PrateleirasId",
+                table: "ProdutoImportante",
+                column: "PrateleirasId");
         }
 
         /// <inheritdoc />
@@ -192,6 +267,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Produto");
+
+            migrationBuilder.DropTable(
+                name: "ProdutoImportante");
 
             migrationBuilder.DropTable(
                 name: "Endereco");

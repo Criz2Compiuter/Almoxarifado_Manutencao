@@ -50,20 +50,6 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .GroupBy(x => x.Enderecos.Prateleiras)
                 .ToListAsync();
         }
-
-        public async Task<List<Produto>> FindByStatusAsync(ProdutoStatus? produtoStatus)
-        {
-            var result = from obj in _context.Produto select obj;
-            if(produtoStatus.HasValue)
-            {
-                result = result.Where(x => x.Status == produtoStatus);
-            }
-            return await result
-                .Include(x => x.CodigoDeCompra)
-                .Include(x => x.Status)
-                .OrderByDescending(x => x.Status)
-                .ToListAsync();
-        }
     }
 }
 

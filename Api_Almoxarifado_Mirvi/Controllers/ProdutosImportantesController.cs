@@ -9,22 +9,22 @@ using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutosImportantesController : Controller
     {
 
-        private readonly ProdutosService _produtoService;
+        private readonly ProdutosImportantesService _produtoImportantesService;
         private readonly PrateleiraService _prateleiraService;
         private readonly EnderecoService _enderecoService;
-        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, EnderecoService enderecoService)
+        public ProdutosImportantesController(ProdutosImportantesService produtoImportantesService, PrateleiraService prateleiraService, EnderecoService enderecoService)
         {
-            _produtoService = produtoService;
+            _produtoImportantesService = produtoImportantesService;
             _prateleiraService = prateleiraService;
             _enderecoService = enderecoService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var list = await _produtoService.FindAllAsync();
+            var list = await _produtoImportantesService.FindAllAsync();
             return View(list);
         }
 
@@ -32,18 +32,18 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos };
+            var viewModel = new FormularioCadastroProdutoImportante { Prateleira = prateleiras, Endereco = enderecos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Produto produto)
+        public async Task<IActionResult> Create(ProdutoImportante produtoImportante)
         {
-            await _produtoService.InsertAsync(produto);
+            await _produtoImportantesService.InsertAsync(produtoImportante);
             return RedirectToAction(nameof(Index));
         }
-
+       
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -51,7 +51,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id nao foi fornecido" });
             }
 
-            var obj = await _produtoService.FindByIdAsync(id.Value);
+            var obj = await _produtoImportantesService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -66,7 +66,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             try
             {
-                await _produtoService.RemoveAsync(id);
+                await _produtoImportantesService.RemoveAsync(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (IntegreityException e)
@@ -82,7 +82,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = await _produtoService.FindByIdAsync(id.Value);
+            var obj = await _produtoImportantesService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -98,7 +98,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
-            var obj = await _produtoService.FindByIdAsync(id.Value);
+            var obj = await _produtoImportantesService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
@@ -106,28 +106,28 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
             List<Endereco>? enderecos = await _enderecoService.FindAllAsync();
-            FormularioCadastroProduto viewModel = new FormularioCadastroProduto { Produto = obj, Prateleira = prateleiras, Endereco = enderecos };
+            FormularioCadastroProdutoImportante viewModel = new FormularioCadastroProdutoImportante { ProdutoImportante = obj, Prateleira = prateleiras, Endereco = enderecos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Produto produto)
+        public async Task<IActionResult> Edit(int id, ProdutoImportante produtoImportante)
         {
             if (ModelState.IsValid)
             {
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var enderecos = await _enderecoService.FindAllAsync();
-                var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Produto = produto };
+                var viewModel = new FormularioCadastroProdutoImportante { Prateleira = prateleiras, Endereco = enderecos, ProdutoImportante = produtoImportante };
                 return View(viewModel);
             }
-            if (id != produto.Id)
+            if (id != produtoImportante.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Id fornecido nao correspondem" });
             }
             try
             {
-                await _produtoService.UpdateAsync(produto);
+                await _produtoImportantesService.UpdateAsync(produtoImportante);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
@@ -152,29 +152,29 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             try
             {
-                var produto = await _produtoService.FindByIdAsync(id);
-                if (produto == null)
+                var produtoImportante = await _produtoImportantesService.FindByIdAsync(id);
+                if (produtoImportante == null)
                 {
                     return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
                 }
 
-                produto.Quantidade = quantidade;
+                produtoImportante.Quantidade = quantidade;
                 if (quantidade <= 1)
                 {
-                    produto.Status = ProdutoStatus.Indisponivel;
-                    produto.Data = DateTime.Now;
+                    produtoImportante.ProdutoStatusImportante = ProdutoStatusImportante.Indisponivelv;
+                    produtoImportante.Data = DateTime.Now;
                 }
                 else if (quantidade > 1 && quantidade < 15)
                 {
-                    produto.Status = ProdutoStatus.LimiteBaixo;
-                    produto.Data = DateTime.Now;
+                    produtoImportante.ProdutoStatusImportante = ProdutoStatusImportante.LimiteBaixov;
+                    produtoImportante.Data = DateTime.Now;
                 }
                 else if (quantidade >= 15)
                 {
-                    produto.Status = ProdutoStatus.Disponivel;
-                    produto.Data = DateTime.Now;
+                    produtoImportante.ProdutoStatusImportante = ProdutoStatusImportante.Disponivelv;
+                    produtoImportante.Data = DateTime.Now;
                 }
-                await _produtoService.AtualizarProduto(produto);
+                await _produtoImportantesService.AtualizarProduto(produtoImportante);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
@@ -185,7 +185,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> ProdutosIndisponiveis()
         {
-            var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync();
+            var unavailableProducts = await _produtoImportantesService.ObterProdutosImportantesIndisponíveisAsync();
             return View(unavailableProducts);
         }
     }

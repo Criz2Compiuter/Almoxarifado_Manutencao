@@ -47,15 +47,5 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var result = await _buscasService.FindByDateGroupingAsync(minDate, maxDate);
             return View(result);
         }
-        public async Task<IActionResult> StatusSearch(ProdutoStatus? produtoStatus)
-        {
-            if (!produtoStatus.HasValue)
-            {
-                produtoStatus = ProdutoStatus.Indisponivel;
-            }
-            ViewData["ProdutoStatus"] = produtoStatus.Value.ToString("Indisponivel");
-            var result = await _buscasService.FindByStatusAsync(produtoStatus);
-            return View(result);
-        }
     }
 }

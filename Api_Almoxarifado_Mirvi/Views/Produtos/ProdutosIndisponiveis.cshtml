@@ -1,18 +1,11 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
 @{
-    ViewData["Title"] = "Produto";
+    ViewData["Title"] = "Requisicoes de produtos";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <table class="table tavle-striped table-hover">
-    <p>
-        <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
-    </p>
-    <p>
-        <a class="btn btn-success" asp-action="Create">Adicionar Produto</a>
-    </p>
-    <thead>
     <thead>
         <tr class="success">
             <th>
@@ -38,7 +31,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr >
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>

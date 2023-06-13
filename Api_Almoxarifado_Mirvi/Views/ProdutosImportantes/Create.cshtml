@@ -1,0 +1,119 @@
+﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroProdutoImportante
+@using Api_Almoxarifado_Mirvi.Models.Enums
+@using Api_Almoxarifado_Mirvi.Helpers
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Prateleira</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text_danger"></div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Descricao" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Descricao" class="form-control" />
+                <span asp-validation-for="ProdutoImportante.Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Enderecos" class="control-label"></label>
+                <input asp-for="ProdutoImportante.EnderecosId" class="form-control" />
+                <span asp-validation-for="ProdutoImportante.EnderecosId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Prateleiras" class="control-label"></label>
+                <select asp-for="ProdutoImportante.PrateleirasId" asp-items="@(new SelectList(Model.Prateleira, "Id", "Nome"))" class="form-control"></select>
+                <span asp-validation-for="ProdutoImportante.PrateleirasId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Categoria" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Categoria" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Data" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Data" class="form-control" />
+                <span asp-validation-for="ProdutoImportante.Data" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.CodigoDeCompra" class="control-label"></label>
+                <input asp-for="ProdutoImportante.CodigoDeCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Uso" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Uso" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.C_STalisca" class="control-label"></label>
+                <input asp-for="ProdutoImportante.C_STalisca" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Hpn" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Hpn" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Referencia" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Referencia" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.H225_H300" class="control-label"></label>
+                <input asp-for="ProdutoImportante.H225_H300" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Fornecedor" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Fornecedor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Diametro" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Diametro" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Comprimento" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Comprimento" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Conexao" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Conexao" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Medida" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Medida" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Fabricante" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Fabricante" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Marca" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Marca" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.S_N" class="control-label"></label>
+                <input asp-for="ProdutoImportante.S_N" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Valor" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Valor" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Modelo" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Modelo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProdutoImportante.Quantidade" class="control-label"></label>
+                <input asp-for="ProdutoImportante.Quantidade" class="form-control" />
+                <span asp-validation-for="ProdutoImportante.Quantidade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts{
+    @{
+        { await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+}

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o9wmP3KnXXEHLoe0OGBrARM9ugWyOy7JwwgiTz/BZGEbMcI2CPeGVLJWzhoA3pLMj9ksYgoaoTYr4ICq6EG8UQ==",
+  "dgSpecHash": "Zm0PlA+gB4WM1JWceamBOsSSWdyDc3x3jwiDxpSm5d+/3gxJhGS+PtsKqa/QSxHG/O2SEaSpNXoQmtw7mQxMvQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cristian\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+  "projectFilePath": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\Cristian\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api_Almoxarifado_Mirvi.Models
 {
-    public class Produto
+    public class ProdutoImportante
     {   
          private readonly ProdutosService _produtoService;
-        public Produto(ProdutosService produtosService)
+        public ProdutoImportante(ProdutosService produtosService)
         {
             _produtoService = produtosService;
         }
@@ -23,7 +23,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         [StringLength(50, MinimumLength = 2, ErrorMessage = "A {0} do produto deve ter de {2} a {1} caracter")]
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
-        public ProdutoStatus Status { get; set; }
+        public ProdutoStatusImportante ProdutoStatusImportante { get; set; }
 
         [Display(Name = "Data")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -51,11 +51,11 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Required(ErrorMessage = "{0} não informado")]
         public int Quantidade { get; set; }
 
-        public Produto()
+        public ProdutoImportante()
         {
         }
 
-        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status,
+        public ProdutoImportante(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatusImportante status,
             DateTime data, string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn,
             string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao,
             string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo, int quantidade)
@@ -83,7 +83,7 @@ namespace Api_Almoxarifado_Mirvi.Models
             Valor = valor;
             Modelo = modelo;
             Quantidade = quantidade;
-            Status = status;
+            ProdutoStatusImportante = status;
         }
     }
 }

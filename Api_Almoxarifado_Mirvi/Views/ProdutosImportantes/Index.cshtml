@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
+﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.ProdutoImportante>
 @{
-    ViewData["Title"] = "Produto";
+    ViewData["Title"] = "Produto Importante";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -9,10 +9,10 @@
     <p>
         <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
     </p>
-    <p>
-        <a class="btn btn-success" asp-action="Create">Adicionar Produto</a>
-    </p>
     <thead>
+    <p>
+        <a class="btn btn-success" asp-action="CreateImportante">Adicionar Produto Importante</a>
+    </p>
     <thead>
         <tr class="success">
             <th>
@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Enderecos)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.ProdutoStatusImportante)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Data)
@@ -49,7 +49,7 @@
                     @Html.DisplayFor(modelItem => item.Enderecos.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                        @Html.DisplayFor(modelItem => item.ProdutoStatusImportante)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)

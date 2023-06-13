@@ -9,6 +9,7 @@ namespace Api_Almoxarifado_Mirvi.Models
 {
     public class Api_Almoxarifado_MirviContext : DbContext
     {
+
         public Api_Almoxarifado_MirviContext (DbContextOptions<Api_Almoxarifado_MirviContext> options)
             : base(options)
         {
@@ -19,6 +20,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Prateleira> Prateleira { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Produto> Produto { get; set; }
-        public DbSet<Requisicoes> Requisicoes { get; set; }
+        public DbSet<ProdutoImportante> ProdutoImportante{ get; set; }
     }
 }
