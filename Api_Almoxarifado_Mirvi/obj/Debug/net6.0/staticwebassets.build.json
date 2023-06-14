@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0TZE0CCBAEDbyDcUhnPjlCVtYjqNOEYdaA8SoEL4iwE=",
+  "Hash": "3Z6Qf2yTUKx6gTFf2vOOjl+i2ebNhrxenpnzIpWY7nk=",
   "Source": "Api_Almoxarifado_Mirvi",
   "BasePath": "_content/Api_Almoxarifado_Mirvi",
   "Mode": "Default",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
-    },
-    {
-      "Identity": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\js\\site.js",
-      "SourceId": "Api_Almoxarifado_Mirvi",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
-      "BasePath": "_content/Api_Almoxarifado_Mirvi",
-      "RelativePath": "js/site.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
       "Identity": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-flatly.css",
@@ -1069,6 +1052,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\site.js",
+      "SourceId": "Api_Almoxarifado_Mirvi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
+      "BasePath": "_content/Api_Almoxarifado_Mirvi",
+      "RelativePath": "lib/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\site.js"
     }
   ]
 }

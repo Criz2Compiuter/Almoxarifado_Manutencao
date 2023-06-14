@@ -7,12 +7,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Api_Almoxarifado_Mirvi.Models
 {
     public class Produto
-    {   
-         private readonly ProdutosService _produtoService;
-        public Produto(ProdutosService produtosService)
-        {
-            _produtoService = produtosService;
-        }
+    {
 
         public int? Id { get; set; }
         public Endereco? Enderecos { get; set; } 
@@ -24,6 +19,8 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string Descricao { get; set; }
         public string? Categoria { get; set; }
         public ProdutoStatus Status { get; set; }
+        public int Minimo { get; set; }
+        public int Maximo { get; set; }
 
         [Display(Name = "Data")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
@@ -55,16 +52,17 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status,
-            DateTime data, string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn,
-            string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao,
-            string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo, int quantidade)
+        public Produto(int? id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status, int minimo, int maximo, DateTime data, string? codigoDeCompra, string? uso,
+            string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo, int quantidade)
         {
             Id = id;
             Enderecos = enderecos;
             Prateleiras = prateleiras;
             Descricao = descricao;
             Categoria = categoria;
+            Status = status;
+            Minimo = minimo;
+            Maximo = maximo;
             Data = data;
             CodigoDeCompra = codigoDeCompra;
             Uso = uso;
@@ -83,7 +81,22 @@ namespace Api_Almoxarifado_Mirvi.Models
             Valor = valor;
             Modelo = modelo;
             Quantidade = quantidade;
-            Status = status;
+        }
+
+        public void AtualizarStatus()
+        {
+            if (Quantidade < Minimo)
+            {
+                Status = ProdutoStatus.Indisponivel;
+            }
+            else if (Quantidade >= Minimo && Quantidade < Maximo)
+            {
+                Status = ProdutoStatus.LimiteBaixo;
+            }
+            else
+            {
+                Status = ProdutoStatus.Disponivel;
+            }
         }
     }
 }

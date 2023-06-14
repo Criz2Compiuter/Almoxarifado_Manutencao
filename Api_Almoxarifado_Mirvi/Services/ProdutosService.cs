@@ -82,10 +82,11 @@ namespace Api_Almoxarifado_Mirvi.Services
             }
         }
 
-        public async Task<List<Produto>> ObterProdutosIndisponíveisAsync()
+        public async Task<List<Produto>> ObterProdutosIndisponíveisAsync(int minimo, int maximo)
         {
             return await _context.Produto
                 .Where(p => p.Status == ProdutoStatus.Indisponivel || p.Status == ProdutoStatus.LimiteBaixo)
+                .Where(p => p.Quantidade >= minimo && p.Quantidade <= maximo)
                 .Include(p => p.Prateleiras)
                 .Include(p => p.Enderecos)
                 .ToListAsync();

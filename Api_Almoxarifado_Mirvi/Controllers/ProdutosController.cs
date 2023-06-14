@@ -5,6 +5,7 @@ using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.MinimalApi;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -22,9 +23,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _enderecoService = enderecoService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int minimo, int maximo)
         {
             var list = await _produtoService.FindAllAsync();
+            ViewBag.Minimo = minimo;
+            ViewBag.Maximo = maximo;
             return View(list);
         }
 
@@ -148,7 +151,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Atualizar(int id, int quantidade)
+        public async Task<IActionResult> Atualizar(int id, int quantidade, int minimo, int maximo)
         {
             try
             {
@@ -159,21 +162,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 }
 
                 produto.Quantidade = quantidade;
-                if (quantidade <= 1)
-                {
-                    produto.Status = ProdutoStatus.Indisponivel;
-                    produto.Data = DateTime.Now;
-                }
-                else if (quantidade > 1 && quantidade < 15)
-                {
-                    produto.Status = ProdutoStatus.LimiteBaixo;
-                    produto.Data = DateTime.Now;
-                }
-                else if (quantidade >= 15)
-                {
-                    produto.Status = ProdutoStatus.Disponivel;
-                    produto.Data = DateTime.Now;
-                }
+                produto.AtualizarStatus();
+
                 await _produtoService.AtualizarProduto(produto);
                 return RedirectToAction(nameof(Index));
             }
@@ -183,9 +173,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public async Task<IActionResult> ProdutosIndisponiveis()
+        public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo)
         {
-            var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync();
+            var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync(minimo, maximo);
             return View(unavailableProducts);
         }
     }

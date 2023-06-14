@@ -20,6 +20,5 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Prateleira> Prateleira { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Produto> Produto { get; set; }
-        public DbSet<ProdutoImportante> ProdutoImportante{ get; set; }
     }
 }

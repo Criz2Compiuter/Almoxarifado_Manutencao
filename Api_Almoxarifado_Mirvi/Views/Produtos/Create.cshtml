@@ -1,6 +1,5 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroProduto
 @using Api_Almoxarifado_Mirvi.Models.Enums
-@using Api_Almoxarifado_Mirvi.Helpers
 @{
     ViewData["Title"] = "Create";
 }
@@ -31,6 +30,14 @@
             <div class="form-group">
                 <label asp-for="Produto.Categoria" class="control-label"></label>
                 <input asp-for="Produto.Categoria" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Produto.Minimo" class="control-label"></label>
+                <input asp-for="Produto.Minimo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Produto.Maximo" class="control-label"></label>
+                <input asp-for="Produto.Maximo" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Produto.Data" class="control-label"></label>

@@ -116,30 +116,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJhdGVsZWlyYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/ProdutosImportantes/ProdutosIndisponiveis.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NJbXBvcnRhbnRlc1xQcm9kdXRvc0luZGlzcG9uaXZlaXMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

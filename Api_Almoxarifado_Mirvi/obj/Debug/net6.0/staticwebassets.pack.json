@@ -13,10 +13,6 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
-    },
-    {
       "Id": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
@@ -243,6 +239,10 @@
     {
       "Id": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\site.js",
+      "PackagePath": "staticwebassets\\lib\\site.js"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Api_Almoxarifado_Mirvi.Microsoft.AspNetCore.StaticWebAssets.props",
