@@ -23,11 +23,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _enderecoService = enderecoService;
         }
 
-        public async Task<IActionResult> Index(int minimo, int maximo)
+        public async Task<IActionResult> Index()
         {
             var list = await _produtoService.FindAllAsync();
-            ViewBag.Minimo = minimo;
-            ViewBag.Maximo = maximo;
             return View(list);
         }
 
@@ -177,6 +175,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync(minimo, maximo);
             return View(unavailableProducts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchValue)
+        {
+            var products = await _produtoService.FindByDescriptionAsync(searchValue);
+            return PartialView("_ProductListPartial", products);
         }
     }
 }

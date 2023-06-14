@@ -1,7 +1,6 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 using Api_Almoxarifado_Mirvi.Models.Enums;
 
 namespace Api_Almoxarifado_Mirvi.Services
@@ -90,6 +89,15 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(p => p.Prateleiras)
                 .Include(p => p.Enderecos)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Produto>> FindByDescriptionAsync(string searchValue)
+        {
+            var produtos = await _context.Produto
+                .Where(p => p.Descricao.Contains(searchValue))
+                .ToListAsync();
+
+            return produtos;
         }
     }
 }

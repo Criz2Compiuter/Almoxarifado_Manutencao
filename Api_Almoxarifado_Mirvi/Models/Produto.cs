@@ -53,7 +53,8 @@ namespace Api_Almoxarifado_Mirvi.Models
         }
 
         public Produto(int? id, Endereco? enderecos, Prateleira prateleiras, string descricao, string? categoria, ProdutoStatus status, int minimo, int maximo, DateTime data, string? codigoDeCompra, string? uso,
-            string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo, int quantidade)
+            string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca,
+            string? n, string? valor, string? modelo, int quantidade)
         {
             Id = id;
             Enderecos = enderecos;
@@ -82,7 +83,6 @@ namespace Api_Almoxarifado_Mirvi.Models
             Modelo = modelo;
             Quantidade = quantidade;
         }
-
         public void AtualizarStatus()
         {
             if (Quantidade < Minimo)

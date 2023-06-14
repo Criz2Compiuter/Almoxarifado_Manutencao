@@ -1,39 +1,6 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
-@{
-    ViewData["Title"] = "Produto";
-}
 
-<h1>@ViewData["Title"]</h1>
-
-<table class="table tavle-striped table-hover">
-    <p>
-        <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
-    </p>
-    <p>
-        <a class="btn btn-success" asp-action="Create">Adicionar Produto</a>
-    </p>
-    <thead>
-    <thead>
-        <tr class="success">
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prateleiras)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-         @foreach (var item in Model)
+ @foreach (var item in Model)
         {
             <tr >
                 <td>
@@ -41,6 +8,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Enderecos.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
@@ -67,5 +37,3 @@
                 </td>
             </tr>
         }
-    </tbody>
-</table>
