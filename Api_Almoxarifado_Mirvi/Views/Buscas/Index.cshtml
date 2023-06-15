@@ -1,57 +1,92 @@
-﻿﻿@{
-    ViewData["Title"] = "Buscas de produtos";
+﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
+@{
+    ViewData["Title"] = "Busca por Produtos";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-6">
-        <form class="form-horizontal" asp-action="SimpleSearch">
-            <fieldset>
-                <legend>Simple search</legend>
-                <div class="form-group">
-                    <label for="minDate" class="col-lg-2 control-label">Min Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="minDate" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="maxDate" class="col-lg-2 control-label">Max Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="maxDate" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Digite para pesquisar...">
 </div>
-<div class="row">
-    <div class="col-md-6">
-        <form class="form-horizontal" asp-action="GroupingSearch">
-            <fieldset>
-                <legend>Grouping search</legend>
-                <div class="form-group">
-                    <label for="minDate" class="col-lg-2 control-label">Min Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="minDate" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="maxDate" class="col-lg-2 control-label">Max Date</label>
-                    <div class="col-lg-10">
-                        <input type="date" name="maxDate" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+
+<div id="searchResults">
 </div>
+
+<table class="table tavle-striped table-hover">
+    <p>
+        <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
+    </p>
+    <thead>
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prateleiras)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+        </tr>
+    </thead>
+    <tbody id="productList">
+        @foreach (var item in Model)
+        {
+            <tr class="productRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                    {
+                        <div class="form-group">
+                            @{
+                                var quantidade = item.Quantidade;
+                            }
+                            @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                        </div>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function searchProducts() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+        var rows = document.getElementsByClassName('productRow');
+
+        for (var i = 0; i < rows.length; i++) {
+            var td = rows[i].getElementsByTagName('td')[0];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    }
+</script>

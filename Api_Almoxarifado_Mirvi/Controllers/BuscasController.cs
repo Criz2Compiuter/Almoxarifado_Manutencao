@@ -1,6 +1,8 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.Enums;
+using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
@@ -8,44 +10,42 @@ namespace Api_Almoxarifado_Mirvi.Controllers
     {
 
         private readonly BuscasService _buscasService;
+        private readonly ProdutosService _produtosService;
 
-        public BuscasController(BuscasService buscasService)
+        public BuscasController(BuscasService buscasService, ProdutosService produtosService)
         {
             _buscasService = buscasService;
+            _produtosService = produtosService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult>Index()
         {
-            return View();
+            var produtos = await _produtosService.FindAllAsync();
+            return View(produtos);
         }
-        public async Task<IActionResult> SimpleSearch(DateTime? minDate, DateTime? maxDate)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (!minDate.HasValue)
+            if (id == null)
             {
-                minDate = new DateTime(DateTime.Now.Year, 1, 1);
+                return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
-            if (!maxDate.HasValue)
+
+            var obj = await _produtosService.FindByIdAsync(id.Value);
+            if (obj == null)
             {
-                maxDate = DateTime.Now;
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
-            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
-            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
-            var result = await _buscasService.FindByDateAsync(minDate, maxDate);
-            return View(result);
+
+            return View(obj);
         }
-        public async Task<IActionResult> GroupingSearch(DateTime? minDate, DateTime? maxDate)
+
+        public async Task<IActionResult> Error(string message)
         {
-            if (!minDate.HasValue)
+            var viewModel = new ErrorViewModel
             {
-                minDate = new DateTime(DateTime.Now.Year, 1, 1);
-            }
-            if (!maxDate.HasValue)
-            {
-                maxDate = DateTime.Now;
-            }
-            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
-            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
-            var result = await _buscasService.FindByDateGroupingAsync(minDate, maxDate);
-            return View(result);
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }

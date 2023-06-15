@@ -36,16 +36,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxtb3hhcmlmYWRvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/GroupingSearch.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXEdyb3VwaW5nU2VhcmNoLmNzaHRtbA==
+[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Buscas/SimpleSearch.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVzY2FzXFNpbXBsZVNlYXJjaC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Corredores/Create.cshtml]
@@ -92,8 +88,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/MirviBrasil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNaXJ2aUJyYXNpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/TetraPak.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXRyYVBhay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Prateleiras/Create.cshtml]
@@ -122,10 +126,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Cristian/source/repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Edit.cshtml]

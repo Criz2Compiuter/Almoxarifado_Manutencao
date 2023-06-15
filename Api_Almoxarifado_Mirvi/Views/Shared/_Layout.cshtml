@@ -18,29 +18,28 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Almoxarifados" asp-action="Index">Almoxarifados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Corredores" asp-action="Index">Corredores</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Prateleiras" asp-action="Index">Prateleiras</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Enderecos" asp-action="Index">Enderecos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Buscas" asp-action="Index">Buscas</a>
-                        </li>
-                    </ul>
+                    <div class="text-center">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            @if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Another Action</a>
+                                    <!-- Adicione mais links específicos para a aba Mirvi Brasil -->
+                                </li>
+                            }
+                            else if (ViewContext.RouteData.Values["action"].ToString() == "TetraPak")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Another Action</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -49,16 +48,14 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; Mirvi Brasil 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Detalhes</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; Mirvi Brasil 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Detalhes</a>
+            </div>
+        </footer>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

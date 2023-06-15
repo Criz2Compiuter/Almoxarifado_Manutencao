@@ -1,5 +1,6 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Packaging.Signing;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -15,6 +16,16 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+        public IActionResult MirviBrasil()
+        {
+            ViewData["ActiveTab"] = "MirviBrasil";
+            return View();
+        }
+        public IActionResult TetraPak()
+        {
+            ViewData["ActiveTab"] = "TetraPak";
             return View();
         }
 

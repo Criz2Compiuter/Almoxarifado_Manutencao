@@ -1,39 +1,39 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
 
- @foreach (var item in Model)
-        {
-            <tr >
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Enderecos.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
-                    {
-                        <div class="form-group">
-                            @{
-                                var quantidade = item.Quantidade;
-                            }
-                            @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
-                            <button type="submit" class="btn btn-primary">Atualizar</button>
-                        </div>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enderecos.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+            {
+                <div class="form-group">
+                    @{
+                        var quantidade = item.Quantidade;
                     }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+                    @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                </div>
+            }
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+}

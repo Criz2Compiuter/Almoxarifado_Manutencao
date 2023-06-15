@@ -85,19 +85,16 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             return await _context.Produto
                 .Where(p => p.Status == ProdutoStatus.Indisponivel || p.Status == ProdutoStatus.LimiteBaixo)
-                .Where(p => p.Quantidade >= minimo && p.Quantidade <= maximo)
                 .Include(p => p.Prateleiras)
                 .Include(p => p.Enderecos)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Produto>> FindByDescriptionAsync(string searchValue)
+        public async Task<List<Produto>> FindByDescriptionAsync(string searchValue)
         {
-            var produtos = await _context.Produto
+            return await _context.Produto
                 .Where(p => p.Descricao.Contains(searchValue))
                 .ToListAsync();
-
-            return produtos;
         }
     }
 }
