@@ -3,6 +3,115 @@
     ViewData["Title"] = "Mirvi Brasil";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Almoxarifado Manutencao</h1>
+<div class="search-container text-center">
+    <div class="search-box">
+        <h1>Mirvi Brasil</h1>
+        <input type="text" id="searchInput" class="search-input" onkeyup="searchProducts()" placeholder="Pesquisar...">
+        <div class="search-results" id="search-results1">
+            <table class="table tavle-striped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Prateleiras)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Data)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantidade)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="productList">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantidade)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+
+<script>
+    function searchProducts() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById('productList');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var td = rows[i].getElementsByTagName('td')[0];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    }
+</script>
+<style>
+    .search-container {
+        display: flex;
+        justify-content: center;
+        height: 70vh;
+    }
+
+    .search-box {
+        margin: 0 10px;
+    }
+
+    .search-input {
+        padding: 10px;
+        width: 500px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .search-results {
+        position: absolute;
+        width: 500px;
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+        .search-results a {
+            display: block;
+            padding: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+            .search-results a:hover {
+                background-color: #f0f0f0;
+            }
+</style>

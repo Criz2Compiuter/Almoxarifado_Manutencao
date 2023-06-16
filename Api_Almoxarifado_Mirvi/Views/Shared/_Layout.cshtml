@@ -20,22 +20,73 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <div class="text-center">
                         <ul class="navbar-nav flex-grow-1">
-                            <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                            </li>
-                            @if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
+                            @if (ViewContext.RouteData.Values["action"].ToString() == "Index")
+                            {
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
+                                </li>
+                            }
+                            else if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Another Action</a>
-                                    <!-- Adicione mais links específicos para a aba Mirvi Brasil -->
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Almoxarifados" asp-action="Index">Almoxarifados</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Corredores" asp-action="Index">Corredores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prateleiras" asp-action="Index">Prateleiras</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Enderecos" asp-action="Index">Enderecos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Buscas" asp-action="Index">Buscas</a>
                                 </li>
                             }
                             else if (ViewContext.RouteData.Values["action"].ToString() == "TetraPak")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Another Action</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Almoxarifados" asp-action="Index">Almoxarifados</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Corredores" asp-action="Index">Corredores</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Prateleiras" asp-action="Index">Prateleiras</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Enderecos" asp-action="Index">Enderecos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Index">Produtos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Buscas" asp-action="Index">Buscas</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
                                 </li>
                             }
                         </ul>

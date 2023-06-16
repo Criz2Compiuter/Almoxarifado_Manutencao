@@ -13,43 +13,6 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             _context = context;
         }
-
-        public async Task<List<Produto>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
-        {
-            var result = from obj in _context.Produto select obj;
-            if (minDate.HasValue)
-            {
-                result = result.Where(x => x.Data >= minDate.Value);
-            }
-            if (maxDate.HasValue)
-            {
-                result = result.Where(x => x.Data <= maxDate.Value);
-            }
-            return await result
-                .Include(x => x.Enderecos)
-                .Include(x => x.Enderecos.Prateleiras)
-                .OrderByDescending(x => x.Data)
-                .ToListAsync();
-        }
-
-        public async Task<List<IGrouping<Prateleira, Produto>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
-        {
-            var result = from obj in _context.Produto select obj;
-            if (minDate.HasValue)
-            {
-                result = result.Where(x => x.Data >= minDate.Value);
-            }
-            if (maxDate.HasValue)
-            {
-                result = result.Where(x => x.Data <= maxDate.Value);
-            }
-            return await result
-                .Include(x => x.Enderecos)
-                .Include(x => x.Enderecos.Prateleiras)
-                .OrderByDescending(x => x.Data)
-                .GroupBy(x => x.Enderecos.Prateleiras)
-                .ToListAsync();
-        }
     }
 }
 
