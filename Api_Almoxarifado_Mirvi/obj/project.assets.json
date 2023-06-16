@@ -10212,23 +10212,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\crisf\\.nuget\\packages\\": {},
+    "C:\\Users\\Cristian\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\crisf\\source\\repos\\Almoxarifado_Manutencao\\Nova pasta\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+      "projectUniqueName": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Projeto\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
       "projectName": "Api_Almoxarifado_Mirvi",
-      "projectPath": "C:\\Users\\crisf\\source\\repos\\Almoxarifado_Manutencao\\Nova pasta\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
-      "packagesPath": "C:\\Users\\crisf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\crisf\\source\\repos\\Almoxarifado_Manutencao\\Nova pasta\\Api_Almoxarifado_Mirvi\\obj\\",
+      "projectPath": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Projeto\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+      "packagesPath": "C:\\Users\\Cristian\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Cristian\\source\\repos\\Almoxarifado_Manutencao\\Projeto\\Api_Almoxarifado_Mirvi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\crisf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Cristian\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

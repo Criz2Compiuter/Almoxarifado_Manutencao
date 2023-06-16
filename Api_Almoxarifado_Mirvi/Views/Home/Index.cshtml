@@ -6,8 +6,57 @@
 <div class="search-container text-center">
     <div class="search-box">
         <h1>Mirvi Brasil</h1>
-        <input type="text" id="searchInput" class="search-input" onkeyup="searchProducts()" placeholder="Pesquisar...">
-        <div class="search-results" id="search-results1">
+        <input type="text" id="searchInput1" class="search-input" onkeyup="searchProducts('searchInput1', 'search-results1')" placeholder="Pesquisar...">
+        <div class="search-results" id="search-results1" style="display: none;">
+            <table class="table tavle-striped table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Descricao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Prateleiras)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Data)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantidade)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="productList">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Data)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantidade)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="search-box">
+        <h1>Tetra Pak</h1>
+        <input type="text" id="searchInput2" class="search-input" onkeyup="searchProducts('searchInput2', 'search-results2')" placeholder="Pesquisar...">
+        <div class="search-results" id="search-results2" style="display: none;">
             <table class="table tavle-striped table-hover">
                 <thead>
                     <tr class="success">
@@ -56,22 +105,36 @@
 </div>
 
 <script>
-    function searchProducts() {
-        var input = document.getElementById('searchInput');
+    function searchProducts(inputId, resultsId) {
+        var input = document.getElementById(inputId);
         var filter = input.value.toUpperCase();
-        var table = document.getElementById('productList');
+        var resultsDiv = document.getElementById(resultsId);
+        var table = resultsDiv.querySelector('tbody');
         var rows = table.getElementsByTagName('tr');
+        var anyMatch = false;
 
         for (var i = 0; i < rows.length; i++) {
-            var td = rows[i].getElementsByTagName('td')[0];
-            if (td) {
-                var txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
+            var descriptionCell = rows[i].getElementsByTagName('td')[0];
+            if (descriptionCell) {
+                var description = descriptionCell.textContent || descriptionCell.innerText;
+                var display = description.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
+                rows[i].style.display = display;
+                if (display === '') {
+                    anyMatch = true;
                 }
             }
+        }
+
+        if (anyMatch && filter !== '') {
+            resultsDiv.style.display = 'block';
+        } else {
+            resultsDiv.style.display = 'none';
+        }
+
+        if (filter === '') {
+            table.style.display = 'none';
+        } else {
+            table.style.display = '';
         }
     }
 </script>
@@ -84,6 +147,9 @@
 
     .search-box {
         margin: 0 10px;
+        border: 5px solid #ccc;
+        border-radius: 10px;
+        padding: 5px;
     }
 
     .search-input {
@@ -94,14 +160,13 @@
     }
 
     .search-results {
-        position: absolute;
         width: 500px;
         max-height: 200px;
         overflow-y: auto;
         background-color: #fff;
         border: 1px solid #ccc;
         border-radius: 5px;
-        z-index: 1;
+        margin-top: 10px;
     }
 
         .search-results a {
