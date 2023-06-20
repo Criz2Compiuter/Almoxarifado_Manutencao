@@ -5,8 +5,8 @@
 
 <div class="search-container text-center">
     <div class="search-box">
-        <h1>Mirvi Brasil</h1>
-        <input type="text" id="searchInput1" class="search-input" onkeyup="searchProducts('searchInput1', 'search-results1')" placeholder="Pesquisar...">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MirviBrasil"><h1>Mirvi Brasil</h1></a>
+        <input type="text" id="searchInput1" class="search-input" data-almoxarifado="1" onkeyup="searchProducts('searchInput1', 'search-results1')" placeholder="Pesquisar...">
         <div class="search-results" id="search-results1" style="display: none;">
             <table class="table tavle-striped table-hover">
                 <thead>
@@ -54,8 +54,8 @@
         </div>
     </div>
     <div class="search-box">
-        <h1>Tetra Pak</h1>
-        <input type="text" id="searchInput2" class="search-input" onkeyup="searchProducts('searchInput2', 'search-results2')" placeholder="Pesquisar...">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TetraPak"><h1>Tetra Pak</h1></a>
+        <input type="text" id="searchInput2" class="search-input" data-almoxarifado="2" onkeyup="searchProducts('searchInput2', 'search-results2')" placeholder="Pesquisar...">
         <div class="search-results" id="search-results2" style="display: none;">
             <table class="table tavle-striped table-hover">
                 <thead>
@@ -105,37 +105,30 @@
 </div>
 
 <script>
-    function searchProducts(inputId, resultsId) {
-        var input = document.getElementById(inputId);
-        var filter = input.value.toUpperCase();
-        var resultsDiv = document.getElementById(resultsId);
-        var table = resultsDiv.querySelector('tbody');
-        var rows = table.getElementsByTagName('tr');
-        var anyMatch = false;
+    $(document).ready(function () {
+        $('#almoxarifadoId, #searchValue').on('change keyup', function () {
+            searchProducts();
+        });
+    });
 
-        for (var i = 0; i < rows.length; i++) {
-            var descriptionCell = rows[i].getElementsByTagName('td')[0];
-            if (descriptionCell) {
-                var description = descriptionCell.textContent || descriptionCell.innerText;
-                var display = description.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
-                rows[i].style.display = display;
-                if (display === '') {
-                    anyMatch = true;
-                }
+    function searchProducts() {
+        var almoxarifadoId = $('#almoxarifadoId').val();
+        var searchValue = $('#searchValue').val();
+
+        $.ajax({
+            url: '/Produtos/SearchByAlmoxarifado',
+            type: 'GET',
+            data: {
+                almoxarifadoId: almoxarifadoId,
+                searchValue: searchValue
+            },
+            success: function (data) {
+                $('#productList').html(data);
+            },
+            error: function (error) {
+                console.log(error);
             }
-        }
-
-        if (anyMatch && filter !== '') {
-            resultsDiv.style.display = 'block';
-        } else {
-            resultsDiv.style.display = 'none';
-        }
-
-        if (filter === '') {
-            table.style.display = 'none';
-        } else {
-            table.style.display = '';
-        }
+        });
     }
 </script>
 <style>
@@ -152,16 +145,24 @@
         padding: 5px;
     }
 
+        .search-box h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
     .search-input {
         padding: 10px;
         width: 500px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        margin: 30px 0 0;
     }
 
     .search-results {
         width: 500px;
-        max-height: 200px;
+        max-height: 500px;
         overflow-y: auto;
         background-color: #fff;
         border: 1px solid #ccc;

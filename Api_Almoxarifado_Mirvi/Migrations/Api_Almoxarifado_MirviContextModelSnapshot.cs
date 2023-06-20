@@ -62,15 +62,25 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("AlmoxarifadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CorredorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<int>("PrateleirasId")
+                    b.Property<int?>("PrateleirasId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AlmoxarifadoId");
+
+                    b.HasIndex("CorredorId");
 
                     b.HasIndex("PrateleirasId");
 
@@ -83,6 +93,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("AlmoxarifadoId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CorredorId")
                         .HasColumnType("int");
 
@@ -93,6 +106,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlmoxarifadoId");
+
                     b.HasIndex("CorredorId");
 
                     b.ToTable("Prateleira");
@@ -102,6 +117,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 {
                     b.Property<int?>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AlmoxarifadoId")
                         .HasColumnType("int");
 
                     b.Property<string>("C_STalisca")
@@ -118,6 +136,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<string>("Conexao")
                         .HasColumnType("longtext");
+
+                    b.Property<int?>("CorredorId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
@@ -148,19 +169,19 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<string>("Marca")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Maximo")
+                    b.Property<int?>("Maximo")
                         .HasColumnType("int");
 
                     b.Property<string>("Medida")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Minimo")
+                    b.Property<int?>("Minimo")
                         .HasColumnType("int");
 
                     b.Property<string>("Modelo")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PrateleirasId")
+                    b.Property<int?>("PrateleirasId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
@@ -183,6 +204,10 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlmoxarifadoId");
+
+                    b.HasIndex("CorredorId");
+
                     b.HasIndex("EnderecosId");
 
                     b.HasIndex("PrateleirasId");
@@ -203,37 +228,65 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Endereco", b =>
                 {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Almoxarifado", "Almoxarifado")
+                        .WithMany("Enderecos")
+                        .HasForeignKey("AlmoxarifadoId");
+
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Corredor", "Corredor")
+                        .WithMany("Endereco")
+                        .HasForeignKey("CorredorId");
+
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Prateleira", "Prateleiras")
                         .WithMany("Endereco")
-                        .HasForeignKey("PrateleirasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrateleirasId");
+
+                    b.Navigation("Almoxarifado");
+
+                    b.Navigation("Corredor");
 
                     b.Navigation("Prateleiras");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Prateleira", b =>
                 {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Almoxarifado", "Almoxarifado")
+                        .WithMany("Prateleira")
+                        .HasForeignKey("AlmoxarifadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Corredor", "Corredor")
                         .WithMany("Prateleiras")
                         .HasForeignKey("CorredorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Almoxarifado");
+
                     b.Navigation("Corredor");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Produto", b =>
                 {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Almoxarifado", "Almoxarifado")
+                        .WithMany("Produto")
+                        .HasForeignKey("AlmoxarifadoId");
+
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Corredor", "Corredor")
+                        .WithMany("Produto")
+                        .HasForeignKey("CorredorId");
+
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Endereco", "Enderecos")
                         .WithMany("Produto")
                         .HasForeignKey("EnderecosId");
 
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Prateleira", "Prateleiras")
                         .WithMany("Produto")
-                        .HasForeignKey("PrateleirasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrateleirasId");
+
+                    b.Navigation("Almoxarifado");
+
+                    b.Navigation("Corredor");
 
                     b.Navigation("Enderecos");
 
@@ -243,11 +296,21 @@ namespace Api_Almoxarifado_Mirvi.Migrations
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Almoxarifado", b =>
                 {
                     b.Navigation("Corredor");
+
+                    b.Navigation("Enderecos");
+
+                    b.Navigation("Prateleira");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Corredor", b =>
                 {
+                    b.Navigation("Endereco");
+
                     b.Navigation("Prateleiras");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Endereco", b =>

@@ -10,6 +10,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string Nome { get; set; }
         public Corredor Corredor { get; set; }
         public int CorredorId { get; set; }
+        public Almoxarifado Almoxarifado { get; set; }
         public ICollection<Endereco> Endereco { get; set; }
         public ICollection<Produto>? Produto { get; set; }
 
@@ -17,11 +18,12 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Prateleira(int id, string nome, Corredor corredor)
+        public Prateleira(int id, string nome, Corredor corredor, Almoxarifado almoxarifado)
         {
             Id = id;
             Nome = nome;
             Corredor = corredor;
+            Almoxarifado = almoxarifado;
         }
 
 

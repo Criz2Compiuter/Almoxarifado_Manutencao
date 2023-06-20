@@ -16,7 +16,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Produto>> FindAllAsync()
         {
-            return await _context.Produto.Include(obj => obj.Prateleiras).Include(obj => obj.Enderecos).ToListAsync();
+            return await _context.Produto.Include(obj => obj.Prateleiras).Include(obj => obj.Enderecos).Include(obj => obj.Almoxarifado).ToListAsync();
         }
 
         public async Task InsertAsync(Produto obj)
@@ -27,7 +27,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<Produto> FindByIdAsync(int id)
         {
-            return await _context.Produto.Include(obj => obj.Prateleiras).Include(obj => obj.Enderecos).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Produto.Include(obj => obj.Prateleiras).Include(obj => obj.Enderecos).Include(obj => obj.Almoxarifado).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
         public async Task RemoveAsync(int id)
@@ -94,6 +94,15 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             return await _context.Produto
                 .Where(p => p.Descricao.Contains(searchValue))
+                .ToListAsync();
+        }
+
+        public async Task<List<Produto>> FindByAlmoxarifadoAsync(int almoxarifadoId)
+        {
+            return await _context.Produto
+                .Where(p => p.AlmoxarifadoId == almoxarifadoId)
+                .Include(obj => obj.Prateleiras)
+                .Include(obj => obj.Enderecos)
                 .ToListAsync();
         }
     }

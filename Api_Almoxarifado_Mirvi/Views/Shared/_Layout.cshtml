@@ -22,12 +22,6 @@
                         <ul class="navbar-nav flex-grow-1">
                             @if (ViewContext.RouteData.Values["action"].ToString() == "Index")
                             {
-                                <li>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
-                                </li>
                             }
                             else if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
                             {

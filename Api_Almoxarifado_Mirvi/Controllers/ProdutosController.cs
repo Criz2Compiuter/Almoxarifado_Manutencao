@@ -16,11 +16,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly ProdutosService _produtoService;
         private readonly PrateleiraService _prateleiraService;
         private readonly EnderecoService _enderecoService;
-        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, EnderecoService enderecoService)
+        private readonly AlmoxarifadoService _almoxarifadoService;
+        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService
+            , EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
             _enderecoService = enderecoService;
+            _almoxarifadoService = almoxarifadoService;
         }
 
         public async Task<IActionResult> Index()
@@ -178,9 +181,22 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string searchValue)
+        public async Task<IActionResult> Search(int almoxarifadoId, string searchValue)
         {
-            var products = await _produtoService.FindByDescriptionAsync(searchValue);
+            var products = await _produtoService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
+            return PartialView("_ProductListPartial", products);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
+        {
+            var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                products = products.Where(p => p.Descricao.Contains(searchValue)).ToList();
+            }
+
             return PartialView("_ProductListPartial", products);
         }
     }

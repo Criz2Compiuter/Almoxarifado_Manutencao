@@ -9,7 +9,11 @@ namespace Api_Almoxarifado_Mirvi.Models
         [StringLength(20, MinimumLength = 2, ErrorMessage = "O {0} do endereco deve ter no maximo 20 caracter")]
         public string Nome { get; set; }
         public Prateleira Prateleiras { get; set; }
-        public int PrateleirasId { get; set; }
+        public int? PrateleirasId { get; set; }
+        public Corredor Corredor { get; set; }
+        public int? CorredorId { get; set; }
+        public Almoxarifado Almoxarifado { get; set; }
+        public int? AlmoxarifadoId { get; set; }
         public ICollection<Produto>? Produto { get; set; }
 
         public Endereco()
@@ -17,11 +21,16 @@ namespace Api_Almoxarifado_Mirvi.Models
             
         }
 
-        public Endereco(int id, string nome, Prateleira prateleiras)
+        public Endereco(int id, string nome, Prateleira prateleiras, int? prateleiraId, Almoxarifado almoxarifado, int? almoxarifadoId, Corredor corredor, int? corredorId)
         {
             Id = id;
             Nome = nome;
+            PrateleirasId = prateleiraId;
             Prateleiras = prateleiras;
+            Almoxarifado = almoxarifado;
+            AlmoxarifadoId = almoxarifadoId;
+            Corredor = corredor;
+            CorredorId = corredorId;
         }
         public void AddEnderecos(Produto pr)
         {

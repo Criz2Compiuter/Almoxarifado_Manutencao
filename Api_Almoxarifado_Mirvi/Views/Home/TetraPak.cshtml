@@ -4,4 +4,92 @@
 }
 <div class="text-center">
     <h1 class="display-4">Almoxarifado Tetra Pak</h1>
+
+    <div class="links-center">
+        <ul class="navbar flex-grow-1">
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">GIMA GELICAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success smaller-btn" asp-area="" asp-controller="Produtos" asp-action="Index">INTRAVIS HELICAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">GIMA RECAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">IMD - SCREWCAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success smaller-btn" asp-area="" asp-controller="Produtos" asp-action="Index">STREAMCAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">GEFIT - DREAMCAP</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE 065 - 070 LINE</a>
+            </li>
+            <li>
+                <a class="btn btn-success smaller-btn" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE 073 - 077 LINE</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE DC 415 LINE</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE LIGHTCAP 24 - 30</a>
+            </li>
+            <li>
+                <a class="btn btn-success smaller-btn" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE RECAP 764 - 766</a>
+            </li>
+            <li>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MOLDE STREAMCAP 261 - 263</a>
+            </li>
+        </ul>
+    </div>
 </div>
+<style>
+    .links-center {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0px 10px;
+    }
+
+        .links-center li {
+            width: calc(33.33%);
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            list-style: none;
+        }
+
+    .btn-success {
+        width: 300px;
+        height: 50px;
+    }
+
+    .links-center li {
+        width: calc(33.33% - 10px);
+        padding: 5px;
+        text-align: center;
+        list-style: none;
+    }
+
+    .links-center a {
+        display: inline-block;
+        width: 90%;
+        padding: 10px;
+        text-decoration: none;
+        text-align: center;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .smaller-btn {
+        max-width: 250px;
+        font-size: 14px;
+    }
+</style>
