@@ -5,6 +5,12 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<select id="almoxarifadoSelect">
+    <option value="">Todos os almoxarifados</option>
+    <option value="Mirvi">Almoxarifado Mirvi</option>
+    <option value="Tetra">Almoxarifado Tetra</option>
+</select>
+
 <table class="table tavle-striped table-hover">
     <p>
         <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
@@ -35,7 +41,7 @@
     <tbody>
          @foreach (var item in Model)
         {
-            <tr >
+            <tr class="produtoRow @(item.Almoxarifado.Nome)">
                 <td>
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
@@ -69,3 +75,28 @@
         }
     </tbody>
 </table>
+<script>
+    document.getElementById('almoxarifadoSelect').addEventListener('change', function () {
+        var selectedAlmoxarifado = this.value;
+
+        // Esconde todos os produtos
+        var produtos = document.getElementsByClassName('produtoRow');
+        for (var i = 0; i < produtos.length; i++) {
+            produtos[i].style.display = 'none';
+        }
+
+        // Mostra apenas os produtos do almoxarifado selecionado
+        if (selectedAlmoxarifado) {
+            var produtosFiltrados = document.getElementsByClassName(selectedAlmoxarifado);
+            for (var i = 0; i < produtosFiltrados.length; i++) {
+                produtosFiltrados[i].style.display = 'table-row';
+            }
+        }
+        else {
+            // Se nenhuma opção for selecionada, mostra todos os produtos
+            for (var i = 0; i < produtos.length; i++) {
+                produtos[i].style.display = 'table-row';
+            }
+        }
+    });
+</script>

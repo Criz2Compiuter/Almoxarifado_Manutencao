@@ -23,10 +23,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewData["ActiveTab"] = "Index";
             return View(produtos);
         }
-        public IActionResult MirviBrasil()
+        public async Task<IActionResult> MirviBrasil(string searchValue = "")
         {
             ViewData["ActiveTab"] = "MirviBrasil";
-            return View();
+
+            int almoxarifadoId = 1;
+
+            var produtosMirviBrasil = await _produtosService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
+
+            return View(produtosMirviBrasil);
         }
         public IActionResult TetraPak()
         {

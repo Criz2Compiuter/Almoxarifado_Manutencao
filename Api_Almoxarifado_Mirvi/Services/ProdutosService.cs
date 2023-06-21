@@ -55,8 +55,8 @@ namespace Api_Almoxarifado_Mirvi.Services
             {
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
-            } 
-            catch (DbUpdateException e) 
+            }
+            catch (DbUpdateException e)
             {
                 throw new IntegreityException(e.Message);
             }
@@ -103,6 +103,26 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Where(p => p.AlmoxarifadoId == almoxarifadoId)
                 .Include(obj => obj.Prateleiras)
                 .Include(obj => obj.Enderecos)
+                .ToListAsync();
+        }
+        public async Task<List<Produto>> SearchByAlmoxarifadoAsync(int almoxarifadoId, string searchValue)
+        {
+            var query = _context.Produto.AsQueryable();
+
+            // Filtrar por almoxarifadoId, se for fornecido
+            if (almoxarifadoId > 0)
+            {
+                query = query.Where(p => p.AlmoxarifadoId == almoxarifadoId);
+            }
+
+            // Filtrar por descrição, se for fornecida
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(p => p.Descricao.Contains(searchValue));
+            }
+            return await query
+                .Include(p => p.Prateleiras)
+                .Include(p => p.Enderecos)
                 .ToListAsync();
         }
     }

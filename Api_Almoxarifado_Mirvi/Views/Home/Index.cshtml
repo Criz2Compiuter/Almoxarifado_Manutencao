@@ -28,26 +28,29 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList">
+                <tbody id="productList1">
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descricao)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Data)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantidade)
-                            </td>
-                        </tr>
+                        if (item.Almoxarifado.Id == 1)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantidade)
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
@@ -77,26 +80,29 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList">
+                <tbody id="productList2">
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descricao)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Data)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantidade)
-                            </td>
-                        </tr>
+                        if (item.AlmoxarifadoId == 2)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Data)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantidade)
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
@@ -105,32 +111,37 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        $('#almoxarifadoId, #searchValue').on('change keyup', function () {
-            searchProducts();
-        });
-    });
-
-    function searchProducts() {
-        var almoxarifadoId = $('#almoxarifadoId').val();
-        var searchValue = $('#searchValue').val();
-
-        $.ajax({
-            url: '/Produtos/SearchByAlmoxarifado',
-            type: 'GET',
-            data: {
-                almoxarifadoId: almoxarifadoId,
-                searchValue: searchValue
-            },
-            success: function (data) {
-                $('#productList').html(data);
-            },
-            error: function (error) {
-                console.log(error);
+    function searchProducts(inputId, resultsId) {
+        var input = document.getElementById(inputId);
+        var filter = input.value.toUpperCase();
+        var resultsDiv = document.getElementById(resultsId);
+        var table = resultsDiv.querySelector('tbody');
+        var rows = table.getElementsByTagName('tr');
+        var anyMatch = false;
+        for (var i = 0; i < rows.length; i++) {
+            var descriptionCell = rows[i].getElementsByTagName('td')[0];
+            if (descriptionCell) {
+                var description = descriptionCell.textContent || descriptionCell.innerText;
+                var display = description.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
+                rows[i].style.display = display;
+                if (display === '') {
+                    anyMatch = true;
+                }
             }
-        });
+        }
+        if (anyMatch && filter !== '') {
+            resultsDiv.style.display = 'block';
+        } else {
+            resultsDiv.style.display = 'none';
+        }
+        if (filter === '') {
+            table.style.display = 'none';
+        } else {
+            table.style.display = '';
+        }
     }
 </script>
+
 <style>
     .search-container {
         display: flex;
@@ -139,7 +150,7 @@
     }
 
     .search-box {
-        margin: 0 10px;
+        margin: 10px;
         border: 5px solid #ccc;
         border-radius: 10px;
         padding: 5px;
@@ -149,7 +160,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0;
         }
 
     .search-input {
@@ -157,7 +167,7 @@
         width: 500px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        margin: 30px 0 0;
+        margin: 30px 0px 0px 0px;
     }
 
     .search-results {
