@@ -5,12 +5,6 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<select id="almoxarifadoSelect">
-    <option value="">Todos os almoxarifados</option>
-    <option value="Mirvi">Almoxarifado Mirvi</option>
-    <option value="Tetra">Almoxarifado Tetra</option>
-</select>
-
 <table class="table tavle-striped table-hover">
     <p>
         <a class="btn btn-success" asp-action="ProdutosIndisponiveis">Requisicoes</a>
@@ -22,81 +16,57 @@
     <thead>
         <tr class="success">
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                    @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Prateleiras)
+                    @Html.DisplayNameFor(model => model.Prateleiras)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                    @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data)
+                    @Html.DisplayNameFor(model => model.Data)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
+                    @Html.DisplayNameFor(model => model.Quantidade)
             </th>
         </tr>
     </thead>
     <tbody>
-         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
-                    {
-                        <div class="form-group">
-                            @{
-                                var quantidade = item.Quantidade;
-                            }
-                            @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
-                            <button type="submit" class="btn btn-primary">Atualizar</button>
-                        </div>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                        {
+                                <div class="form-group">
+                                @{
+                                    var quantidade = item.Quantidade;
+                                }
+                                @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                                </div>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
     </tbody>
 </table>
-<script>
-    document.getElementById('almoxarifadoSelect').addEventListener('change', function () {
-        var selectedAlmoxarifado = this.value;
 
-        // Esconde todos os produtos
-        var produtos = document.getElementsByClassName('produtoRow');
-        for (var i = 0; i < produtos.length; i++) {
-            produtos[i].style.display = 'none';
-        }
-
-        // Mostra apenas os produtos do almoxarifado selecionado
-        if (selectedAlmoxarifado) {
-            var produtosFiltrados = document.getElementsByClassName(selectedAlmoxarifado);
-            for (var i = 0; i < produtosFiltrados.length; i++) {
-                produtosFiltrados[i].style.display = 'table-row';
-            }
-        }
-        else {
-            // Se nenhuma opção for selecionada, mostra todos os produtos
-            for (var i = 0; i < produtos.length; i++) {
-                produtos[i].style.display = 'table-row';
-            }
-        }
-    });
-</script>

@@ -12,11 +12,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         private readonly EnderecoService _enderecoService;
         private readonly PrateleiraService _prateleiraService;
+        private readonly CorredorService _corredorService;
+        private readonly AlmoxarifadoService _almoxarifadoService;
 
-        public EnderecosController(EnderecoService enderecosService, PrateleiraService prateleiraService)
+        public EnderecosController(EnderecoService enderecosService, PrateleiraService prateleiraService, CorredorService corredorService, AlmoxarifadoService almoxarifadoService)
         {
             _enderecoService = enderecosService;
             _prateleiraService = prateleiraService;
+            _almoxarifadoService = almoxarifadoService;
+            _corredorService = corredorService;
         }
 
         public async Task<IActionResult> Index()
@@ -28,7 +32,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Create()
         {
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras };
+            var corredor = await _corredorService.FindAllAsync();
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Corredores = corredor, Almoxarifados = almoxarifado };
             return View(viewModel);
         }
 
@@ -42,7 +48,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Endereco = endereco };
+            var corredor = await _corredorService.FindAllAsync();
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroEndereco { Prateleira = prateleiras, Endereco = endereco, Almoxarifados = almoxarifado, Corredores = corredor };
             return View(viewModel);
 
         }

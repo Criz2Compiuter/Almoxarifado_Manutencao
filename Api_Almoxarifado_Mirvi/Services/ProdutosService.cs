@@ -125,10 +125,10 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(p => p.Enderecos)
                 .ToListAsync();
         }
-        public async Task<List<Produto>> GetProdutosByAlmoxarifadoAsync(int almoxarifadoId)
+        public async Task<List<Produto>> GetProdutosByAlmoxarifadoAsync(string almoxarifadoId)
         {
             var produtos = await _context.Produto
-                .Where(p => p.AlmoxarifadoId == almoxarifadoId)
+                .Where(p => p.Almoxarifado.Nome == almoxarifadoId)
                 .ToListAsync();
 
             return produtos;

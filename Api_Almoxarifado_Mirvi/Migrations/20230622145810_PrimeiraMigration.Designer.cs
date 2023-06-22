@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     [DbContext(typeof(Api_Almoxarifado_MirviContext))]
-    [Migration("20230620133141_PrimeiraMigration")]
+    [Migration("20230622145810_PrimeiraMigration")]
     partial class PrimeiraMigration
     {
         /// <inheritdoc />

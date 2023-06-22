@@ -1,11 +1,9 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
-using Api_Almoxarifado_Mirvi.Models.Enums;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.MinimalApi;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
@@ -14,21 +12,24 @@ namespace Api_Almoxarifado_Mirvi.Controllers
     {
 
         private readonly ProdutosService _produtoService;
+        private readonly CorredorService _corredorService;
         private readonly PrateleiraService _prateleiraService;
         private readonly EnderecoService _enderecoService;
         private readonly AlmoxarifadoService _almoxarifadoService;
-        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService
-            , EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService)
+
+        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService,
+        EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
             _enderecoService = enderecoService;
             _almoxarifadoService = almoxarifadoService;
+            _corredorService = corredorService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var produtos = await _produtoService.GetProdutosByAlmoxarifadoAsync("Mirvi Brasil");
+            var produtos = await _produtoService.FindAllAsync();
             return View(produtos);
         }
 
@@ -36,7 +37,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos };
+            var corredor = await _corredorService.FindAllAsync();
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Almoxarifado = almoxarifado, Corredor = corredor };
             return View(viewModel);
         }
 

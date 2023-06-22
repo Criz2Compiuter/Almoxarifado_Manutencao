@@ -12,11 +12,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         private readonly PrateleiraService _prateleiraService;
         private readonly CorredorService _corredorService;
+        private readonly AlmoxarifadoService _almoxarifadoService;
 
-        public PrateleirasController(PrateleiraService prateleiraService, CorredorService corredorService)
+        public PrateleirasController(PrateleiraService prateleiraService, CorredorService corredorService, AlmoxarifadoService almoxarifadoService)
         {
             _prateleiraService = prateleiraService;
             _corredorService = corredorService;
+            _almoxarifadoService = almoxarifadoService;
         }
 
         public async Task<IActionResult> Index()
@@ -28,7 +30,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Create()
         {
             var corredores = await _corredorService.FindAllAsync();
-            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores };
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Almoxarifados = almoxarifado};
             return View(viewModel);
         }
 
@@ -42,7 +45,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var corredores = await _corredorService.FindAllAsync();
-            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira };
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira, Almoxarifados = almoxarifado };
             return View(viewModel);
         }
 

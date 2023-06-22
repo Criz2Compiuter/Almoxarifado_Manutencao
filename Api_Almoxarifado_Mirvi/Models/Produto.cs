@@ -57,7 +57,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int? id, Endereco? enderecos, int? enderecoId, Prateleira prateleiras, int? prateleirasId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? uso,
+        public Produto(int? id, Endereco? enderecos, int? enderecoId, Prateleira prateleiras, int? prateleirasId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, string? codigoDeCompra, string? uso,
             string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca,
             string? n, string? valor, string? modelo, int quantidade, Corredor corredor, int? corredorId, Almoxarifado almoxarifado, int? almoxarifadoId)
         {
@@ -71,7 +71,6 @@ namespace Api_Almoxarifado_Mirvi.Models
             Status = status;
             Minimo = minimo;
             Maximo = maximo;
-            Data = data;
             CodigoDeCompra = codigoDeCompra;
             Uso = uso;
             C_STalisca = c_STalisca;
@@ -99,14 +98,17 @@ namespace Api_Almoxarifado_Mirvi.Models
             if (Quantidade < Minimo)
             {
                 Status = ProdutoStatus.Indisponivel;
+                Data = DateTime.Now;
             }
             else if (Quantidade >= Minimo && Quantidade < Maximo)
             {
                 Status = ProdutoStatus.LimiteBaixo;
+                Data = DateTime.Now;
             }
             else
             {
                 Status = ProdutoStatus.Disponivel;
+                Data = DateTime.Now;
             }
         }
     }
