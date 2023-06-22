@@ -1,5 +1,6 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Packaging.Signing;
 using System.Diagnostics;
@@ -23,15 +24,22 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewData["ActiveTab"] = "Index";
             return View(produtos);
         }
-        public async Task<IActionResult> MirviBrasil(string searchValue = "")
+        public async Task<IActionResult> MirviBrasil()
         {
             ViewData["ActiveTab"] = "MirviBrasil";
-
-            int almoxarifadoId = 1;
-
-            var produtosMirviBrasil = await _produtosService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
-
-            return View(produtosMirviBrasil);
+            try
+            {
+                var produtos = await _produtosService.GetProdutosByAlmoxarifadoAsync("Mirvi Brasil"); 
+                return View(produtos);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
         public IActionResult TetraPak()
         {

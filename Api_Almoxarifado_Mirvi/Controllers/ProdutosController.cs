@@ -28,8 +28,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _produtoService.FindAllAsync();
-            return View(list);
+            var produtos = await _produtoService.GetProdutosByAlmoxarifadoAsync("Mirvi Brasil");
+            return View(produtos);
         }
 
         public async Task<IActionResult> Create()
