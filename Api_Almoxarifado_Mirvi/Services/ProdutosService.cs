@@ -113,6 +113,15 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(obj => obj.Enderecos)
                 .ToListAsync();
         }
+
+        public async Task<List<Produto>> FindByAlmoxarifadoNomeAsync(string almoxarifadoNome)
+        {
+            return await _context.Produto
+                .Where(p => p.Almoxarifado.Nome == almoxarifadoNome)
+                .Include(obj => obj.Prateleiras)
+                .Include(obj => obj.Enderecos)
+                .ToListAsync();
+        }
         public async Task<List<Produto>> SearchByAlmoxarifadoAsync(int almoxarifadoId, string searchValue)
         {
             var query = _context.Produto.AsQueryable();
@@ -137,6 +146,14 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             var produtos = await _context.Produto
                 .Where(p => p.Almoxarifado.Nome == almoxarifadoId)
+                .ToListAsync();
+
+            return produtos;
+        }
+        public async Task<List<Produto>> ObterProdutosPorMaquina(string maquina)
+        {
+            var produtos = await _context.Produto
+                .Where(p => p.Maquina.Nome == maquina)
                 .ToListAsync();
 
             return produtos;

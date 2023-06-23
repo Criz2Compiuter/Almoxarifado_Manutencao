@@ -31,9 +31,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _maquinasService = maquinasService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string almoxarifadoNome)
         {
-            var produtos = await _produtoService.FindAllAsync();
+            var produtos = await _produtoService.FindByAlmoxarifadoNomeAsync(almoxarifadoNome);
             return View(produtos);
         }
 

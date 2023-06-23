@@ -61,6 +61,42 @@
         </ul>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var links = document.querySelectorAll('.links-center a');
+
+        links.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                var almoxarifadoId = this.getAttribute('data-almoxarifado');
+                var searchInputId = 'searchInput' + almoxarifadoId;
+                var searchResultsId = 'search-results' + almoxarifadoId;
+
+                hideAllSearchResults();
+                showSearchResults(searchResultsId);
+
+                document.getElementById(searchInputId).focus();
+            });
+        });
+    });
+
+    function hideAllSearchResults() {
+        var resultsDivs = document.querySelectorAll('.search-results');
+
+        resultsDivs.forEach(function (div) {
+            div.style.display = 'none';
+        });
+    }
+
+    function showSearchResults(resultsId) {
+        var resultsDiv = document.getElementById(resultsId);
+        resultsDiv.style.display = 'block';
+    }
+
+    function searchProducts(inputId, resultsId) {
+        // Your existing searchProducts function implementation
+    }
+</script>
 <style>
     .links-center {
         display: flex;

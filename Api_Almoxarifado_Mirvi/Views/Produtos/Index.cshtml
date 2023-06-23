@@ -12,6 +12,9 @@
     <p>
         <a class="btn btn-success" asp-action="Create">Adicionar Produto</a>
     </p>
+    <div>
+        <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Digite para pesquisar...">
+    </div>
     <thead>
     <thead>
         <tr class="success">
@@ -30,6 +33,9 @@
             <th>
                     @Html.DisplayNameFor(model => model.Quantidade)
             </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Maquina)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -47,6 +53,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.Nome)
                     </td>
                     <td>
                         @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
@@ -69,4 +81,22 @@
             }
     </tbody>
 </table>
+<script>
+function searchProducts() {
+        var input = document.getElementById('searchInput');
+        var filter = input.value.toUpperCase();
+        var rows = document.getElementsByClassName('productRow');
 
+        for (var i = 0; i < rows.length; i++) {
+            var td = rows[i].getElementsByTagName('td')[0];
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    }
+</script>

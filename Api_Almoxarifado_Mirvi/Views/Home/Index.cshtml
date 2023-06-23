@@ -5,7 +5,7 @@
 
 <div class="search-container text-center">
     <div class="search-box">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MirviBrasil"><h1>Mirvi Brasil</h1></a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MirviBrasil" asp-route-nomeAlmoxarifado="Mirvi Brasil"><h1>Mirvi Brasil</h1></a>
         <input type="text" id="searchInput1" class="search-input" data-almoxarifado="1" onkeyup="searchProducts('searchInput1', 'search-results1')" placeholder="Pesquisar...">
         <div class="search-results" id="search-results1" style="display: none;">
             <table class="table tavle-striped table-hover">
@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="search-box">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TetraPak"><h1>Tetra Pak</h1></a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TetraPak" asp-route-nomeAlmoxarifado="Mirvi Brasil"><h1>Tetra Pak</h1></a>
         <input type="text" id="searchInput2" class="search-input" data-almoxarifado="2" onkeyup="searchProducts('searchInput2', 'search-results2')" placeholder="Pesquisar...">
         <div class="search-results" id="search-results2" style="display: none;">
             <table class="table tavle-striped table-hover">
@@ -77,6 +77,9 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Quantidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Maquina)
                         </th>
                     </tr>
                 </thead>
@@ -100,6 +103,9 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Quantidade)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Maquina.Nome)
                                 </td>
                             </tr>
                         }
