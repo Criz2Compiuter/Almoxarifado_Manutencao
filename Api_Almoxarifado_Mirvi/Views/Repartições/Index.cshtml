@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Repartição>
+@{
+    ViewData["Title"] = "Repartição";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table tavle-striped table-hover">
+    <thead>
+        <tr class="success">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Almoxarifado)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach( var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Almoxarifado.Nome)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-success" asp-action="Create">Criar nova Repartição</a>
+</p>

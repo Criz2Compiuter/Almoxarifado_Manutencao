@@ -16,6 +16,10 @@ namespace Api_Almoxarifado_Mirvi.Models
         public int? PrateleirasId { get; set; }
         public Corredor Corredor { get; set; }
         public int? CorredorId { get; set; }
+        public Repartição? Repartição { get; set; }
+        public int? RepartiçãoId { get; set; }
+        public Maquina? Maquina { get; set; }
+        public int? MaquinaId { get; set; }
 
         public Almoxarifado Almoxarifado { get; set; }
         public int? AlmoxarifadoId { get; set; }
@@ -57,20 +61,32 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int? id, Endereco? enderecos, int? enderecoId, Prateleira prateleiras, int? prateleirasId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, string? codigoDeCompra, string? uso,
-            string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca,
-            string? n, string? valor, string? modelo, int quantidade, Corredor corredor, int? corredorId, Almoxarifado almoxarifado, int? almoxarifadoId)
+        public Produto(int? id, Endereco? enderecos, int? enderecosId, Prateleira prateleiras, int? prateleirasId, Corredor corredor,
+            int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId, Almoxarifado almoxarifado,
+            int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data,
+            string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor,
+            string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n,
+            string? valor, string? modelo, int quantidade)
         {
             Id = id;
             Enderecos = enderecos;
-            EnderecosId = enderecoId;
+            EnderecosId = enderecosId;
             Prateleiras = prateleiras;
-            PrateleirasId = prateleirasId; 
+            PrateleirasId = prateleirasId;
+            Corredor = corredor;
+            CorredorId = corredorId;
+            Repartição = repartição;
+            RepartiçãoId = repartiçãoId;
+            Maquina = maquina;
+            MaquinaId = maquinaId;
+            Almoxarifado = almoxarifado;
+            AlmoxarifadoId = almoxarifadoId;
             Descricao = descricao;
             Categoria = categoria;
             Status = status;
             Minimo = minimo;
             Maximo = maximo;
+            Data = data;
             CodigoDeCompra = codigoDeCompra;
             Uso = uso;
             C_STalisca = c_STalisca;
@@ -88,11 +104,8 @@ namespace Api_Almoxarifado_Mirvi.Models
             Valor = valor;
             Modelo = modelo;
             Quantidade = quantidade;
-            Corredor = corredor;
-            CorredorId = corredorId;
-            Almoxarifado = almoxarifado;
-            AlmoxarifadoId = almoxarifadoId;
         }
+
         public void AtualizarStatus()
         {
             if (Quantidade < Minimo)

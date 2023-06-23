@@ -16,15 +16,19 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly PrateleiraService _prateleiraService;
         private readonly EnderecoService _enderecoService;
         private readonly AlmoxarifadoService _almoxarifadoService;
+        private readonly RepartiçõesService _repartiçõesService;
+        private readonly MaquinasService _maquinasService;
 
         public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService,
-        EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService)
+        EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
             _enderecoService = enderecoService;
             _almoxarifadoService = almoxarifadoService;
             _corredorService = corredorService;
+            _repartiçõesService = repartiçõesService;
+            _maquinasService = maquinasService;
         }
 
         public async Task<IActionResult> Index()
@@ -39,7 +43,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var prateleiras = await _prateleiraService.FindAllAsync();
             var corredor = await _corredorService.FindAllAsync();
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Almoxarifado = almoxarifado, Corredor = corredor };
+            var maquina = await _maquinasService.FindAllAsync();
+            var repatição = await _repartiçõesService.FindAllAsync();
+            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Almoxarifado = almoxarifado,
+                Corredor = corredor, Maquina = maquina, Repartição = repatição };
             return View(viewModel);
         }
 
@@ -113,7 +120,20 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
             List<Endereco>? enderecos = await _enderecoService.FindAllAsync();
-            FormularioCadastroProduto viewModel = new FormularioCadastroProduto { Produto = obj, Prateleira = prateleiras, Endereco = enderecos };
+            List<Corredor> corredor = await _corredorService.FindAllAsync();
+            List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
+            List<Maquina> maquina = await _maquinasService.FindAllAsync();
+            List<Repartição> repartição = await _repartiçõesService.FindAllAsync();
+            
+            FormularioCadastroProduto viewModel = new FormularioCadastroProduto
+            {
+                Prateleira = prateleiras,
+                Endereco = enderecos,
+                Almoxarifado = almoxarifado,
+                Corredor = corredor,
+                Maquina = maquina,
+                Repartição = repartição
+            };
             return View(viewModel);
         }
 
@@ -125,7 +145,19 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var enderecos = await _enderecoService.FindAllAsync();
-                var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Produto = produto };
+                var corredor = await _corredorService.FindAllAsync();
+                var almoxarifado = await _almoxarifadoService.FindAllAsync();
+                var maquina = await _maquinasService.FindAllAsync();
+                var repartição = await _repartiçõesService.FindAllAsync();
+                var viewModel = new FormularioCadastroProduto
+                {
+                    Prateleira = prateleiras,
+                    Endereco = enderecos,
+                    Almoxarifado = almoxarifado,
+                    Corredor = corredor,
+                    Maquina = maquina,
+                    Repartição = repartição
+                };
                 return View(viewModel);
             }
             if (id != produto.Id)
