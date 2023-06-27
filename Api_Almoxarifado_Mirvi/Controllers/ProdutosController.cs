@@ -31,22 +31,20 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _maquinasService = maquinasService;
         }
 
-        public async Task<IActionResult> Index(string almoxarifadoNome)
+        public async Task<IActionResult> Index(int almoxarifadoId)
         {
-            var produtos = await _produtoService.FindByAlmoxarifadoNomeAsync(almoxarifadoNome);
+            var produtos = await _produtoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
             return View(produtos);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            ViewData["AlmoxarifadoId"] = almoxarifadoId;
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
-            var corredor = await _corredorService.FindAllAsync();
-            var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var repatição = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Almoxarifado = almoxarifado,
-                Corredor = corredor, Maquina = maquina, Repartição = repatição };
+            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repatição };
             return View(viewModel);
         }
 
@@ -120,8 +118,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
             List<Endereco>? enderecos = await _enderecoService.FindAllAsync();
-            List<Corredor> corredor = await _corredorService.FindAllAsync();
-            List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
             List<Maquina> maquina = await _maquinasService.FindAllAsync();
             List<Repartição> repartição = await _repartiçõesService.FindAllAsync();
             
@@ -129,8 +125,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 Prateleira = prateleiras,
                 Endereco = enderecos,
-                Almoxarifado = almoxarifado,
-                Corredor = corredor,
                 Maquina = maquina,
                 Repartição = repartição
             };
@@ -145,16 +139,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var enderecos = await _enderecoService.FindAllAsync();
-                var corredor = await _corredorService.FindAllAsync();
-                var almoxarifado = await _almoxarifadoService.FindAllAsync();
                 var maquina = await _maquinasService.FindAllAsync();
                 var repartição = await _repartiçõesService.FindAllAsync();
                 var viewModel = new FormularioCadastroProduto
                 {
                     Prateleira = prateleiras,
                     Endereco = enderecos,
-                    Almoxarifado = almoxarifado,
-                    Corredor = corredor,
                     Maquina = maquina,
                     Repartição = repartição
                 };

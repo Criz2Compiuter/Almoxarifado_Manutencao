@@ -44,7 +44,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroMaquina { Almoxarifados = almoxarifado };
+            var viewModel = new FormularioCadastroRepartição { Repartição = repartição, Almoxarifados = almoxarifado };
             return View(viewModel);
         }
 
@@ -115,20 +115,21 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Maquina maquina)
+        public async Task<IActionResult> Edit(int id, Repartição repartição)
         {
             if (!ModelState.IsValid)
             {
                 var almoxarifados = await _almoxarifadoService.FindAllAsync();
-                var viewModel = new FormularioCadastroMaquina { Almoxarifados = almoxarifados, Maquina = maquina };
+                var viewModel = new FormularioCadastroRepartição { Almoxarifados = almoxarifados, Repartição = repartição };
+                return View(viewModel);
             }
-            if (id != maquina.Id)
+            if (id != repartição.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Ids fornecido nao correspondem" });
             }
             try
             {
-                await _repartiçãoService.UpdateAsync(maquina);
+                await _repartiçãoService.UpdateAsync(repartição);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

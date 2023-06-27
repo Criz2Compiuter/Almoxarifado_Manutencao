@@ -44,7 +44,7 @@
                 <input asp-for="Produto.Data" class="form-control" />
                 <span asp-validation-for="Produto.Data" class="text-danger"></span>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label asp-for="Produto.CodigoDeCompra" class="control-label"></label>
                 <input asp-for="Produto.CodigoDeCompra" class="form-control" />
             </div>
@@ -113,22 +113,21 @@
                 <input asp-for="Produto.Quantidade" class="form-control" />
                 <span asp-validation-for="Produto.Quantidade" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Produto.Almoxarifado" class="control-label"></label>
-                <select asp-for="Produto.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifado, "Id", "Nome"))" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Produto.Corredor" class="control-label"></label>
-                <select asp-for="Produto.CorredorId" asp-items="@(new SelectList(Model.Corredor, "Id", "Descricao"))" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Produto.Maquina" class="control-label"></label>
-                <select asp-for="Produto.MaquinaId" asp-items="@(new SelectList(Model.Maquina, "Id", "Nome"))" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Produto.Repartição" class="control-label"></label>
-                <select asp-for="Produto.RepartiçãoId" asp-items="@(new SelectList(Model.Repartição, "Id", "Nome"))" class="form-control"></select>
-            </div>
+            @if (ViewData["AlmoxarifadoId"] == "1")
+            {
+                <div class="form-group">
+                    <label asp-for="Produto.Maquina" class="control-label"></label>
+                    <select asp-for="Produto.MaquinaId" asp-items="@(new SelectList(Model.Maquina, "Id", "Nome"))" class="form-control"></select>
+                </div>
+            }
+            else if (ViewData["AlmoxarifadoId"] == "2")
+            {
+                <div class="form-group">
+                    <label asp-for="Produto.Repartição" class="control-label"></label>
+                    <select asp-for="Produto.RepartiçãoId" asp-items="@(new SelectList(Model.Repartição, "Id", "Nome"))" class="form-control"></select>
+                </div>
+            }
+            <p>Almoxarifado ID: @ViewData["AlmoxarifadoId"]</p>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

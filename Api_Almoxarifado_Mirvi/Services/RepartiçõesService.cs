@@ -43,7 +43,7 @@ namespace Api_Almoxarifado_Mirvi.Services
             }
         }
 
-        public async Task UpdateAsync(Maquina obj)
+        public async Task UpdateAsync(Repartição obj)
         {
             bool hasAny = await _context.Repartição.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
