@@ -8,95 +8,59 @@
     <div class="links-center">
         <ul class="navbar flex-grow-1">
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">SERVO VALVULA</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="1">SERVO VALVULA</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">PNEUMATICOS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="2">PNEUMATICOS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MATERIAIS ELETRICOS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="3">MATERIAIS ELETRICOS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">SENSORES</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="4">SENSORES</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">CONEXOES HIDRAULICAS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="5">CONEXOES HIDRAULICAS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">CORREIAS-V</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="6">CORREIAS-V</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">ARMARIO</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="7">CORREIAS-V</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">NETSAL</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="8">NETSAL</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">FUSIVEIS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="9">FUSIVEIS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">CILINDROS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="10">CILINDROS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">CORREIAS-ELETRICAS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="11">CORREIAS-ELETRICAS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">FILTROS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="12">FILTROS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">KASE-MOTORES</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="13">KASE-MOTORES</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">HUSKY</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="14">HUSKY</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">MANGUEIRAS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="15">MANGUEIRAS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">PERIFERICOS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="16">PERIFERICOS</a>
             </li>
             <li>
-                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="Index">ROLAMENTOS</a>
+                <a class="btn btn-success" asp-area="" asp-controller="Produtos" asp-action="IndexMirvi" asp-route-reparticaoId="17">ROLAMENTOS</a>
             </li>
         </ul>
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var links = document.querySelectorAll('.links-center a');
-
-        links.forEach(function (link) {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                var almoxarifadoId = this.getAttribute('data-almoxarifado');
-                var searchInputId = 'searchInput' + almoxarifadoId;
-                var searchResultsId = 'search-results' + almoxarifadoId;
-
-                hideAllSearchResults();
-                showSearchResults(searchResultsId);
-
-                document.getElementById(searchInputId).focus();
-            });
-        });
-    });
-
-    function hideAllSearchResults() {
-        var resultsDivs = document.querySelectorAll('.search-results');
-
-        resultsDivs.forEach(function (div) {
-            div.style.display = 'none';
-        });
-    }
-
-    function showSearchResults(resultsId) {
-        var resultsDiv = document.getElementById(resultsId);
-        resultsDiv.style.display = 'block';
-    }
-
-    function searchProducts(inputId, resultsId) {
-        // Your existing searchProducts function implementation
-    }
-</script>
 <style>
     .links-center {
         display: flex;
@@ -114,10 +78,10 @@
             list-style: none;
         }
 
-        .btn-success {
-            width: 300px;
-            height: 50px;
-        }
+    .btn-success {
+        width: 300px;
+        height: 50px;
+    }
 
     .links-center li {
         width: calc(33.33% - 10px);

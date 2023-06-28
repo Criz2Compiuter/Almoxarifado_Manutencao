@@ -24,9 +24,36 @@ public class SeedingService
         Almoxarifado a1 = new Almoxarifado(1, "Mirvi Brasil");
         Almoxarifado a2 = new Almoxarifado(2, "Tetra Pak");
 
-        Repartição r1 = new Repartição(1, "Servo Valvula", a1, 1);
+        Repartição r1 = new Repartição(1, "SERVO VALVULA", a1, 1);
+        Repartição r2 = new Repartição(2, "PNEUMATICOS", a1, 1);
+        Repartição r3 = new Repartição(3, "MATERIAIS ELETRICOS", a1, 1);
+        Repartição r4 = new Repartição(4, "SENSORES", a1, 1);
+        Repartição r5 = new Repartição(5, "CONEXOES HIDRAULICAS", a1, 1);
+        Repartição r6 = new Repartição(6, "CORREIAS-V", a1, 1);
+        Repartição r7 = new Repartição(7, "CORREIAS-V", a1, 1);
+        Repartição r8 = new Repartição(8, "NETSAL", a1, 1);
+        Repartição r9 = new Repartição(9, "FUSIVEIS", a1, 1);
+        Repartição r10 = new Repartição(10, "CILINDROS", a1, 1);
+        Repartição r11 = new Repartição(11, "CORREIAS-ELETRICAS", a1, 1);
+        Repartição r12 = new Repartição(12, "FILTROS", a1, 1);
+        Repartição r13 = new Repartição(13, "KASE-MOTORES", a1, 1);
+        Repartição r14 = new Repartição(14, "HUSKY", a1, 1);
+        Repartição r15 = new Repartição(15, "MANGUEIRAS", a1, 1);
+        Repartição r16 = new Repartição(16, "PERIFERICOS", a1, 1);
+        Repartição r17 = new Repartição(17, "ROLAMENTOS", a1, 1);
 
-        Maquina m1 = new Maquina(1, "Gima Helicap", a1, 1);
+        Maquina m1 = new Maquina(1, "Gima Helicap", a2, 2);
+        Maquina m2 = new Maquina(2, "Intravis Helicap", a2, 2);
+        Maquina m3 = new Maquina(3, "Gima Recap", a2, 2);
+        Maquina m4 = new Maquina(4, "IMD - ScrewCap", a2, 2);
+        Maquina m5 = new Maquina(5, "Molde 065 070 line", a2, 2);
+        Maquina m6 = new Maquina(6, "Molde 073 - 077 line", a2, 2);
+        Maquina m7 = new Maquina(7, "Molde dc 475 line", a2, 2);
+        Maquina m8 = new Maquina(8, "Molde LightCap 24-30", a2, 2);
+        Maquina m9 = new Maquina(9, "Molde Recap 764 766", a2, 2);
+        Maquina m10 = new Maquina(10, "Molde StreamCap", a2, 2);
+        Maquina m11 = new Maquina(11, "StreamCap", a2, 2);
+        Maquina m12 = new Maquina(12, "Gefit - DreamCap", a2, 2);
 
         Corredor c1 = new Corredor(1, "A", a1);
         Corredor c2 = new Corredor(2, "B",a1);
@@ -48,6 +75,10 @@ public class SeedingService
         Produto pr6 = new Produto(6, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5);
 
         _context.Almoxarifado.AddRange(a1);
+
+        _context.Repartição.AddRange(r1, r2, r3, r3, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17);
+
+        _context.Maquina.AddRange(m1, m2, m3, m3, m5, m6, m7, m8, m9, m10, m11, m12);
 
         _context.Corredor.AddRange(c1, c2, c3);
 

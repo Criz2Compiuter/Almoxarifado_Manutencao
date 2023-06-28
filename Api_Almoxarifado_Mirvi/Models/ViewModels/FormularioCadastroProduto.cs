@@ -7,5 +7,6 @@
         public ICollection<Prateleira> Prateleira { get; set; }
         public ICollection<Maquina>? Maquina { get; set; }
         public ICollection<Repartição>? Repartição { get; set; }
+        public int IdAlmoxarifado { get; set; }
     }
 }

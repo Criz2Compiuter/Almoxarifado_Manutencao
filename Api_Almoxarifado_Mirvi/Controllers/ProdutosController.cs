@@ -33,18 +33,31 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Index(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var produtos = await _produtoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
+            return View(produtos);
+        }
+        
+        public async Task<IActionResult> IndexMirvi(int reparticaoId)
+        {
+            ViewBag.reparticaoId = reparticaoId;
+            var produtos = await _produtoService.FindAllInReparticaoAsync(reparticaoId);
+            return View(produtos);
+        }
+        public async Task<IActionResult> IndexTetraPak(int maquinaId)
+        {
+            ViewBag.maquinaId = maquinaId;
+            var produtos = await _produtoService.FindAllInMaquinaAsync(maquinaId);
             return View(produtos);
         }
 
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
-            ViewData["AlmoxarifadoId"] = almoxarifadoId;
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var repatição = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repatição };
+            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repatição, IdAlmoxarifado = almoxarifadoId};
             return View(viewModel);
         }
 

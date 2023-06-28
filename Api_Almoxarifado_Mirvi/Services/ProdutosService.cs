@@ -150,5 +150,23 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(obj => obj.Almoxarifado)
                 .ToListAsync();
         }
+        public async Task<List<Produto>> FindAllInReparticaoAsync(int? reparticaoId)
+        {
+            return await _context.Produto
+                .Where(obj => obj.RepartiçãoId == reparticaoId)
+                .Include(obj => obj.Prateleiras)
+                .Include(obj => obj.Enderecos)
+                .Include(obj => obj.Almoxarifado)
+                .ToListAsync();
+        }
+        public async Task<List<Produto>> FindAllInMaquinaAsync(int? maquinaId)
+        {
+            return await _context.Produto
+                .Where(obj => obj.MaquinaId == maquinaId)
+                .Include(obj => obj.Prateleiras)
+                .Include(obj => obj.Enderecos)
+                .Include(obj => obj.Almoxarifado)
+                .ToListAsync();
+        }
     }
 }

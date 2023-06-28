@@ -113,21 +113,20 @@
                 <input asp-for="Produto.Quantidade" class="form-control" />
                 <span asp-validation-for="Produto.Quantidade" class="text-danger"></span>
             </div>
-            @if (ViewData["AlmoxarifadoId"] == "1")
+            @if (Model.IdAlmoxarifado == 2)
             {
                 <div class="form-group">
                     <label asp-for="Produto.Maquina" class="control-label"></label>
                     <select asp-for="Produto.MaquinaId" asp-items="@(new SelectList(Model.Maquina, "Id", "Nome"))" class="form-control"></select>
                 </div>
             }
-            else if (ViewData["AlmoxarifadoId"] == "2")
+            else if (Model.IdAlmoxarifado == 1)
             {
                 <div class="form-group">
                     <label asp-for="Produto.Repartição" class="control-label"></label>
                     <select asp-for="Produto.RepartiçãoId" asp-items="@(new SelectList(Model.Repartição, "Id", "Nome"))" class="form-control"></select>
                 </div>
             }
-            <p>Almoxarifado ID: @ViewData["AlmoxarifadoId"]</p>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
