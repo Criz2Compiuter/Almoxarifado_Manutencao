@@ -53,11 +53,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var repatição = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repatição, IdAlmoxarifado = almoxarifadoId};
+            var viewModel = new FormularioCadastroProduto { Almoxarifado = almoxarifado, Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repatição, IdAlmoxarifado = almoxarifadoId};
             return View(viewModel);
         }
 

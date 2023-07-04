@@ -169,6 +169,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("Desconto")
+                        .HasColumnType("int");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -190,6 +193,12 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Hpn")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Linha")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Local")
                         .HasColumnType("longtext");
 
                     b.Property<int?>("MaquinaId")
@@ -216,6 +225,10 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<string>("QuantidadeTotalIntalada")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Referencia")
                         .HasColumnType("longtext");
 
@@ -227,9 +240,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
-
-                    b.Property<string>("Uso")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Valor")
                         .HasColumnType("longtext");

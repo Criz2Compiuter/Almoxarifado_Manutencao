@@ -37,7 +37,8 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Required(ErrorMessage = "{0} não informado")]
         public DateTime Data { get; set; }
         public string? CodigoDeCompra { get; set; }
-        public string? Uso { get; set; }
+        public string? Local { get; set; }
+        public string? Linha { get; set; }
         public string? C_STalisca { get; set; }
         public string? Hpn { get; set; }
         public string? Referencia { get; set; }
@@ -56,17 +57,17 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
         [Required(ErrorMessage = "{0} não informado")]
         public int Quantidade { get; set; }
+        public string QuantidadeTotalIntalada{ get; set; }
+        public int Desconto{ get; set; }
 
         public Produto()
         {
         }
 
-        public Produto(int? id, Endereco? enderecos, int? enderecosId, Prateleira prateleiras, int? prateleirasId, Corredor corredor,
-            int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId, Almoxarifado almoxarifado,
-            int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data,
-            string? codigoDeCompra, string? uso, string? c_STalisca, string? hpn, string? referencia, string? h225_H300, string? fornecedor,
-            string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n,
-            string? valor, string? modelo, int quantidade)
+        public Produto(int? id, Endereco? enderecos, int? enderecosId, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
+            Almoxarifado almoxarifado, int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? local, string? linha, string? c_STalisca,
+            string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo,
+            int quantidade, string quantidadeTotalIntalada, int desconto)
         {
             Id = id;
             Enderecos = enderecos;
@@ -88,7 +89,8 @@ namespace Api_Almoxarifado_Mirvi.Models
             Maximo = maximo;
             Data = data;
             CodigoDeCompra = codigoDeCompra;
-            Uso = uso;
+            Local = local;
+            Linha = linha;
             C_STalisca = c_STalisca;
             Hpn = hpn;
             Referencia = referencia;
@@ -104,6 +106,8 @@ namespace Api_Almoxarifado_Mirvi.Models
             Valor = valor;
             Modelo = modelo;
             Quantidade = quantidade;
+            QuantidadeTotalIntalada = quantidadeTotalIntalada;
+            Desconto = desconto;
         }
 
         public void AtualizarStatus()

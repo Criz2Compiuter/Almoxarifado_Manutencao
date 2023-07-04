@@ -15,39 +15,26 @@
                             @Html.DisplayNameFor(model => model.Descricao)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Prateleiras)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Data)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.Quantidade)
                         </th>
+
                     </tr>
                 </thead>
                 <tbody id="productList1">
                     @foreach (var item in Model)
                     {
-                        if (item.Almoxarifado.Id == 1)
+                        if (item.AlmoxarifadoId == 1)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                    <a href="/Produtos/Details/@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Descricao)
+                                    </a>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Data)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantidade)
+                                    <a href="/Produtos/Details/@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Quantidade)
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -67,19 +54,7 @@
                             @Html.DisplayNameFor(model => model.Descricao)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Prateleiras)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Status)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Data)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.Quantidade)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Maquina)
                         </th>
                     </tr>
                 </thead>
@@ -90,22 +65,12 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                    <a href="/Produtos/Details/@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Descricao)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Status)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Data)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Quantidade)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Maquina.Nome)
+                                    <a href="/Produtos/Details/@item.Id">
+                                        @Html.DisplayFor(modelItem => item.Quantidade)
                                 </td>
                             </tr>
                         }

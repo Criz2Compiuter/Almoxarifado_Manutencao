@@ -186,7 +186,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     Data = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CodigoDeCompra = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Uso = table.Column<string>(type: "longtext", nullable: true)
+                    Local = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Linha = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     C_STalisca = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -216,7 +218,10 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Modelo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeTotalIntalada = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Desconto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

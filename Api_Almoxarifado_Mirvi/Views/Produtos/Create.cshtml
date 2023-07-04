@@ -49,8 +49,12 @@
                 <input asp-for="Produto.CodigoDeCompra" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Produto.Uso" class="control-label"></label>
-                <input asp-for="Produto.Uso" class="form-control" />
+                <label asp-for="Produto.Local" class="control-label"></label>
+                <input asp-for="Produto.Local" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Produto.Linha" class="control-label"></label>
+                <input asp-for="Produto.Linha" class="form-control" />
             </div>
             <div class="form-group">
                 <label asp-for="Produto.C_STalisca" class="control-label"></label>
@@ -119,12 +123,20 @@
                     <label asp-for="Produto.Maquina" class="control-label"></label>
                     <select asp-for="Produto.MaquinaId" asp-items="@(new SelectList(Model.Maquina, "Id", "Nome"))" class="form-control"></select>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Produto.Almoxarifado" class="control-label"></label>
+                    <select asp-for="Produto.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifado.Where(a => a.Id == Model.IdAlmoxarifado), "Id", "Nome"))" class="form-control"></select>
+                </div>
             }
             else if (Model.IdAlmoxarifado == 1)
             {
                 <div class="form-group">
                     <label asp-for="Produto.Repartição" class="control-label"></label>
                     <select asp-for="Produto.RepartiçãoId" asp-items="@(new SelectList(Model.Repartição, "Id", "Nome"))" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Produto.Almoxarifado" class="control-label"></label>
+                    <select asp-for="Produto.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifado.Where(a => a.Id == Model.IdAlmoxarifado), "Id", "Nome"))" class="form-control"></select>
                 </div>
             }
             <div class="form-group">
