@@ -57,8 +57,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
         [Required(ErrorMessage = "{0} não informado")]
         public int Quantidade { get; set; }
-        public string QuantidadeTotalIntalada{ get; set; }
-        public int Desconto{ get; set; }
+        public string? QuantidadeTotalIntalada{ get; set; }
 
         public Produto()
         {
@@ -67,7 +66,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public Produto(int? id, Endereco? enderecos, int? enderecosId, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
             Almoxarifado almoxarifado, int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? local, string? linha, string? c_STalisca,
             string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo,
-            int quantidade, string quantidadeTotalIntalada, int desconto)
+            int quantidade, string? quantidadeTotalIntalada)
         {
             Id = id;
             Enderecos = enderecos;
@@ -107,7 +106,6 @@ namespace Api_Almoxarifado_Mirvi.Models
             Modelo = modelo;
             Quantidade = quantidade;
             QuantidadeTotalIntalada = quantidadeTotalIntalada;
-            Desconto = desconto;
         }
 
         public void AtualizarStatus()

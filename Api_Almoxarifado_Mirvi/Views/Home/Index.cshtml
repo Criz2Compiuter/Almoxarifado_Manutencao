@@ -17,7 +17,6 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Quantidade)
                         </th>
-
                     </tr>
                 </thead>
                 <tbody id="productList1">
@@ -35,6 +34,12 @@
                                     <a href="/Produtos/Details/@item.Id">
                                         @Html.DisplayFor(modelItem => item.Quantidade)
                                     </a>
+                                </td>
+                                <td>
+                                    <div class="deduct-container">
+                                        <input type="number" class="quantity-input" id="quantityInput_@item.Id" placeholder="Quantidade">
+                                        <button class="deduct-button" onclick="deductQuantity('@item.Id')">Descontar</button>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -67,10 +72,18 @@
                                 <td>
                                     <a href="/Produtos/Details/@item.Id">
                                         @Html.DisplayFor(modelItem => item.Descricao)
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="/Produtos/Details/@item.Id">
                                         @Html.DisplayFor(modelItem => item.Quantidade)
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="deduct-container">
+                                        <input type="number" class="quantity-input" id="quantityInput_@item.Id" placeholder="Quantidade">
+                                        <button class="deduct-button" onclick="deductQuantity('@item.Id')">Descontar</button>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -80,20 +93,23 @@
         </div>
     </div>
 </div>
-
 <script>
     function searchProducts(inputId, resultsId) {
         var input = document.getElementById(inputId);
-        var filter = input.value.toUpperCase();
+        var filter = input.value;
         var resultsDiv = document.getElementById(resultsId);
         var table = resultsDiv.querySelector('tbody');
         var rows = table.getElementsByTagName('tr');
         var anyMatch = false;
+
+        // Store the filter value in local storage
+        localStorage.setItem(inputId, filter);
+
         for (var i = 0; i < rows.length; i++) {
             var descriptionCell = rows[i].getElementsByTagName('td')[0];
             if (descriptionCell) {
                 var description = descriptionCell.textContent || descriptionCell.innerText;
-                var display = description.toUpperCase().indexOf(filter) > -1 ? '' : 'none';
+                var display = description.toUpperCase().indexOf(filter.toUpperCase()) > -1 ? '' : 'none';
                 rows[i].style.display = display;
                 if (display === '') {
                     anyMatch = true;
@@ -111,8 +127,24 @@
             table.style.display = '';
         }
     }
-</script>
+    // Restore the filter value from local storage when the page loads
+    window.onload = function () {
+        var input1 = document.getElementById("searchInput1");
+        var input2 = document.getElementById("searchInput2");
+        var filter1 = localStorage.getItem("searchInput1");
+        var filter2 = localStorage.getItem("searchInput2");
 
+        if (input1 && filter1) {
+            input1.value = filter1;
+            searchProducts("searchInput1", "search-results1");
+        }
+
+        if (input2 && filter2) {
+            input2.value = filter2;
+            searchProducts("searchInput2", "search-results2");
+        }
+    };
+</script>
 <style>
     .search-container {
         display: flex;

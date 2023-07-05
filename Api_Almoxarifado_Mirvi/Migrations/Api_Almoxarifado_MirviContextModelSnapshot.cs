@@ -169,9 +169,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Desconto")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -226,7 +223,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("QuantidadeTotalIntalada")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Referencia")

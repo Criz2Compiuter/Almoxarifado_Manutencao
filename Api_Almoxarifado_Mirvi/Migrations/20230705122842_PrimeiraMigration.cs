@@ -219,9 +219,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     Modelo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeTotalIntalada = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Desconto = table.Column<int>(type: "int", nullable: false)
+                    QuantidadeTotalIntalada = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {

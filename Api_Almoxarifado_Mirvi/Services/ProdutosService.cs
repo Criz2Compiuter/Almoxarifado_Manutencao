@@ -40,16 +40,13 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task RemoveAsync(int id)
         {
-            try
+            var obj = await _context.Produto.FindAsync(id);
+            if (obj == null)
             {
-                var obj = _context.Produto.Find(id);
-                _context.Produto.Remove(obj);
-                await _context.SaveChangesAsync();
+                throw new NotFoundException("Produto não encontrado");
             }
-            catch (DbUpdateException e)
-            {
-                throw new IntegreityException("Produto nao pode ser deletado");
-            }
+            _context.Produto.Remove(obj);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Produto obj)
@@ -171,6 +168,31 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(obj => obj.Almoxarifado)
                 .Include(obj => obj.Maquina)
                 .ToListAsync();
+        }
+        public async Task DeduzirQuantidadeAsync(int productId, int quantidade)
+        {
+            var produto = await FindByIdAsync(productId);
+            if (produto == null)
+            {
+                throw new NotFoundException("Produto não encontrado");
+            }
+
+            if (produto.Quantidade < quantidade)
+            {
+                throw new Exception("Quantidade insuficiente do produto");
+            }
+
+            produto.Quantidade -= quantidade;
+
+            try
+            {
+                _context.Update(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
         }
     }
 }

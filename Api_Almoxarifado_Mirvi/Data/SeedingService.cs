@@ -67,12 +67,12 @@ public class SeedingService
         Endereco e2 = new Endereco(2, "AF2", p2, 2, a1, 1, c2, 2);
         Endereco e3 = new Endereco(3, "AF3", p3, 3, a1, 1, c3, 3);
 
-        Produto pr1 = new Produto(1, e1, 1, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
-        Produto pr2 = new Produto(2, e2, 2, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
-        Produto pr3 = new Produto(3, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
-        Produto pr4 = new Produto(4, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
-        Produto pr5 = new Produto(5, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
-        Produto pr6 = new Produto(6, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "", 1);
+        Produto pr1 = new Produto(1, e1, 1, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr2 = new Produto(2, e2, 2, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr3 = new Produto(3, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr4 = new Produto(4, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr5 = new Produto(5, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr6 = new Produto(6, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
 
         _context.Almoxarifado.AddRange(a1);
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     [DbContext(typeof(Api_Almoxarifado_MirviContext))]
-    [Migration("20230704151618_PrimeiraMigration")]
+    [Migration("20230705122842_PrimeiraMigration")]
     partial class PrimeiraMigration
     {
         /// <inheritdoc />
@@ -172,9 +172,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Desconto")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -229,7 +226,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("QuantidadeTotalIntalada")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Referencia")

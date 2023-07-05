@@ -2,8 +2,9 @@
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Packaging.Signing;
+using System.Threading.Tasks;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
@@ -24,23 +25,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewData["ActiveTab"] = "Index";
             return View(produtos);
         }
+
         public async Task<IActionResult> MirviBrasil()
         {
             ViewData["ActiveTab"] = "MirviBrasil";
-            try
-            {
-                var produtos = await _produtosService.GetProdutosByAlmoxarifadoAsync("Mirvi Brasil"); 
-                return View(produtos);
-            }
-            catch (NotFoundException)
-            {
-                return NotFound();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
+            return View();
         }
+
         public IActionResult TetraPak()
         {
             ViewData["ActiveTab"] = "TetraPak";

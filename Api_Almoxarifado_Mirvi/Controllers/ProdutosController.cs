@@ -238,5 +238,23 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             return PartialView("_ProductListPartial", products);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DescontarQuantidade(int productId, int quantidade)
+        {
+            try
+            {
+                await _produtoService.DeduzirQuantidadeAsync(productId, quantidade);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }
