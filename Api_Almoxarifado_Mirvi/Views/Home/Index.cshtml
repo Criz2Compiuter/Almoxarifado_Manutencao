@@ -5,10 +5,10 @@
 
 <div class="search-container text-center">
     <div class="search-box">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MirviBrasil" asp-route-nomeAlmoxarifado="Mirvi Brasil"><h1>Mirvi Brasil</h1></a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MirviBrasil"><h1>Mirvi Brasil</h1></a>
         <input type="text" id="searchInput1" class="search-input" data-almoxarifado="1" onkeyup="searchProducts('searchInput1', 'search-results1')" placeholder="Pesquisar...">
-        <div class="search-results" id="search-results1" style="display: none;">
-            <table class="table tavle-striped table-hover">
+        <div class="search-results" id="search-results1" style="display: none; height: 310px; overflow-y: scroll;">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr class="success">
                         <th>
@@ -19,7 +19,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList1">
+                <tbody>
                     @foreach (var item in Model)
                     {
                         if (item.AlmoxarifadoId == 1)
@@ -30,16 +30,14 @@
                                         @Html.DisplayFor(modelItem => item.Descricao)
                                     </a>
                                 </td>
-                                <td>
+                                <td id="quantidade_@item.Id">
                                     <a href="/Produtos/Details/@item.Id">
-                                        @Html.DisplayFor(modelItem => item.Quantidade)
+                                        @item.Quantidade
                                     </a>
                                 </td>
                                 <td>
-                                    <div class="deduct-container">
-                                        <input type="number" class="quantity-input" id="quantityInput_@item.Id" placeholder="Quantidade">
-                                        <button class="deduct-button" onclick="deductQuantity('@item.Id')">Descontar</button>
-                                    </div>
+                                    <input type="number" id="quantityInput_@item.Id" class="quantity-input" data-product-id="@item.Id" placeholder="Quantidade">
+                                    <button type="button" class="btn btn-primary" onclick="discountQuantity(@item.Id, 'productList1', @item.Quantidade)">Descontar</button>
                                 </td>
                             </tr>
                         }
@@ -49,10 +47,10 @@
         </div>
     </div>
     <div class="search-box">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TetraPak" asp-route-nomeAlmoxarifado="Mirvi Brasil"><h1>Tetra Pak</h1></a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="TetraPak"><h1>Tetra Pak</h1></a>
         <input type="text" id="searchInput2" class="search-input" data-almoxarifado="2" onkeyup="searchProducts('searchInput2', 'search-results2')" placeholder="Pesquisar...">
-        <div class="search-results" id="search-results2" style="display: none;">
-            <table class="table tavle-striped table-hover">
+        <div class="search-results" id="search-results2" style="display: none; height: 310px; overflow-y: scroll;">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr class="success">
                         <th>
@@ -63,7 +61,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody id="productList2">
+                <tbody>
                     @foreach (var item in Model)
                     {
                         if (item.AlmoxarifadoId == 2)
@@ -74,16 +72,14 @@
                                         @Html.DisplayFor(modelItem => item.Descricao)
                                     </a>
                                 </td>
-                                <td>
+                                <td id="quantidade_@item.Id">
                                     <a href="/Produtos/Details/@item.Id">
-                                        @Html.DisplayFor(modelItem => item.Quantidade)
+                                        @item.Quantidade
                                     </a>
                                 </td>
                                 <td>
-                                    <div class="deduct-container">
-                                        <input type="number" class="quantity-input" id="quantityInput_@item.Id" placeholder="Quantidade">
-                                        <button class="deduct-button" onclick="deductQuantity('@item.Id')">Descontar</button>
-                                    </div>
+                                    <input type="number" id="quantityInput_@item.Id" class="quantity-input" data-product-id="@item.Id" placeholder="Quantidade">
+                                    <button type="button" class="btn btn-primary" onclick="discountQuantity(@item.Id, 'productList2', @item.Quantidade)">Descontar</button>
                                 </td>
                             </tr>
                         }
@@ -93,23 +89,59 @@
         </div>
     </div>
 </div>
+
 <script>
+    function discountQuantity(productId, productListId, currentQuantity) {
+        var input = document.getElementById('quantityInput_' + productId);
+        var discountQuantity = parseInt(input.value);
+        if (isNaN(discountQuantity)) {
+            alert("Por favor, insira um valor numérico válido.");
+            input.value = '';
+            return;
+        }
+        if (discountQuantity > currentQuantity) {
+            alert("O valor a ser descontado é maior do que a quantidade atual.");
+            input.value = '';
+            return;
+        }
+        if (discountQuantity < 0) {
+            alert("O valor a ser descontado não pode ser negativo.");
+            input.value = '';
+            return;
+        }
+        input.value = '';
+
+        var quantidadeElement = document.getElementById('quantidade_' + productId);
+        currentQuantity = parseInt(quantidadeElement.innerText);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/Home/DescontarQuantidade?id=" + productId + "&quantidade=" + discountQuantity, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var newQuantity = currentQuantity - discountQuantity;
+                    quantidadeElement.innerHTML = '<a href="/Produtos/Details/' + productId + '">' + newQuantity + '</a>';
+                } else {
+                    console.error("Error: " + xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
     function searchProducts(inputId, resultsId) {
         var input = document.getElementById(inputId);
-        var filter = input.value;
+        var filter = input.value.toLowerCase();
         var resultsDiv = document.getElementById(resultsId);
         var table = resultsDiv.querySelector('tbody');
         var rows = table.getElementsByTagName('tr');
         var anyMatch = false;
-
-        // Store the filter value in local storage
-        localStorage.setItem(inputId, filter);
-
         for (var i = 0; i < rows.length; i++) {
             var descriptionCell = rows[i].getElementsByTagName('td')[0];
             if (descriptionCell) {
                 var description = descriptionCell.textContent || descriptionCell.innerText;
-                var display = description.toUpperCase().indexOf(filter.toUpperCase()) > -1 ? '' : 'none';
+                var display = description.toLowerCase().indexOf(filter) > -1 ? '' : 'none';
                 rows[i].style.display = display;
                 if (display === '') {
                     anyMatch = true;
@@ -126,8 +158,10 @@
         } else {
             table.style.display = '';
         }
+
+        localStorage.setItem(inputId, filter);
     }
-    // Restore the filter value from local storage when the page loads
+
     window.onload = function () {
         var input1 = document.getElementById("searchInput1");
         var input2 = document.getElementById("searchInput2");
@@ -194,3 +228,4 @@
                 background-color: #f0f0f0;
             }
 </style>
+

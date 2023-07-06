@@ -1,168 +1,238 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.Produto
 @{
     ViewData["Title"] = "Detalhes";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
 <hr />
 <div>
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Prateleiras)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Prateleiras.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Enderecos)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Enderecos.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Categoria)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CodigoDeCompra)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CodigoDeCompra)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Local)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Local)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Linha)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Linha)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.C_STalisca)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.C_STalisca)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hpn)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hpn)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Referencia)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Referencia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.H225_H300)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.H225_H300)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Fornecedor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fornecedor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Diametro)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Diametro)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Comprimento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Comprimento)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Conexao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Conexao)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Medida)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Medida)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Fabricante)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Fabricante)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Marca)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Marca)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.S_N)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.S_N)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Modelo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Modelo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Quantidade)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Almoxarifado)
-        </dt>
-        <dt>
-            @Html.DisplayFor(model => model.Almoxarifado.Nome)
-        </dt>
+        @if (Model.Descricao != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+        }
+        @if (Model.Prateleiras != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Prateleiras)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Prateleiras.Nome)
+            </dd>
+        }
+        @if (Model.Enderecos != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Enderecos)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Enderecos.Nome)
+            </dd>
+        }
+        @if (Model.Categoria != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Categoria)
+            </dd>
+        }
+        @if (Model.Status != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        }
+        @if (Model.Data != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Data)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Data)
+            </dd>
+        }
+        @if (Model.CodigoDeCompra != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.CodigoDeCompra)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CodigoDeCompra)
+            </dd>
+        }
+        @if (Model.Local != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Local)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Local)
+            </dd>
+        }
+        @if (Model.Linha != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Linha)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Linha)
+            </dd>
+        }
+        @if (Model.C_STalisca != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.C_STalisca)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.C_STalisca)
+            </dd>
+        }
+        @if (Model.Hpn != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Hpn)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Hpn)
+            </dd>
+        }
+        @if (Model.Referencia != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Referencia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Referencia)
+            </dd>
+        }
+        @if (Model.H225_H300 != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.H225_H300)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.H225_H300)
+            </dd>
+        }
+        @if (Model.Fornecedor != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Fornecedor)
+            </dd>
+        }
+        @if (Model.Diametro != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Diametro)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Diametro)
+            </dd>
+        }
+        @if (Model.Comprimento != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Comprimento)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comprimento)
+            </dd>
+        }
+        @if (Model.Conexao != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Conexao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Conexao)
+            </dd>
+        }
+        @if (Model.Medida != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Medida)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Medida)
+            </dd>
+        }
+        @if (Model.Fabricante != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Fabricante)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Fabricante)
+            </dd>
+        }
+        @if (Model.Marca != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Marca)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Marca)
+            </dd>
+        }
+        @if (Model.S_N != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.S_N)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.S_N)
+            </dd>
+        }
+        @if (Model.Valor != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+        }
+        @if (Model.Modelo != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Modelo)
+            </dd>
+        }
+        @if (Model.Quantidade != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Quantidade)
+            </dd>
+        }
+        @if (Model.Almoxarifado != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Almoxarifado)
+            </dt>
+            <dt>
+                @Html.DisplayFor(model => model.Almoxarifado.Nome)
+            </dt>
+        }
     </dl>
 </div>
 <div>

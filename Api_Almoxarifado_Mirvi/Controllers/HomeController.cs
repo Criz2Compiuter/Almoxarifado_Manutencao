@@ -25,11 +25,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewData["ActiveTab"] = "Index";
             return View(produtos);
         }
-
         public async Task<IActionResult> MirviBrasil()
         {
             ViewData["ActiveTab"] = "MirviBrasil";
-            return View();
+                return View();
         }
 
         public IActionResult TetraPak()
@@ -54,6 +53,24 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             var products = await _produtosService.FindByDescriptionAsync(searchValue);
             return PartialView("_ProductListPartial", products);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
+        {
+            try
+            {
+                await _produtosService.DeduzirQuantidadeAsync(id, quantidade);
+                return Ok();
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
     }
 }

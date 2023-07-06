@@ -53,6 +53,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
@@ -64,14 +65,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Produto produto)
+        public async Task<IActionResult> Create(Produto produto, int almoxarifadoId)
         {
             await _produtoService.InsertAsync(produto);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { almoxarifadoId });
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao foi fornecido" });
@@ -88,12 +90,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int almoxarifadoId)
         {
             try
             {
                 await _produtoService.RemoveAsync(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { almoxarifadoId });
             }
             catch (IntegreityException e)
             {
@@ -101,8 +103,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });

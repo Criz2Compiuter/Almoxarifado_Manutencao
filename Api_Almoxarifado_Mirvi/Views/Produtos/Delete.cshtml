@@ -1,13 +1,14 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.Produto
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Deletar"; 
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
-<h3>Tem certeza que deseja excluir essa prateleira?</h3>
+<h3>Tem certeza que deseja excluir esse produto ?</h3>
 
 <div>
-    <h4>Corredor</h4>
+    <h4>Produto</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -24,9 +25,8 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+    <form asp-action="Delete" asp-route-id="@Model.Id" asp-route-almoxarifadoId="@almoxarifadoId">
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index">Voltar para lista</a>
+        <a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a>
     </form>
 </div>

@@ -34,9 +34,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Quantidade)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Repartição)
-            </th>
+            @if (almoxarifadoId == 1)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Repartição)
+                </th>
+            }
+            else if (almoxarifadoId == 2)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Maquina)
+                </th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -58,9 +67,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantidade)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Repartição.Nome)
-                </td>
+                @if (almoxarifadoId == 1)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Repartição.Nome)
+                    </td>
+                }
+                else if (almoxarifadoId == 2)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Maquina.Nome)
+                    </td>
+                }
                 <td>
                     @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
                     {
@@ -74,9 +92,9 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Deletar</a>
                 </td>
             </tr>
         }
