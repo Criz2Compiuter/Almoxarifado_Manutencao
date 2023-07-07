@@ -1,15 +1,22 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroProduto
+@using Api_Almoxarifado_Mirvi.Models.Enums
 @{
     ViewData["Title"] = "Editar";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
-
 <h1>@ViewData["Title"]</h1>
-
-<h4>Produto</h4>
+<h4>Produtos</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
+            <input type="hidden" asp-for="Produto.Id" />
+            <div asp-validation-summary="All" class="text_danger"></div>
+            <div class="form-group">
+                <label asp-for="Produto.Id" class="control-label"></label>
+                <input asp-for="Produto.Id" class="form-control" />
+                <span asp-validation-for="Produto.Id" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Produto.Descricao" class="control-label"></label>
                 <input asp-for="Produto.Descricao" class="form-control" />
@@ -17,12 +24,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Produto.Enderecos" class="control-label"></label>
-                <input asp-for="Produto.Enderecos" class="form-control"/>
+                <select asp-for="Produto.EnderecosId" asp-items="@(new SelectList(Model.Endereco, "Id", "Nome"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Produto.Prateleiras" class="control-label"></label>
                 <select asp-for="Produto.PrateleirasId" asp-items="@(new SelectList(Model.Prateleira, "Id", "Nome"))" class="form-control"></select>
-                <span asp-validation-for="Produto.PrateleirasId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Produto.Categoria" class="control-label"></label>
@@ -121,6 +127,10 @@
                     <select asp-for="Produto.MaquinaId" asp-items="@(new SelectList(Model.Maquina, "Id", "Nome"))" class="form-control"></select>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Produto.Corredor" class="control-label"></label>
+                    <select asp-for="Produto.CorredorId" asp-items="@(new SelectList(Model.Corredor, "Id", "Descricao"))" class="form-control"></select>
+                </div>
+                <div class="form-group">
                     <label asp-for="Produto.Almoxarifado" class="control-label"></label>
                     <select asp-for="Produto.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifado.Where(a => a.Id == Model.IdAlmoxarifado), "Id", "Nome"))" class="form-control"></select>
                 </div>
@@ -132,13 +142,23 @@
                     <select asp-for="Produto.RepartiçãoId" asp-items="@(new SelectList(Model.Repartição, "Id", "Nome"))" class="form-control"></select>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Produto.Corredor" class="control-label"></label>
+                    <select asp-for="Produto.CorredorId" asp-items="@(new SelectList(Model.Corredor, "Id", "Descricao"))" class="form-control"></select>
+                </div>
+                <div class="form-group">
                     <label asp-for="Produto.Almoxarifado" class="control-label"></label>
                     <select asp-for="Produto.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifado.Where(a => a.Id == Model.IdAlmoxarifado), "Id", "Nome"))" class="form-control"></select>
                 </div>
             }
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Salvar" asp-route-almoxarifadoId="@almoxarifadoId" class="btn btn-default" />
+                <a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a>
             </div>
         </form>
     </div>
 </div>
+@section Scripts{
+    @{
+        { await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }
+}

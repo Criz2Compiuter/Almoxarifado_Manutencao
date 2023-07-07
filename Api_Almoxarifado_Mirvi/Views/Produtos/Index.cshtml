@@ -80,7 +80,7 @@
                     </td>
                 }
                 <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id, almoxarifadoId = almoxarifadoId }, FormMethod.Post, null, new { @class = "form-inline" }))
                     {
                         <div class="form-group">
                             @{
@@ -92,7 +92,7 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Editar</a>
                     <a asp-action="Details" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Detalhes</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Deletar</a>
                 </td>

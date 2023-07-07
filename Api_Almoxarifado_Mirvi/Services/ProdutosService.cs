@@ -16,10 +16,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Produto>> FindAllAsync()
         {
-            return await _context.Produto.Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
-                .Include(obj => obj.Almoxarifado)
-                .ToListAsync();
+            return await _context.Produto.ToListAsync();
         }
 
         public async Task InsertAsync(Produto obj)
@@ -30,7 +27,9 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<Produto> FindByIdAsync(int id)
         {
-            return await _context.Produto.Include(obj => obj.Prateleiras)
+            return await _context.Produto
+                .Include(obj => obj.Corredor)
+                .Include(obj => obj.Prateleiras)
                 .Include(obj => obj.Enderecos)
                 .Include(obj => obj.Maquina)
                 .Include(obj => obj.Repartição)
@@ -61,27 +60,8 @@ namespace Api_Almoxarifado_Mirvi.Services
                 _context.Update(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateConcurrencyException e)
             {
-                throw new IntegreityException(e.Message);
-            }
-        }
-
-        public async Task AtualizarProduto(Produto obj)
-        {
-            bool hasAny = _context.Produto.Any(x => x.Id == obj.Id);
-            if (!hasAny)
-            {
-                throw new NotFoundException("Produto nao encontrado");
-            }
-            try
-            {
-                _context.Update(obj);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException e)
-            {
-
                 throw new IntegreityException(e.Message);
             }
         }

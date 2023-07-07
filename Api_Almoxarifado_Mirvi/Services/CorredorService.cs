@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Corredor>> FindAllAsync()
         {
-            return await _context.Corredor.Include(obj => obj.Almoxarifado).OrderBy(x => x.Descricao).ToListAsync();
+            return await _context.Corredor.ToListAsync();
         }
 
         public async Task InsertAsync(Corredor obj)
@@ -26,7 +26,9 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<Corredor> FindByIdAsync(int id)
         {
-            return await _context.Corredor.Include(obj => obj.Almoxarifado).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Corredor
+                .Include(obj => obj.Almoxarifado)
+                .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
         public async Task RemoveAsync(int id)

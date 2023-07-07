@@ -4,9 +4,7 @@
     ViewData["Title"] = "Create";
     var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
-
 <h1>@ViewData["Title"]</h1>
-
 <h4>Produtos</h4>
 <hr />
 <div class="row">
@@ -141,6 +139,7 @@
             }
             <div class="form-group">
                 <input type="submit" value="Create" asp-route-almoxarifadoId="@almoxarifadoId" class="btn btn-default" />
+                <a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a>
             </div>
         </form>
     </div>

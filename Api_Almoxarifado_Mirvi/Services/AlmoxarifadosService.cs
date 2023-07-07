@@ -16,7 +16,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Almoxarifado>> FindAllAsync()
         {
-            return await _context.Almoxarifado.OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Almoxarifado.ToListAsync();
         }
 
         public async Task InsertAsync(Almoxarifado obj)
