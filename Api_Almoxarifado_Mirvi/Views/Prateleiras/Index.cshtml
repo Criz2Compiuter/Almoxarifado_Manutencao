@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Prateleira>
 @{
     ViewData["Title"] = "Prateleira";
+    var almoxarifadoId = ViewBag.AlmxoarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
+<p>
+    <a class="btn btn-success" asp-action="Create" asp-all-route-data="@almoxarifadoId">Criar Nova Prateleira</a>
+</p>
 
 <table class="table tavle-striped table-hover">
     <thead>
         <tr class="success">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -27,9 +28,6 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelitem => item.Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelitem => item.Nome)
                 </td>
                 <td>
@@ -39,14 +37,11 @@
                     @Html.DisplayFor(modelitem => item.Almoxarifado.Nome)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-all-route-data="@almoxarifadoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-all-route-data="@almoxarifadoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-all-route-data="@almoxarifadoId">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<p>
-    <a class="btn btn-success" asp-action="Create">Criar nova Prateleira</a>
-</p>

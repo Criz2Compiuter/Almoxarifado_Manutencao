@@ -17,6 +17,15 @@
                 @Html.DisplayFor(model => model.Descricao)
             </dd>
         }
+        @if (Model.Endereco != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco)
+            </dd>
+        }
         @if (Model.Prateleiras != null)
         {
             <dt>
@@ -24,15 +33,6 @@
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Prateleiras.Nome)
-            </dd>
-        }
-        @if (Model.Enderecos != null)
-        {
-            <dt>
-                @Html.DisplayNameFor(model => model.Enderecos)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Enderecos.Nome)
             </dd>
         }
         @if (Model.Categoria != null)

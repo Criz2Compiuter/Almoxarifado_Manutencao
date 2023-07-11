@@ -21,9 +21,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _almoxarifadoService = almoxarifadoService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int almoxarifadoId)
         {
-            var list = await _maquinaService.FindAllAsync();
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+            var list = await _maquinaService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
             return View(list);
         }
 

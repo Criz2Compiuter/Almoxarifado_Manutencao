@@ -9,9 +9,6 @@
     <thead>
         <tr class="success">
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
         </tr>
@@ -21,15 +18,12 @@
         {
             <tr>
                 <th>
-                    @Html.DisplayFor(modelitem => item.Id)
-                </th>
-                <th>
                     @Html.DisplayFor(modelitem => item.Nome)
                 </th>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
                 </td>
             </tr>
         }
@@ -37,6 +31,5 @@
 </table>
 <hr />
 <p>
-    <a class="btn btn-success" asp-action="Create">Criar um novo almoxarifado</a>
-    <a asp-action="Index">Voltar para lista</a>
+    <a class="btn btn-success" asp-action="Create">Criar Novo almoxarifado</a>
 </p>

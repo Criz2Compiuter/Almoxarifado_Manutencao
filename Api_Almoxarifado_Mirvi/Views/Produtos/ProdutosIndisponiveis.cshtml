@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Produtos Indisponíveis e Limite Baixo";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -14,9 +15,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Prateleiras)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Enderecos)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -40,16 +38,13 @@
                     @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Enderecos.Nome)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id, almoxarifadoId = almoxarifadoId, produtoindisponivelId = 1 }, FormMethod.Post, null, new { @class = "form-inline" }))
                     {
                         <div class="form-group">
                             @{

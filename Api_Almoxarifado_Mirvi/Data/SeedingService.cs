@@ -15,10 +15,9 @@ public class SeedingService
         if (_context.Almoxarifado.Any() ||
             _context.Corredor.Any() ||
             _context.Prateleira.Any() ||
-            _context.Endereco.Any() ||
             _context.Produto.Any())
         {
-            return; //O Banco de dados ja foi populado
+            return;
         }
 
         Almoxarifado a1 = new Almoxarifado(1, "Mirvi Brasil");
@@ -63,16 +62,12 @@ public class SeedingService
         Prateleira p2 = new Prateleira(2, "A2", c2, a1, 1);
         Prateleira p3 = new Prateleira(3, "A3", c3, a2, 2);
 
-        Endereco e1 = new Endereco(1, "AF1", p1, 1, a1, 1, c1, 1);
-        Endereco e2 = new Endereco(2, "AF2", p2, 2, a1, 1, c2, 2);
-        Endereco e3 = new Endereco(3, "AF3", p3, 3, a1, 1, c3, 3);
-
-        Produto pr1 = new Produto(1, e1, 1, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
-        Produto pr2 = new Produto(2, e2, 2, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
-        Produto pr3 = new Produto(3, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
-        Produto pr4 = new Produto(4, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
-        Produto pr5 = new Produto(5, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
-        Produto pr6 = new Produto(6, e3, 3, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", "", ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", 5, "");
+        Produto pr1 = new Produto(1, null, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
+        Produto pr2 = new Produto(2, null, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
+        Produto pr3 = new Produto(3, null, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
+        Produto pr4 = new Produto(4, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
+        Produto pr5 = new Produto(5, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
+        Produto pr6 = new Produto(6, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null);
 
         _context.Almoxarifado.AddRange(a1);
 
@@ -83,8 +78,6 @@ public class SeedingService
         _context.Corredor.AddRange(c1, c2, c3);
 
         _context.Prateleira.AddRange(p1, p2, p3);
-
-        _context.Endereco.AddRange(e1, e2, e3);
 
         _context.Produto.AddRange(pr1, pr2, pr3, pr4, pr5, pr6);
 

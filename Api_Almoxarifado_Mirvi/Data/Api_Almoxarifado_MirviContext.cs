@@ -18,7 +18,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Almoxarifado> Almoxarifado { get; set; } = default!;
         public DbSet<Corredor> Corredor { get; set; }
         public DbSet<Prateleira> Prateleira { get; set; }
-        public DbSet<Endereco> Endereco { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Maquina> Maquina { get; set; }
         public DbSet<Repartição> Repartição { get; set; }

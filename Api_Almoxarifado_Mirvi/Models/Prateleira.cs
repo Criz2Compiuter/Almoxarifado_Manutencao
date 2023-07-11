@@ -12,7 +12,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public int CorredorId { get; set; }
         public Almoxarifado Almoxarifado { get; set; }
         public int AlmoxarifadoId { get; set; }
-        public ICollection<Endereco> Endereco { get; set; }
         public ICollection<Produto>? Produto { get; set; }
 
         public Prateleira()

@@ -10,8 +10,7 @@ namespace Api_Almoxarifado_Mirvi.Models
     {
 
         public int? Id { get; set; }
-        public Endereco? Enderecos { get; set; } 
-        public int? EnderecosId { get; set; }
+        public string? Endereco { get; set; }
         public Prateleira Prateleiras { get; set; }
         public int? PrateleirasId { get; set; }
         public Corredor Corredor { get; set; }
@@ -63,14 +62,12 @@ namespace Api_Almoxarifado_Mirvi.Models
         {
         }
 
-        public Produto(int? id, Endereco? enderecos, int? enderecosId, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
+        public Produto(int? id, string? Endereco, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
             Almoxarifado almoxarifado, int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? local, string? linha, string? c_STalisca,
             string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo,
             int quantidade, string? quantidadeTotalIntalada)
         {
             Id = id;
-            Enderecos = enderecos;
-            EnderecosId = enderecosId;
             Prateleiras = prateleiras;
             PrateleirasId = prateleirasId;
             Corredor = corredor;

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Maquina>
 @{
     ViewData["Title"] = "Maquina";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -8,9 +9,6 @@
 <table class="table tavle-striped table-hover">
     <thead>
         <tr class="success">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -24,18 +22,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelitem => item.Id)
-                </td>
-                <td>
                     @Html.DisplayFor(modelitem => item.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelitem => item.Almoxarifado.Nome)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
                 </td>
             </tr>
         }

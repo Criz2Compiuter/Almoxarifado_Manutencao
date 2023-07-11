@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeiraMigration : Migration
+    public partial class PrimeiraMigation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -126,51 +126,11 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Endereco",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PrateleirasId = table.Column<int>(type: "int", nullable: true),
-                    CorredorId = table.Column<int>(type: "int", nullable: true),
-                    AlmoxarifadoId = table.Column<int>(type: "int", nullable: true),
-                    RepartiçãoId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Endereco", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Endereco_Almoxarifado_AlmoxarifadoId",
-                        column: x => x.AlmoxarifadoId,
-                        principalTable: "Almoxarifado",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Endereco_Corredor_CorredorId",
-                        column: x => x.CorredorId,
-                        principalTable: "Corredor",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Endereco_Prateleira_PrateleirasId",
-                        column: x => x.PrateleirasId,
-                        principalTable: "Prateleira",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Endereco_Repartição_RepartiçãoId",
-                        column: x => x.RepartiçãoId,
-                        principalTable: "Repartição",
-                        principalColumn: "Id");
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Produto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EnderecosId = table.Column<int>(type: "int", nullable: true),
                     PrateleirasId = table.Column<int>(type: "int", nullable: true),
                     CorredorId = table.Column<int>(type: "int", nullable: true),
                     RepartiçãoId = table.Column<int>(type: "int", nullable: true),
@@ -236,11 +196,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         principalTable: "Corredor",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Produto_Endereco_EnderecosId",
-                        column: x => x.EnderecosId,
-                        principalTable: "Endereco",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Produto_Maquina_MaquinaId",
                         column: x => x.MaquinaId,
                         principalTable: "Maquina",
@@ -262,26 +217,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 name: "IX_Corredor_AlmoxarifadoId",
                 table: "Corredor",
                 column: "AlmoxarifadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Endereco_AlmoxarifadoId",
-                table: "Endereco",
-                column: "AlmoxarifadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Endereco_CorredorId",
-                table: "Endereco",
-                column: "CorredorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Endereco_PrateleirasId",
-                table: "Endereco",
-                column: "PrateleirasId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Endereco_RepartiçãoId",
-                table: "Endereco",
-                column: "RepartiçãoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Maquina_AlmoxarifadoId",
@@ -309,11 +244,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 column: "CorredorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produto_EnderecosId",
-                table: "Produto",
-                column: "EnderecosId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Produto_MaquinaId",
                 table: "Produto",
                 column: "MaquinaId");
@@ -339,9 +269,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Produto");
-
-            migrationBuilder.DropTable(
-                name: "Endereco");
 
             migrationBuilder.DropTable(
                 name: "Maquina");

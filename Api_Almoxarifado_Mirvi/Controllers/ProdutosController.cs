@@ -14,17 +14,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly ProdutosService _produtoService;
         private readonly CorredorService _corredorService;
         private readonly PrateleiraService _prateleiraService;
-        private readonly EnderecoService _enderecoService;
         private readonly AlmoxarifadoService _almoxarifadoService;
         private readonly RepartiçõesService _repartiçõesService;
         private readonly MaquinasService _maquinasService;
 
-        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService,
-        EnderecoService enderecoService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService)
+        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
-            _enderecoService = enderecoService;
             _almoxarifadoService = almoxarifadoService;
             _corredorService = corredorService;
             _repartiçõesService = repartiçõesService;
@@ -55,11 +52,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var enderecos = await _enderecoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var repartição = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Almoxarifado = almoxarifado, Prateleira = prateleiras, Endereco = enderecos, Maquina = maquina, Repartição = repartição, IdAlmoxarifado = almoxarifadoId};
+            var viewModel = new FormularioCadastroProduto { Almoxarifado = almoxarifado, Prateleira = prateleiras, Maquina = maquina, Repartição = repartição, IdAlmoxarifado = almoxarifadoId};
             return View(viewModel);
         }
 
@@ -137,7 +133,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
             List<Corredor> corredor = await _corredorService.FindAllAsync();
             List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
-            List<Endereco>? enderecos = await _enderecoService.FindAllAsync();
             List<Maquina> maquina = await _maquinasService.FindAllAsync();
             List<Repartição> repartição = await _repartiçõesService.FindAllAsync();
             FormularioCadastroProduto viewModel = new FormularioCadastroProduto
@@ -146,7 +141,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 Almoxarifado = almoxarifado,
                 Corredor = corredor,
                 Prateleira = prateleiras,
-                Endereco = enderecos,
                 Maquina = maquina,
                 Repartição = repartição,
                 IdAlmoxarifado = almoxarifadoId
@@ -162,7 +156,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 var almoxarifado = await _almoxarifadoService.FindAllAsync();
                 var corredor = await _corredorService.FindAllAsync();
-                var enderecos = await _enderecoService.FindAllAsync();
                 var prateleiras = await _prateleiraService.FindAllAsync();
                 var maquina = await _maquinasService.FindAllAsync();
                 var repartição = await _repartiçõesService.FindAllAsync();
@@ -171,7 +164,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                     Produto = produto,
                     Almoxarifado = almoxarifado,
                     Corredor = corredor,
-                    Endereco = enderecos,
                     Prateleira = prateleiras,
                     Maquina = maquina,
                     Repartição = repartição,
@@ -190,7 +182,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
             catch (ApplicationException e)
             {
-                return RedirectToAction(nameof(Error), new { message = e.Message + "Erororororo" });
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
 
@@ -206,7 +198,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId)
+        public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId)
         {
             try
             {
@@ -220,6 +212,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 produto.AtualizarStatus();
 
                 await _produtoService.UpdateAsync(produto);
+                if(produtoindisponivelId == 1)
+                {
+                    return RedirectToAction("Produtosindisponiveis", new { almoxarifadoId });
+                }
                 return RedirectToAction("Index", new { almoxarifadoId });
             }
             catch (ApplicationException e)
@@ -228,9 +224,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo)
+        public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo, int almoxarifadoId)
         {
-            var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync(minimo, maximo);
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+            var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync(minimo, maximo, almoxarifadoId);
             return View(unavailableProducts);
         }
 

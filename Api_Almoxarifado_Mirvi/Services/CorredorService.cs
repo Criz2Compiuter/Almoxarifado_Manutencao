@@ -62,5 +62,12 @@ namespace Api_Almoxarifado_Mirvi.Services
                 throw new IntegreityException(e.Message);
             }
         }
+        public async Task<List<Corredor>> FindAllInAlmoxarifadoAsync(int almoxarifadoId)
+        {
+            return await _context.Corredor
+                .Where(obj => obj.AlmoxarifadoId == almoxarifadoId)
+                .Include(obj => obj.Almoxarifado)
+                .ToListAsync();
+        }
     }
 }

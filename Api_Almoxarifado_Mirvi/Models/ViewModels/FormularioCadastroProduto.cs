@@ -5,7 +5,6 @@
         public Produto Produto { get; set; }
         public ICollection<Almoxarifado> Almoxarifado { get; set; }
         public ICollection<Corredor> Corredor { get; set; }
-        public ICollection<Endereco>? Endereco { get; set; }
         public ICollection<Prateleira> Prateleira { get; set; }
         public ICollection<Maquina>? Maquina { get; set; }
         public ICollection<Repartição>? Repartição { get; set; }

@@ -30,7 +30,6 @@ namespace Api_Almoxarifado_Mirvi.Services
             return await _context.Produto
                 .Include(obj => obj.Corredor)
                 .Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
                 .Include(obj => obj.Maquina)
                 .Include(obj => obj.Repartição)
                 .Include(obj => obj.Almoxarifado)
@@ -66,12 +65,12 @@ namespace Api_Almoxarifado_Mirvi.Services
             }
         }
 
-        public async Task<List<Produto>> ObterProdutosIndisponíveisAsync(int minimo, int maximo)
+        public async Task<List<Produto>> ObterProdutosIndisponíveisAsync(int minimo, int maximo, int almoxarifadoId)
         {
             return await _context.Produto
+                .Where(p => p.AlmoxarifadoId ==  almoxarifadoId)
                 .Where(p => p.Status == ProdutoStatus.Indisponivel || p.Status == ProdutoStatus.LimiteBaixo)
                 .Include(p => p.Prateleiras)
-                .Include(p => p.Enderecos)
                 .ToListAsync();
         }
 
@@ -87,27 +86,23 @@ namespace Api_Almoxarifado_Mirvi.Services
             return await _context.Produto
                 .Where(p => p.AlmoxarifadoId == almoxarifadoId)
                 .Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
                 .ToListAsync();
         }
         public async Task<List<Produto>> SearchByAlmoxarifadoAsync(int almoxarifadoId, string searchValue)
         {
             var query = _context.Produto.AsQueryable();
 
-            // Filtrar por almoxarifadoId, se for fornecido
             if (almoxarifadoId > 0)
             {
                 query = query.Where(p => p.AlmoxarifadoId == almoxarifadoId);
             }
 
-            // Filtrar por descrição, se for fornecida
             if (!string.IsNullOrEmpty(searchValue))
             {
                 query = query.Where(p => p.Descricao.Contains(searchValue));
             }
             return await query
                 .Include(p => p.Prateleiras)
-                .Include(p => p.Enderecos)
                 .ToListAsync();
         }
         public async Task<List<Produto>> GetProdutosByAlmoxarifadoAsync(int almoxarifadoId)
@@ -122,8 +117,8 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             return await _context.Produto
                 .Where(obj => obj.AlmoxarifadoId == almoxarifadoId)
+                .Include(obj => obj.Corredor)
                 .Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
                 .Include(obj => obj.Almoxarifado)
                 .Include(obj => obj.Maquina)
                 .Include(obj => obj.Repartição)
@@ -134,7 +129,6 @@ namespace Api_Almoxarifado_Mirvi.Services
             return await _context.Produto
                 .Where(obj => obj.RepartiçãoId == reparticaoId && obj.AlmoxarifadoId == 1)
                 .Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
                 .Include(obj => obj.Almoxarifado)
                 .Include(obj => obj.Repartição)
                 .ToListAsync();
@@ -144,11 +138,11 @@ namespace Api_Almoxarifado_Mirvi.Services
             return await _context.Produto
                 .Where(obj => obj.MaquinaId == maquinaId && obj.AlmoxarifadoId == 2)
                 .Include(obj => obj.Prateleiras)
-                .Include(obj => obj.Enderecos)
                 .Include(obj => obj.Almoxarifado)
                 .Include(obj => obj.Maquina)
                 .ToListAsync();
         }
+
         public async Task DeduzirQuantidadeAsync(int productId, int quantidade)
         {
             var produto = await FindByIdAsync(productId);

@@ -10,7 +10,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string Nome { get; set; }
         public ICollection<Corredor> Corredor { get; set; } = new List<Corredor>();
         public ICollection<Prateleira> Prateleira { get; set; } =  new List<Prateleira>();
-        public ICollection<Endereco> Enderecos { get; set; } =  new List<Endereco>();
         public ICollection<Produto> Produto { get; set; } =  new List<Produto>();
 
         public Almoxarifado()

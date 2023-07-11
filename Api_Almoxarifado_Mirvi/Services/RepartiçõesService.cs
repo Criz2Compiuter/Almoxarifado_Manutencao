@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
         public async Task<List<Repartição>> FindAllAsync()
         {
-            return await _context.Repartição.Include(obj => obj.Almoxarifado).OrderBy(x => x.Nome).ToListAsync();
+            return await _context.Repartição.ToListAsync();
         }
 
         public async Task InsertAsync(Repartição obj)
@@ -59,6 +59,14 @@ namespace Api_Almoxarifado_Mirvi.Services
             {
                 throw new IntegreityException(e.Message);
             }
+        }
+
+        public async Task<List<Repartição>> FindAllInAlmoxarifadoAsync(int almoxarifadoId)
+        {
+            return await _context.Repartição
+                .Where(obj => obj.AlmoxarifadoId == almoxarifadoId)
+                .Include(obj => obj.Almoxarifado)
+                .ToListAsync();
         }
     }
 }
