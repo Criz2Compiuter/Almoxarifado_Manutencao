@@ -1,6 +1,7 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.Prateleira
 @{
     ViewData["Title"] = "Detalhes";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -28,6 +29,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Edit</a>
-    <a asp-action="Index">Voltar para lista</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-route-almoxarifadoId="@almoxarifadoId"  class="btn btn-default">Edit</a>
+    <a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a>
 </div>

@@ -19,10 +19,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _produtosService = produtosService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexM()
         {
             var produtos = await _produtosService.FindAllAsync();
-            ViewData["ActiveTab"] = "Index";
+            ViewData["ActiveTab"] = "IndexM";
             return View(produtos);
         }
         public async Task<IActionResult> MirviBrasil()

@@ -73,11 +73,11 @@ namespace Api_Almoxarifado_Mirvi
             {
                 endpoints.MapControllerRoute(
                     name: "customRoute",
-                    pattern: "{controller=Home}/{action=Index}/{id}/{parameter}"); // Rota personalizada com parâmetros adicionais
+                    pattern: "{controller=Home}/{action=IndexM}/{id}/{parameter}"); // Rota personalizada com parâmetros adicionais
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"); // Rota padrão
+                    pattern: "{controller=Home}/{action=IndexM}/{id?}"); // Rota padrão
             });
 
             app.Run();

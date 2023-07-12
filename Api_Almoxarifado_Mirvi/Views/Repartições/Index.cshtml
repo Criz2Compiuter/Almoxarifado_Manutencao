@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Repartição>
 @{
     ViewData["Title"] = "Repartição";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -27,14 +28,14 @@
                     @Html.DisplayFor(modelitem => item.Almoxarifado.Nome)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 <p>
-    <a class="btn btn-success" asp-action="Create">Criar nova Repartição</a>
+    <a class="btn btn-success" asp-route-almoxarifadoId="@almoxarifadoId" asp-action="Create">Criar nova Repartição</a>
 </p>

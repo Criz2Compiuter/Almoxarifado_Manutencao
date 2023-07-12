@@ -28,23 +28,20 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _maquinasService = maquinasService;
         }
 
-        public async Task<IActionResult> Index(int almoxarifadoId)
+        public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var produtos = await _produtoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
-            return View(produtos);
-        }
-        
-        public async Task<IActionResult> IndexMirvi(int reparticaoId)
-        {
-            ViewBag.reparticaoId = reparticaoId;
-            var produtos = await _produtoService.FindAllInReparticaoAsync(reparticaoId);
-            return View(produtos);
-        }
-        public async Task<IActionResult> IndexTetraPak(int maquinaId)
-        {
-            ViewBag.maquinaId = maquinaId;
-            var produtos = await _produtoService.FindAllInMaquinaAsync(maquinaId);
+            if(reparticaoId != null)
+            {
+                var produtosReparticao = await _produtoService.FindAllInReparticaoAsync(reparticaoId);
+                return View(produtosReparticao);
+            }
+            else if (maquinaId != null)
+            {
+                var produtosMaquinas = await _produtoService.FindAllInMaquinaAsync(maquinaId);
+                return View(produtosMaquinas);
+            }
             return View(produtos);
         }
 
@@ -64,7 +61,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Create(Produto produto, int almoxarifadoId)
         {
             await _produtoService.InsertAsync(produto);
-            return RedirectToAction("Index", new { almoxarifadoId });
+            return RedirectToAction(nameof(Index), new { almoxarifadoId });
         }
 
         public async Task<IActionResult> Delete(int? id, int almoxarifadoId)

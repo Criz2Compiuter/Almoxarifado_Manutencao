@@ -5,7 +5,9 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<p>
+    <a class="btn btn-success" asp-action="Create" asp-route-almoxarifadoid="@almoxarifadoId">Criar um novo Corredor</a>
+</p>
 <table class="table tavle-striped table-hover">
     <thead>
         <tr class="success">
@@ -28,14 +30,11 @@
                     @Html.DisplayFor(modelitem => item.Almoxarifado.Nome)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<p>
-    <a class="btn btn-success" asp-action="Create">Criar um novo Corredor</a>
-</p>

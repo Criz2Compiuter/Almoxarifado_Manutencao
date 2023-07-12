@@ -30,8 +30,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifados = await _almoxarifadoService.FindAllAsync();
-            var ViewModel = new FormularioCadastroCorredor { Almoxarifados = almoxarifados, AlmoxarifadoId = almoxarifadoId };
+            var ViewModel = new FormularioCadastroCorredor 
+            {
+                Almoxarifados = almoxarifados,
+                AlmoxarifadoId = almoxarifadoId 
+            };
             return View(ViewModel);
         }
 
@@ -42,7 +47,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             if (!ModelState.IsValid)
             {
                 await _corredorService.InsertAsync(corredor);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new {almoxarifadoId});
             }
             var almoxarifados = await _almoxarifadoService.FindAllAsync();
             var viewModel = new FormularioCadastroCorredor
@@ -130,15 +135,16 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Corredor corredor, int almoxarifadoId)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var almoxarifado = await _almoxarifadoService.FindAllAsync();
                 var viewModel = new FormularioCadastroCorredor
                 {
-                    Almoxarifados = almoxarifado
-                    ,Corredor = corredor,
+                    Almoxarifados = almoxarifado,
+                    Corredor = corredor,
                     AlmoxarifadoId = almoxarifadoId
                 };
+                return View(viewModel);
             }
             if (id != corredor.Id)
             {

@@ -28,29 +28,40 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(list);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroMaquina { Almoxarifados = almoxarifado};
+            var viewModel = new FormularioCadastroMaquina 
+            {
+                Almoxarifados = almoxarifado,
+                AlmoxarifadoId = almoxarifadoId,
+            };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Maquina maquina)
+        public async Task<IActionResult> Create(Maquina maquina, int almoxarifadoId)
         {
             if (!ModelState.IsValid)
             {
                 await _maquinaService.InsertAsync(maquina);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroMaquina { Almoxarifados = almoxarifado };
+            var viewModel = new FormularioCadastroMaquina 
+            { 
+                Maquina = maquina,
+                Almoxarifados = almoxarifado,
+                AlmoxarifadoId = almoxarifadoId 
+            };
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -67,12 +78,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int almoxarifadoId)
         {
             try
             {
                 await _maquinaService.RemoveAsync(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             catch (IntegreityException e)
             {
@@ -80,8 +91,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -96,8 +108,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -110,18 +123,28 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
-            FormularioCadastroMaquina viewModel = new FormularioCadastroMaquina { Maquina = obj, Almoxarifados = almoxarifado };
+            FormularioCadastroMaquina viewModel = new FormularioCadastroMaquina 
+            { 
+                Maquina = obj,
+                Almoxarifados = almoxarifado,
+                AlmoxarifadoId = almoxarifadoId
+            };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Maquina maquina)
+        public async Task<IActionResult> Edit(int id, Maquina maquina, int almoxarifadoId)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var almoxarifados = await _almoxarifadoService.FindAllAsync();
-                var viewModel = new FormularioCadastroMaquina { Almoxarifados = almoxarifados, Maquina = maquina };
+                var viewModel = new FormularioCadastroMaquina 
+                {
+                    Almoxarifados = almoxarifados,
+                    Maquina = maquina, 
+                    AlmoxarifadoId = almoxarifadoId
+                };
             }
             if (id != maquina.Id)
             {
@@ -130,7 +153,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             try
             {
                 await _maquinaService.UpdateAsync(maquina);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             catch (ApplicationException e)
             {

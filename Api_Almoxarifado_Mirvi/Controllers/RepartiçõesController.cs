@@ -23,12 +23,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         public async Task<IActionResult> Index(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var list = await _repartiçãoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
             return View(list);
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var viewModel = new FormularioCadastroRepartição { Almoxarifados = almoxarifado };
             return View(viewModel);
@@ -36,20 +38,27 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Repartição repartição)
+        public async Task<IActionResult> Create(Repartição repartição, int almoxarifadoId)
         {
             if (!ModelState.IsValid)
             {
                 await _repartiçãoService.InsertAsync(repartição);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroRepartição { Repartição = repartição, Almoxarifados = almoxarifado };
+            var viewModel = new FormularioCadastroRepartição 
+            {
+                Repartição = repartição,
+                Almoxarifados = almoxarifado,
+                AlmoxarifadoId = almoxarifadoId
+                
+            };
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -66,12 +75,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int almoxarifadoId)
         {
             try
             {
                 await _repartiçãoService.RemoveAsync(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             catch (IntegreityException e)
             {
@@ -79,8 +88,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -95,8 +105,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
@@ -109,18 +120,28 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
-            FormularioCadastroRepartição viewModel = new FormularioCadastroRepartição { Repartição = obj, Almoxarifados = almoxarifado };
+            FormularioCadastroRepartição viewModel = new FormularioCadastroRepartição 
+            {
+                Repartição = obj,
+                Almoxarifados = almoxarifado,
+                AlmoxarifadoId = almoxarifadoId
+            };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Repartição repartição)
+        public async Task<IActionResult> Edit(int id, Repartição repartição, int almoxarifadoId)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var almoxarifados = await _almoxarifadoService.FindAllAsync();
-                var viewModel = new FormularioCadastroRepartição { Almoxarifados = almoxarifados, Repartição = repartição };
+                var viewModel = new FormularioCadastroRepartição 
+                {
+                    Almoxarifados = almoxarifados,
+                    Repartição = repartição, 
+                    AlmoxarifadoId = almoxarifadoId
+                };
                 return View(viewModel);
             }
             if (id != repartição.Id)
@@ -130,7 +151,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             try
             {
                 await _repartiçãoService.UpdateAsync(repartição);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             catch (ApplicationException e)
             {

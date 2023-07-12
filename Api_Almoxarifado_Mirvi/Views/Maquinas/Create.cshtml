@@ -1,6 +1,7 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.ViewModels.FormularioCadastroMaquina
 @{
     ViewData["Title"] = "Create";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -20,12 +21,12 @@
                 <select asp-for="Maquina.AlmoxarifadoId" asp-items="@(new SelectList(Model.Almoxarifados, "Id", "Nome"))" class="form-control"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" asp-route-almoxarifadoId="@almoxarifadoId" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
-<div><a asp-action="Index">Voltar para lista</a></div>
+<div><a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a></div>
 @section Scripts{
     @{
         { await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

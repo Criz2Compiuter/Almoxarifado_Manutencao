@@ -33,7 +33,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var corredores = await _corredorService.FindAllAsync();
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
-            var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Almoxarifados = almoxarifado };
+            var viewModel = new FormularioCadastroPrateleira 
+            { 
+                Corredores = corredores,
+                Almoxarifados = almoxarifado 
+            };
             return View(viewModel);
         }
 
@@ -41,11 +45,17 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Prateleira prateleira, int almoxarifadoId)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var corredores = await _corredorService.FindAllAsync();
                 var almoxarifado = await _almoxarifadoService.FindAllAsync();
-                var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira, Almoxarifados = almoxarifado, AlmoxarifadoId = almoxarifadoId };
+                var viewModel = new FormularioCadastroPrateleira 
+                {
+                    Corredores = corredores,
+                    Prateleira = prateleira,
+                    Almoxarifados = almoxarifado,
+                    AlmoxarifadoId = almoxarifadoId
+                };
                 return View(viewModel);
             }
             await _prateleiraService.InsertAsync(prateleira);
@@ -117,7 +127,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             List<Almoxarifado> almoxarifado = await _almoxarifadoService.FindAllAsync();
             List<Corredor> corredores = await _corredorService.FindAllAsync();
-            FormularioCadastroPrateleira viewModel = new FormularioCadastroPrateleira { Prateleira = obj, Corredores = corredores, AlmoxarifadoId = almoxarifadoId, Almoxarifados = almoxarifado };
+            FormularioCadastroPrateleira viewModel = new FormularioCadastroPrateleira 
+            {
+                Prateleira = obj,
+                Corredores = corredores,
+                AlmoxarifadoId = almoxarifadoId,
+                Almoxarifados = almoxarifado 
+            };
             return View(viewModel);
         }
 
@@ -129,7 +145,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 var almoxarifado = await _almoxarifadoService.FindAllAsync();
                 var corredores = await _corredorService.FindAllAsync();
-                var viewModel = new FormularioCadastroPrateleira { Corredores = corredores, Prateleira = prateleira, Almoxarifados = almoxarifado, AlmoxarifadoId = almoxarifadoId };
+                var viewModel = new FormularioCadastroPrateleira
+                {
+                    Corredores = corredores,
+                    Prateleira = prateleira,
+                    Almoxarifados = almoxarifado,
+                    AlmoxarifadoId = almoxarifadoId
+                };
+                return View(viewModel);
             }
             if (id != prateleira.Id)
             {
@@ -138,7 +161,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             try
             {
                 await _prateleiraService.UpdateAsync(prateleira);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
             catch (ApplicationException e)
             {

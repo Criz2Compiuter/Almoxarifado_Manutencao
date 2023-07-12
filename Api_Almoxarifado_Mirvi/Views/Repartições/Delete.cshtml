@@ -1,6 +1,7 @@
 ﻿@model Api_Almoxarifado_Mirvi.Models.Repartição
 @{
     ViewData["Title"] = "Delete";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -26,7 +27,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Index">Voltar para lista</a>
+        <input type="submit" asp-route-almoxarifadoId="@almoxarifadoId" value="Deletar" class="btn btn-danger" />
+        <a asp-action="Index" asp-route-almoxarifadoId="@almoxarifadoId">Voltar para lista</a>
     </form>
 </div>
