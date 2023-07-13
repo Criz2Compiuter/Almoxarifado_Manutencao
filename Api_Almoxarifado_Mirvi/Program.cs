@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Api_Almoxarifado_Mirvi.Models;
-using Microsoft.Extensions.Options;
 using Api_Almoxarifado_Mirvi.Services;
-using Microsoft.Extensions.Configuration;
 using System.Globalization;
+using Api_Almoxarifado_Mirvi.Data;
+using Microsoft.AspNetCore.Identity;
+using Api_Almoxarifado_Mirvi.Authorization;
 
 namespace Api_Almoxarifado_Mirvi
 {
@@ -17,8 +17,25 @@ namespace Api_Almoxarifado_Mirvi
             var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
 
             builder.Services.AddDbContext<Api_Almoxarifado_MirviContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-            
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            builder.Services.AddDbContext<UsuarioDbContext>(options =>
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            builder.Services.AddIdentity<Usuario, IdentityRole>()
+                .AddEntityFrameworkStores<UsuarioDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Cargos", policy => policy.AddRequirements(new Cargos("Visitante", "Mecanico", "Administrador")));
+            });
+
+            builder.Services.AddScoped<UsuarioService>();
+            builder.Services.AddScoped<TokenService>();
+
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<CorredorService>();
             builder.Services.AddScoped<PrateleiraService>();
@@ -27,9 +44,6 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddScoped<AlmoxarifadoService>();
             builder.Services.AddScoped<RepartiçõesService>();
             builder.Services.AddScoped<MaquinasService>();
-
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 

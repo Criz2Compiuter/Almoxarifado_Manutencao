@@ -2132,3 +2132,16 @@ C:\Users\Cristian\source\repos\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\refint\Ap
 C:\Users\Cristian\source\repos\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.pdb
 C:\Users\Cristian\source\repos\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.genruntimeconfig.cache
 C:\Users\Cristian\source\repos\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\ref\Api_Almoxarifado_Mirvi.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
