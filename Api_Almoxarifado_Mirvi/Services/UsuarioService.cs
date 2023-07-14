@@ -1,7 +1,7 @@
-﻿using Api_Almoxarifado_Mirvi.Data.Dtos;
-using Api_Almoxarifado_Mirvi.Models;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Api_Almoxarifado_Mirvi.Data.Dtos;
+using Api_Almoxarifado_Mirvi.Models;
 
 namespace Api_Almoxarifado_Mirvi.Services
 {
@@ -20,28 +20,33 @@ namespace Api_Almoxarifado_Mirvi.Services
             _tokenService = tokenService;
         }
 
-        public async Task Cadastra(CreateUsuarioDto dto)
+        public async Task CadastraUsuario(CreateDto dto)
         {
-            Usuario usuario = _mapper.Map<Usuario>
-            (dto);
+            Usuario usuario = _mapper.Map<Usuario>(dto);
 
             IdentityResult resultado = await _userManager.CreateAsync(usuario, dto.Password);
 
-            throw new ApplicationException("Falha ao cadastrar usuario!");
+            if(!resultado.Succeeded)
+            {
+                throw new ApplicationException("Falha ao cadastrar usuario!");
+            }
         }
 
-        public async Task<string> Login(LoginUsuarioDto dto)
+        public async Task<string> Login(LoginDto dto)
         {
             var resultado = await _signInManager.PasswordSignInAsync(dto.Username, dto.Password, false, false);
 
-            if(!resultado.Succeeded)
+            if (!resultado.Succeeded)
             {
                 throw new ApplicationException("Usuario nao autenticado!");
             }
 
-            var usuario = _signInManager.UserManager.Users.FirstOrDefault(user => user.NormalizedUserName == dto.Username.ToUpper());
+            var usuario = _signInManager
+                .UserManager
+                .Users
+                .FirstOrDefault(user => user.NormalizedUserName == dto.Username.ToUpper());
 
-           var token = _tokenService.GenerateToken(usuario);
+            var token = _tokenService.GenerateToken(usuario);
 
             return token;
         }

@@ -14,15 +14,16 @@ namespace Api_Almoxarifado_Mirvi.Services
             {
                 new Claim("username", usuario.UserName),
                 new Claim("id", usuario.Id),
-                new Claim ("LoginTimestamp", DateTime.UtcNow.ToString())
+                new Claim("loginTimestamp", DateTime.UtcNow.ToString())
             };
 
-            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("89uyihu89uio89yihjiu89i"));
+            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("687uyikjm"));
 
-            var signingCredentials = 
-                new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
+            var signingCredentials = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(expires: DateTime.Now.AddMinutes(10),
+            var token = new JwtSecurityToken
+                (
+                expires: DateTime.Now.AddMinutes(10),
                 claims: claims,
                 signingCredentials: signingCredentials
                 );

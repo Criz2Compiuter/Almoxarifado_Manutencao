@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UsuariosApi.Controllers
+namespace Api_Almoxarifado_Mirvi.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
-    public class AcessoController : ControllerBase
+    public class AcessoController : Controller
     {
         [HttpGet]
         [Authorize(Policy = "Cargos")]

@@ -2145,3 +2145,11 @@ C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bi
 C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net6.0\Api_Almoxarifado_Mirvi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
