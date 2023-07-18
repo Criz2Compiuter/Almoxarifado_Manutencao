@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Api_Almoxarifado_Mirvi.Models;
+using Microsoft.Extensions.Options;
 using Api_Almoxarifado_Mirvi.Services;
+using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Api_Almoxarifado_Mirvi.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Api_Almoxarifado_Mirvi
 {
@@ -22,42 +21,6 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddDbContext<Api_Almoxarifado_MirviContext>(options =>
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            builder.Services
-                .AddIdentity<Usuario, IdentityRole>()
-                .AddEntityFrameworkStores<Api_Almoxarifado_MirviContext>()
-                .AddDefaultTokenProviders();
-
-            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            
-            builder.Services.AddSingleton<IAuthorizationHandler, CargosAuthorization>();
-
-            builder.Services.AddControllers();
-
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme =
-                    JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9780ouijhluo89uihjuio")),
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("CargosNecessario", policy =>
-                     policy.AddRequirements(new CargosNecessario("Mecanico", "Administrador", "Visitante"))
-                );
-            });
-
-            builder.Services.AddEndpointsApiExplorer();
-
             builder.Services.AddScoped<SeedingService>();
             builder.Services.AddScoped<CorredorService>();
             builder.Services.AddScoped<PrateleiraService>();
@@ -66,11 +29,20 @@ namespace Api_Almoxarifado_Mirvi
             builder.Services.AddScoped<AlmoxarifadoService>();
             builder.Services.AddScoped<RepartiçõesService>();
             builder.Services.AddScoped<MaquinasService>();
-            builder.Services.AddScoped<UsuarioService>();
-            builder.Services.AddScoped<TokenService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<Api_Almoxarifado_MirviContext>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "AspNetCore.Cookies";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                    options.SlidingExpiration = true;
+                });
 
             var app = builder.Build();
 
@@ -78,8 +50,10 @@ namespace Api_Almoxarifado_Mirvi
             {
                 var serviceProvider = scope.ServiceProvider;
 
+                // Resolve the SeedingService from the service provider
                 var seedingService = serviceProvider.GetRequiredService<SeedingService>();
 
+                // Call the Seed method on the SeedingService
                 seedingService.Seed(serviceProvider);
             }
 
@@ -93,9 +67,11 @@ namespace Api_Almoxarifado_Mirvi
 
             app.UseRequestLocalization(localizationOption);
 
+            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -103,6 +79,7 @@ namespace Api_Almoxarifado_Mirvi
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -110,14 +87,12 @@ namespace Api_Almoxarifado_Mirvi
             {
                 endpoints.MapControllerRoute(
                     name: "customRoute",
-                    pattern: "{controller=Home}/{action=IndexM}/{id}/{parameter}"); 
+                    pattern: "{controller=Home}/{action=IndexM}/{id}/{parameter}"); // Rota personalizada com parâmetros adicionais
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=IndexM}/{id?}");
+                    pattern: "{controller=Home}/{action=IndexM}/{id?}"); // Rota padrão
             });
-
-            app.MapControllers();
 
             app.Run();
         }

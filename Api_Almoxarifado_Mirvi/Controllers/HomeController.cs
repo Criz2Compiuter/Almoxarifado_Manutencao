@@ -1,10 +1,9 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using Newtonsoft.Json;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
