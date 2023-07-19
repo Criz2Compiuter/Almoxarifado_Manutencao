@@ -32,8 +32,7 @@ namespace Api_Almoxarifado_Mirvi.Models
                 new Usuario
                 {
                     UsuarioId = 1,
-                    Nome = "Jose",
-                    NomeCargos = (Entities.Enums.Cargos.Administrador)
+                    Nome = "Jose"
                 });
         }
     }

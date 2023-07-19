@@ -15,7 +15,7 @@ namespace Api_Almoxarifado_Mirvi.Models.ViewModels
         public string? ConfirmPassword { get; set; }
         public string SenhaPararegistrar { get; set; } = "95825776";
         [Required]
-        [Display(Name = "Confirmar a senha")]
+        [Display(Name = "Confirmar a senha para registro")]
         [Compare("SenhaParaRegistrar", ErrorMessage = "Senha informada incorreta")]
         public string? SenhaParaRegistrar { get; set; }
         

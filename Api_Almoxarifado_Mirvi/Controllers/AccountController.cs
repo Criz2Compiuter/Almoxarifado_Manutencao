@@ -1,4 +1,5 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -36,7 +37,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 if(result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("IndexM", "home");
                 }
 
                 foreach(var error in result.Errors)
@@ -62,7 +63,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                     model.Nome, model.Password, model.Remember, false);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("indexM", "home");
                 }
 
                 ModelState.AddModelError(string.Empty, "Login Invalido");
@@ -74,7 +75,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("IndexM", "home");
+        }
+
+        [HttpGet]
+        [Route("/Account/AccessDenied")]
+        public ActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

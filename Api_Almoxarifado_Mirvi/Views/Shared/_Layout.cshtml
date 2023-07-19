@@ -22,7 +22,8 @@
                         <ul class="navbar-nav flex-grow-1">
                             @if (ViewContext.RouteData.Values["action"].ToString() == "IndexM")
                             {
-                                <partial name="_LoginPartial.cshtml"/>
+                                <partial name="_LoginPartial.cshtml" />
+                                <partial name="_LoginAdmin.cshtml" />
                             }
                             else if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
                             {

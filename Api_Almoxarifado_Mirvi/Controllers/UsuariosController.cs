@@ -21,7 +21,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _context = context;
         }
 
-        // GET: Usuarios
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return _context.Usuarios != null ? 
@@ -29,7 +29,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                           Problem("Entity set 'Api_Almoxarifado_MirviContext.Usuarios'  is null.");
         }
 
-        // GET: Usuarios/Details/5
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Usuarios == null)
@@ -47,7 +47,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Create
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public IActionResult Create()
         {
             return View();
@@ -58,7 +58,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UsuarioId,Nome,NomeCargos")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("UsuarioId,Nome")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Edit/5
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Usuarios == null)
@@ -90,7 +90,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Nome,NomeCargos")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Nome")] Usuario usuario)
         {
             if (id != usuario.UsuarioId)
             {
@@ -120,7 +120,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Delete/5
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Usuarios == null)
