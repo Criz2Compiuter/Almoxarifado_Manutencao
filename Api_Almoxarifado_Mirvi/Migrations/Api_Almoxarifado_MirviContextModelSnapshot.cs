@@ -30,9 +30,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
-                    b.Property<int>("NomeCargos")
-                        .HasColumnType("int");
-
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
@@ -41,8 +38,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                         new
                         {
                             UsuarioId = 1,
-                            Nome = "Jose",
-                            NomeCargos = 1
+                            Nome = "Jose"
                         });
                 });
 

@@ -2,21 +2,20 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Data;
-using System.Runtime.CompilerServices;
 
 namespace Api_Almoxarifado_Mirvi.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
-public class AdminrolesController : Controller
-    {
+[Authorize(Roles ="Admin")]
+public class AdminRolesController : Controller
+{
     private RoleManager<IdentityRole> roleManager;
     private UserManager<IdentityUser> userManager;
 
-    public AdminrolesController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+    public AdminRolesController(RoleManager<IdentityRole> roleManager,
+        UserManager<IdentityUser> userManager)
     {
         this.roleManager = roleManager;
         this.userManager = userManager;
@@ -29,10 +28,10 @@ public class AdminrolesController : Controller
     [HttpPost]
     public async Task<IActionResult> Create([Required] string name)
     {
-        if (ModelState.IsValid)
+        if(ModelState.IsValid)
         {
             IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
-            if (result.Succeeded)
+            if(result.Succeeded)
             {
                 return RedirectToAction("Index");
             }
@@ -44,8 +43,6 @@ public class AdminrolesController : Controller
         return View(name);
     }
 
-
-    [HttpGet]
     public async Task<IActionResult> Update(string id)
     {
         IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -53,12 +50,12 @@ public class AdminrolesController : Controller
         List<IdentityUser> members = new List<IdentityUser>();
         List<IdentityUser> nonMembers = new List<IdentityUser>();
 
-        foreach (IdentityUser user in userManager.Users)
+        foreach(IdentityUser user in userManager.Users.ToList())
         {
-            var list = await userManager.IsInRoleAsync(user, role.Name)
-                ? members : nonMembers;
+            var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
             list.Add(user);
         }
+
         return View(new RoleEdit
         {
             Role = role,
@@ -72,24 +69,26 @@ public class AdminrolesController : Controller
     {
         IdentityResult result;
 
-        if (ModelState.IsValid)
+        if(ModelState.IsValid)
         {
-            foreach (string userId in model.AddIds ?? new string[] { })
+            foreach (string userId in model.AddIds ?? new string[] {})
             {
                 IdentityUser user = await userManager.FindByIdAsync(userId);
-                if (user != null)
+
+                if(user != null)
                 {
                     result = await userManager.AddToRoleAsync(user, model.RoleName);
-                    if (!result.Succeeded)
+                    if(!result.Succeeded)
                     {
                         Errors(result);
                     }
                 }
             }
-            foreach (string userId in model.DeleteIds ?? new string[] { })
+            foreach(string userId in model.DeleteIds ?? new string[] { })
             {
                 IdentityUser user = await userManager.FindByIdAsync(userId);
-                if (user != null)
+
+                if(user != null)
                 {
                     result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
 
@@ -100,7 +99,7 @@ public class AdminrolesController : Controller
                 }
             }
         }
-        if (ModelState.IsValid)
+        if(ModelState.IsValid)
         {
             return RedirectToAction(nameof(Index));
         }
@@ -110,14 +109,14 @@ public class AdminrolesController : Controller
         }
     }
 
-    [HttpGet]
+    [HttpGet] 
     public async Task<IActionResult> Delete(string id)
     {
         IdentityRole role = await roleManager.FindByIdAsync(id);
 
         if(role == null)
         {
-            ModelState.AddModelError("", "Role nao encontrado");
+            ModelState.AddModelError("", "Role nao encontrada");
             return View("Index", roleManager.Roles);
         }
         return View(role);
@@ -125,7 +124,7 @@ public class AdminrolesController : Controller
 
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(string id)
+    public async Task<IActionResult> DeleteConfirmed (string id)
     {
         var role = await roleManager.FindByIdAsync(id);
 
@@ -139,21 +138,15 @@ public class AdminrolesController : Controller
             }
             else
             {
-                Errors(result);
+                ModelState.AddModelError("", "Role nao encontrada");
             }
-        }
-        else
-        {
-            ModelState.AddModelError("", "Role nao encotrado");
         }
         return View("Index", roleManager.Roles);
     }
 
     private void Errors(IdentityResult result)
     {
-        foreach(IdentityError error in result.Errors)
-        {
+        foreach (IdentityError error in result.Errors)
             ModelState.AddModelError("", error.Description);
-        }
     }
 }

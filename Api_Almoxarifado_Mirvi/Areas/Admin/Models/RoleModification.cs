@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Api_Almoxarifado_Mirvi.Areas.Admin.Models;
-
 public class RoleModification
 {
     [Required]
@@ -9,5 +8,4 @@ public class RoleModification
     public string? RoleId { get; set; }
     public string[]? AddIds { get; set; }
     public string[]? DeleteIds { get; set; }
-
 }

@@ -83,13 +83,24 @@ await CriarPerfisUsuariosAsync(app);
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "MinhaArea",
-    pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "MinhaArea",
+      pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+    );
+});
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=IndexM}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "customRoute",
+        pattern: "{controller=Home}/{action=IndexM}/{id}/{parameter}"); 
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=IndexM}/{id?}"); 
+});
 
 app.Run();
 async Task CriarPerfisUsuariosAsync(WebApplication app)

@@ -2,41 +2,41 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MvcWebIdentity.Areas.Admin.Controllers;
+namespace Api_Almoxarifado_Mirvi.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles ="Admin")]
 public class AdminUsersController : Controller
 {
-    private readonly UserManager<IdentityUser> userManager;
+    private readonly UserManager<IdentityUser> _userManager;
 
     public AdminUsersController(UserManager<IdentityUser> userManager)
     {
-        this.userManager = userManager;
+        _userManager = userManager;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-        var users = userManager.Users;
+        var users = _userManager.Users;
         return View(users);
     }
 
     [HttpPost]
     public async Task<IActionResult> DeleteUser(string id)
     {
-        var user = await userManager.FindByIdAsync(id);
+        var user = await _userManager.FindByIdAsync(id);
 
-        if (user == null)
+        if(user == null)
         {
-            ViewBag.ErrorMessage = $"Usuário com Id = {id} não foi encontrado";
+            ViewBag.ErrorMessage = $"Usuario com Id = {id} nao foi encontrado";
             return View("NotFound");
         }
         else
         {
-            var result = await userManager.DeleteAsync(user);
+            var result = await _userManager.DeleteAsync(user);
 
-            if (result.Succeeded)
+            if(result.Succeeded)
             {
                 return RedirectToAction("Index");
             }
@@ -45,7 +45,6 @@ public class AdminUsersController : Controller
             {
                 ModelState.AddModelError("", error.Description);
             }
-
             return View("Index");
         }
     }
