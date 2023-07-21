@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
+    [Authorize(Policy = "RequireUserAdminMecanicoRole")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,10 +19,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _produtosService = produtosService;
         }
 
-        public async Task<IActionResult> IndexM()
+        public async Task<IActionResult> Index()
         {
             var produtos = await _produtosService.FindAllAsync();
-            ViewData["ActiveTab"] = "IndexM";
             return View(produtos);
         }
 

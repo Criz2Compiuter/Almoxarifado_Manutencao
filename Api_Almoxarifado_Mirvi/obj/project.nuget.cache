@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "owZU+ArBdvjNRkkQNQ7AHGRYCa0yNCbe+Ig522Dcg21KufwKAjKUeR2IEvBJluS2KKPzEqnn6UJIeZzxSgam4g==",
+  "dgSpecHash": "3BVQYgPwWo6KtR5bNE05FDmEYs+rNcvdDN0BSXmTXjHuU3gzDtrILSwoKk32w1BiMILLGJlRU6Bkef4X0/g3gA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cristian\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+  "projectFilePath": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Cristian\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

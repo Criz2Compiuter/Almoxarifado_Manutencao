@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="IndexM">Mirvi Brasil</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mirvi Brasil</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,10 +20,9 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <div class="text-center">
                         <ul class="navbar-nav flex-grow-1">
-                            @if (ViewContext.RouteData.Values["action"].ToString() == "IndexM")
+                            <partial name="_LoginAdmin.cshtml" />
+                            @if (ViewContext.RouteData.Values["action"].ToString() == "Login")
                             {
-                                <partial name="_LoginAdmin.cshtml" />
-                                <partial name="_LoginPartial.cshtml" />
                             }
                             else if (ViewContext.RouteData.Values["action"].ToString() == "MirviBrasil")
                             {
@@ -87,6 +86,7 @@
                             }
                         </ul>
                     </div>
+                    <partial name="_LoginPartial.cshtml" />
                 </div>
             </div>
         </nav>
@@ -95,7 +95,7 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <footer class="border-top footer text-muted">
+        <footer class="border-top footer text-muted container">
             <div class="container">
                 &copy; Mirvi Brasil 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Detalhes</a>
             </div>
@@ -104,5 +104,6 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)
+    </div>
 </body>
 </html>

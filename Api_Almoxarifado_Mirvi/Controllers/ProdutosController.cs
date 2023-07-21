@@ -30,6 +30,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _maquinasService = maquinasService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -47,6 +48,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(produtos);
         }
 
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -60,6 +62,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Create(Produto produto, int almoxarifadoId)
         {
             await _produtoService.InsertAsync(produto);
@@ -85,6 +88,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Delete(int id, int almoxarifadoId)
         {
             try
@@ -98,6 +102,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -115,6 +120,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -149,6 +155,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Edit(int id, Produto produto, int almoxarifadoId)
         {
             if (ModelState.IsValid)
@@ -197,6 +204,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId)
         {
             try
@@ -223,6 +231,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -231,6 +240,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> Search(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
@@ -238,6 +248,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
@@ -251,6 +262,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> DescontarQuantidade(int productId, int quantidade)
         {
             try

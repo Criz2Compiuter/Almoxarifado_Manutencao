@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        if (item.AlmoxarifadoId == 1)
+                        if (item.AlmoxarifadoId == 1 @*&& (User.HasClaim("IsAdmin", "true") || User.HasClaim("IsFuncionario", "true"))*@)
                         {
                             <tr>
                                 <td>
@@ -64,7 +64,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        if (item.AlmoxarifadoId == 2)
+                        if (item.AlmoxarifadoId == 2 @*&& (User.HasClaim("IsAdmin", "true") || User.HasClaim("IsFuncionario", "true"))*@)
                         {
                             <tr>
                                 <td>
@@ -91,6 +91,20 @@
 </div>
 
 <script>
+    //async function checkAuthorization() {
+    //    const isAuthorized = await DotNet.invokeMethodAsync("NomeDoSeuProjeto", "checkAuthorization");
+    //    return isAuthorized;
+    //}
+
+    //async function initializePage() {
+    //    const isAuthorized = await checkAuthorization();
+    //    if (!isAuthorized) {
+    //        window.location.href = "/AcessoNegado";
+    //    }
+    //}
+
+    window.onload = initializePage;
+
     function discountQuantity(productId, productListId, currentQuantity) {
         var input = document.getElementById('quantityInput_' + productId);
         var discountQuantity = parseInt(input.value);

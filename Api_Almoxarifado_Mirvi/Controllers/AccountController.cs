@@ -18,12 +18,14 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if(ModelState.IsValid)
@@ -37,7 +39,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 if(result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("IndexM", "home");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 foreach(var error in result.Errors)
@@ -51,6 +53,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            ViewData["ActiveTab"] = "Login";
             return View();
         }
 
@@ -63,7 +66,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                     model.Nome, model.Password, model.Remember, false);
                 if(result.Succeeded)
                 {
-                    return RedirectToAction("indexM", "home");
+                    return RedirectToAction("index", "home");
                 }
 
                 ModelState.AddModelError(string.Empty, "Login Invalido");
@@ -75,7 +78,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("IndexM", "home");
+            return RedirectToAction("Index", "home");
         }
 
         [HttpGet]
