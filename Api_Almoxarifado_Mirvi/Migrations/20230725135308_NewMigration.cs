@@ -377,7 +377,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     Modelo = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantidade = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeTotalIntalada = table.Column<string>(type: "longtext", nullable: true)
+                    QuantidadeTotalInstalada = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -411,10 +411,29 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.InsertData(
-                table: "Usuarios",
-                columns: new[] { "UsuarioId", "Nome" },
-                values: new object[] { 1, "Jose" });
+            migrationBuilder.CreateTable(
+                name: "HistoricosDescontos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NomeUsuario = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeDescontada = table.Column<int>(type: "int", nullable: false),
+                    DataDesconto = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HistoricosDescontos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HistoricosDescontos_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -457,6 +476,11 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 name: "IX_Corredor_AlmoxarifadoId",
                 table: "Corredor",
                 column: "AlmoxarifadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HistoricosDescontos_ProdutoId",
+                table: "HistoricosDescontos",
+                column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Maquina_AlmoxarifadoId",
@@ -523,7 +547,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Produto");
+                name: "HistoricosDescontos");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
@@ -533,6 +557,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Produto");
 
             migrationBuilder.DropTable(
                 name: "Maquina");

@@ -168,5 +168,76 @@ namespace Api_Almoxarifado_Mirvi.Services
                 throw new IntegreityException(e.Message);
             }
         }
+
+        public async Task<List<HistoricoDesconto>> ObterHistoricoDescontosPorUsuarioAsync(string nomeUsuario)
+        {
+            var historicosDescontos = await _context.HistoricosDescontos
+                .Where(h => h.NomeUsuario == nomeUsuario)
+                .OrderByDescending(h => h.DataDesconto)
+                .ToListAsync();
+
+            return historicosDescontos;
+        }
+
+        public async Task<List<HistoricoDesconto>> GetHistoricoByNomeUsuario(string nomeUsuario)
+        {
+            var historicos = await _context.HistoricosDescontos
+                .Include(h => h.Produto)
+                .Where(h => h.NomeUsuario == nomeUsuario)
+                .ToListAsync();
+
+            return historicos;
+        }
+
+        public async Task DescontarQuantidadeAsync(int productId, int quantidade, string nomeUsuario)
+        {
+            var produto = await FindByIdAsync(productId);
+            if (produto == null)
+            {
+                throw new NotFoundException("Produto não encontrado");
+            }
+
+            if (produto.Quantidade < quantidade)
+            {
+                throw new Exception("Quantidade insuficiente do produto");
+            }
+
+            produto.Quantidade -= quantidade;
+
+            try
+            {
+                _context.Update(produto);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegreityException(e.Message);
+            }
+
+            var historicoDesconto = new HistoricoDesconto
+            {
+                NomeUsuario = nomeUsuario,
+                ProdutoId = productId,
+                QuantidadeDescontada = quantidade,
+                DataDesconto = DateTime.Now
+            };
+
+            _context.HistoricosDescontos.Add(historicoDesconto);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task RegistrarDesconto(string nomeUsuario, Produto produto, int quantidadeDescontada)
+        {
+            var historicoDesconto = new HistoricoDesconto
+            {
+                NomeUsuario = nomeUsuario,
+                QuantidadeDescontada = quantidadeDescontada,
+                DataDesconto = DateTime.Now,
+                Produto = produto
+            };
+
+            _context.HistoricosDescontos.Add(historicoDesconto);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -10,9 +10,11 @@ using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AlmoxarifadosController : Controller
     {
         private readonly Api_Almoxarifado_MirviContext _context;

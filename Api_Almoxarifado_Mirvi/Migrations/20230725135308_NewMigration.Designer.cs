@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     [DbContext(typeof(Api_Almoxarifado_MirviContext))]
-    [Migration("20230720161639_NewMigration")]
+    [Migration("20230725135308_NewMigration")]
     partial class NewMigration
     {
         /// <inheritdoc />
@@ -36,13 +36,6 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
-
-                    b.HasData(
-                        new
-                        {
-                            UsuarioId = 1,
-                            Nome = "Jose"
-                        });
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Almoxarifado", b =>
@@ -80,6 +73,32 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.HasIndex("AlmoxarifadoId");
 
                     b.ToTable("Corredor");
+                });
+
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.HistoricoDesconto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataDesconto")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NomeUsuario")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeDescontada")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("HistoricosDescontos");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Maquina", b =>
@@ -212,7 +231,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuantidadeTotalIntalada")
+                    b.Property<string>("QuantidadeTotalInstalada")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Referencia")
@@ -469,6 +488,17 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Navigation("Almoxarifado");
                 });
 
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.HistoricoDesconto", b =>
+                {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Produto", "Produto")
+                        .WithMany("HistoricoDescontos")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Maquina", b =>
                 {
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Almoxarifado", "Almoxarifado")
@@ -618,6 +648,11 @@ namespace Api_Almoxarifado_Mirvi.Migrations
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Prateleira", b =>
                 {
                     b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Produto", b =>
+                {
+                    b.Navigation("HistoricoDescontos");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Repartição", b =>

@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-    [Authorize(Policy = "RequireUserAdminMecanicoRole")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

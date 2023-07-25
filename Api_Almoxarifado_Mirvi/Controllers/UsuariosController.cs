@@ -42,7 +42,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -64,7 +64,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Usuarios == null)
@@ -115,7 +115,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(usuario);
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Usuarios == null)

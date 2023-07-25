@@ -5,11 +5,11 @@ using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data.Entity;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-    [Authorize]
     public class ProdutosController : Controller
     {
 
@@ -30,12 +30,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _maquinasService = maquinasService;
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var produtos = await _produtoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
-            if(reparticaoId != null)
+            if (reparticaoId != null)
             {
                 var produtosReparticao = await _produtoService.FindAllInReparticaoAsync(reparticaoId);
                 return View(produtosReparticao);
@@ -48,7 +48,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(produtos);
         }
 
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -56,13 +56,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var prateleiras = await _prateleiraService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var repartição = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto { Almoxarifado = almoxarifado, Prateleira = prateleiras, Maquina = maquina, Repartição = repartição, IdAlmoxarifado = almoxarifadoId};
+            var viewModel = new FormularioCadastroProduto { Almoxarifado = almoxarifado, Prateleira = prateleiras, Maquina = maquina, Repartição = repartição, IdAlmoxarifado = almoxarifadoId };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Produto produto, int almoxarifadoId)
         {
             await _produtoService.InsertAsync(produto);
@@ -88,7 +88,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id, int almoxarifadoId)
         {
             try
@@ -102,7 +102,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -120,7 +120,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -155,7 +155,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, Produto produto, int almoxarifadoId)
         {
             if (ModelState.IsValid)
@@ -204,7 +204,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId)
         {
             try
@@ -219,7 +219,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 produto.AtualizarStatus();
 
                 await _produtoService.UpdateAsync(produto);
-                if(produtoindisponivelId == 1)
+                if (produtoindisponivelId == 1)
                 {
                     return RedirectToAction("Produtosindisponiveis", new { almoxarifadoId });
                 }
@@ -231,7 +231,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -240,7 +240,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Search(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
@@ -248,7 +248,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
@@ -262,22 +262,60 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
-        public async Task<IActionResult> DescontarQuantidade(int productId, int quantidade)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
         {
             try
             {
-                await _produtoService.DeduzirQuantidadeAsync(productId, quantidade);
-                return RedirectToAction("Index", "Home");
+                var produto = await _produtoService.FindByIdAsync(id);
+                if (produto == null)
+                {
+                    return NotFound();
+                }
+
+                var nomeUsuario = Request.Cookies["NomeUsuario"];
+                await _produtoService.DescontarQuantidadeAsync(id, quantidade, nomeUsuario);
+
+                return Ok();
             }
             catch (NotFoundException)
             {
                 return NotFound();
             }
-            catch (Exception)
+            catch (IntegreityException ex)
             {
-                return StatusCode(500);
+                return BadRequest(ex.Message);
             }
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Historico()
+        {
+            var nomeUsuario = Request.Cookies["NomeUsuario"];
+            var historicos = await _produtoService.GetHistoricoByNomeUsuario(nomeUsuario);
+
+            var viewModel = new HistoricoDescontosViewModel
+            {
+                NomeUsuario = nomeUsuario,
+                HistoricoDescontos = historicos
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult SalvarNome(string nome)
+        {
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    Expires = DateTime.Now.AddDays(7)
+                };
+                Response.Cookies.Append("NomeUsuario", nome, cookieOptions);
+            }
+
+            return RedirectToAction("Historico", "Produtos");
         }
     }
 }

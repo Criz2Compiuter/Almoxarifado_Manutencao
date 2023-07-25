@@ -27,7 +27,8 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Login</button>
+            <button type="submit" class="btn btn-primary mt-2" onclick="salvarNome()">Login</button>
+
         </form>
     </div>
 </div>
@@ -38,4 +39,16 @@
             credentials: 'include' 
         });
     });
+
+    function salvarNome() {
+        var nome = document.getElementById('Nome').value;
+        fetch('/Produtos/SalvarNome', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `nome=${encodeURIComponent(nome)}`,
+        });
+    }
 </script>

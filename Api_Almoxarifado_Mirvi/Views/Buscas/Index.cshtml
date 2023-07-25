@@ -52,7 +52,7 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
                     {
                         <div class="form-group">
                             @{

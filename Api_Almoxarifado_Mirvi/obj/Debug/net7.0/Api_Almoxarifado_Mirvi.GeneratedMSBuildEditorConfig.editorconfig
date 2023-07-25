@@ -16,18 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Areas/Admin/Views/AdminClaims/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5DbGFpbXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Areas/Admin/Views/AdminClaims/EditUser.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5DbGFpbXNcRWRpdFVzZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Areas/Admin/Views/AdminClaims/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5DbGFpbXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Areas/Admin/Views/AdminRoles/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWRtaW5Sb2xlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -194,6 +182,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Historico.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcSGlzdG9yaWNvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/Index.cshtml]

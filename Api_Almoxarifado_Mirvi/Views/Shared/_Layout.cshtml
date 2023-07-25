@@ -48,7 +48,10 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TetraPak">Tetra Pak</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="javascript:void(0);" onclick="history.go(-1)">Voltar</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Historico">Historico</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
                                 </li>
                             }
                             else if (ViewContext.RouteData.Values["action"].ToString() == "TetraPak")
@@ -72,17 +75,17 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MirviBrasil">Mirvi Brasil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="javascript:void(0);" onclick="history.go(-1)">Voltar</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Buscas" asp-action="Index">Buscas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Buscas" asp-action="Index">Buscas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produtos" asp-action="Historico">Historico</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
                                 </li>
                             }
                             else
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" href="javascript:void(0);" onclick="history.go(-1)">Voltar</a>
-                                </li>
                             }
                         </ul>
                     </div>

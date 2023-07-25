@@ -24,16 +24,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Maquina> Maquina { get; set; }
         public DbSet<Repartição> Repartição { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<HistoricoDesconto> HistoricosDescontos { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Usuario>().HasData(
-                new Usuario
-                {
-                    UsuarioId = 1,
-                    Nome = "Jose"
-                });
-        }
     }
 }

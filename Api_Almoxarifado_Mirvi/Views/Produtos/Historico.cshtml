@@ -1,0 +1,33 @@
+﻿@model HistoricoDescontosViewModel
+
+@{
+    ViewBag.Title = "Histórico";
+}
+
+<h3 class="text-center">Histórico de Descontos</h3>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome do marginal</th>
+                    <th>Descrição</th>
+                    <th>Quantidade Descontada</th>
+                    <th>Data do Desconto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var desconto in Model.HistoricoDescontos)
+                {
+                    <tr>
+                        <td>@desconto.NomeUsuario</td>
+                        <td>@desconto.Produto.Descricao</td>
+                        <td>@desconto.QuantidadeDescontada</td>
+                        <td>@desconto.DataDesconto.ToString("dd/MM/yyyy - hh:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

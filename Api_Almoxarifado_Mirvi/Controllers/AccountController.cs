@@ -78,7 +78,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "home");
+            return RedirectToAction(nameof(Login));
         }
 
         [HttpGet]
