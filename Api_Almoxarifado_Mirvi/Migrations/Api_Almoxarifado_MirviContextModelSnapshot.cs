@@ -192,6 +192,10 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<string>("Fornecedor")
                         .HasColumnType("longtext");
 
+                    b.Property<byte[]>("FotoPDF")
+                        .IsRequired()
+                        .HasColumnType("longblob");
+
                     b.Property<string>("H225_H300")
                         .HasColumnType("longtext");
 

@@ -169,26 +169,6 @@ namespace Api_Almoxarifado_Mirvi.Services
             }
         }
 
-        public async Task<List<HistoricoDesconto>> ObterHistoricoDescontosPorUsuarioAsync(string nomeUsuario)
-        {
-            var historicosDescontos = await _context.HistoricosDescontos
-                .Where(h => h.NomeUsuario == nomeUsuario)
-                .OrderByDescending(h => h.DataDesconto)
-                .ToListAsync();
-
-            return historicosDescontos;
-        }
-
-        public async Task<List<HistoricoDesconto>> GetHistoricoByNomeUsuario(string nomeUsuario)
-        {
-            var historicos = await _context.HistoricosDescontos
-                .Include(h => h.Produto)
-                .Where(h => h.NomeUsuario == nomeUsuario)
-                .ToListAsync();
-
-            return historicos;
-        }
-
         public async Task DescontarQuantidadeAsync(int productId, int quantidade, string nomeUsuario)
         {
             var produto = await FindByIdAsync(productId);
@@ -226,18 +206,14 @@ namespace Api_Almoxarifado_Mirvi.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task RegistrarDesconto(string nomeUsuario, Produto produto, int quantidadeDescontada)
+        public async Task<List<HistoricoDesconto>> GetHistoricoByNomeUsuario(string nomeUsuario)
         {
-            var historicoDesconto = new HistoricoDesconto
-            {
-                NomeUsuario = nomeUsuario,
-                QuantidadeDescontada = quantidadeDescontada,
-                DataDesconto = DateTime.Now,
-                Produto = produto
-            };
+            var historicos = await _context.HistoricosDescontos
+                .Include(h => h.Produto)
+                .OrderByDescending(h => h.DataDesconto)
+                .ToListAsync();
 
-            _context.HistoricosDescontos.Add(historicoDesconto);
-            await _context.SaveChangesAsync();
+            return historicos;
         }
     }
 }

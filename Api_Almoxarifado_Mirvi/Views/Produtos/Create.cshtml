@@ -116,6 +116,10 @@
                 <input asp-for="Produto.Quantidade" class="form-control" />
                 <span asp-validation-for="Produto.Quantidade" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" type="file" class="form-control" />
+            </div>
             @if (Model.IdAlmoxarifado == 2)
             {
                 <div class="form-group">

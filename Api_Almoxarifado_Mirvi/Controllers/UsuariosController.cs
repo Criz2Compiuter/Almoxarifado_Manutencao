@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "RequireUserAdminMecanicoRole")]
     public class UsuariosController : Controller
     {
         private readonly Api_Almoxarifado_MirviContext _context;
@@ -24,7 +24,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                           Problem("Entity set 'Api_Almoxarifado_MirviContext.Usuarios'  is null.");
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Usuarios == null)

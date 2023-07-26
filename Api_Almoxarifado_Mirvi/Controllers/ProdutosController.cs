@@ -63,12 +63,31 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(Produto produto, int almoxarifadoId)
+        public async Task<IActionResult> Create(FormularioCadastroProduto viewModel, IFormFile file, int almoxarifadoId)
         {
-            await _produtoService.InsertAsync(produto);
+            if (file != null && file.Length > 0)
+            {
+                string fileName = file.FileName;
+                string contentType = file.ContentType;
+                if (Path.GetExtension(viewModel.File.FileName).ToLower() == ".pdf")
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        viewModel.File.CopyTo(ms);
+                        viewModel.Produto.FotoPDF = ms.ToArray();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "O arquivo deve estar em formato PDF.");
+                    return View(viewModel);
+                }
+            }
+            await _produtoService.InsertAsync(viewModel.Produto);
             return RedirectToAction(nameof(Index), new { almoxarifadoId });
         }
 
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -102,7 +121,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Details(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -204,7 +222,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId)
         {
             try
@@ -240,7 +258,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Policy = "RequireUserAdminMecanico")]
         public async Task<IActionResult> Search(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
@@ -248,7 +266,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Policy = "RequireUserAdminMecanico")]
         public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
@@ -263,6 +281,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "RequireAdminMacanico")]
         public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
         {
             try
@@ -272,11 +291,15 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 {
                     return NotFound();
                 }
+                else if (quantidade <= 0)
+                {
+                    return NotFound();
+                }
 
                 var nomeUsuario = Request.Cookies["NomeUsuario"];
                 await _produtoService.DescontarQuantidadeAsync(id, quantidade, nomeUsuario);
 
-                return Ok();
+                return RedirectToAction("Index", "Home");
             }
             catch (NotFoundException)
             {

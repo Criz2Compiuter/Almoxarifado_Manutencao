@@ -56,24 +56,11 @@ namespace Api_Almoxarifado_Mirvi.Models
         [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
         [Required(ErrorMessage = "{0} não informado")]
         public int Quantidade { get; set; }
-        public string? QuantidadeTotalInstalada{ get; set; }
+        public string? QuantidadeTotalInstalada { get; set; }
+        public byte[] FotoPDF { get; set; }
         public List<HistoricoDesconto> HistoricoDescontos { get; set; }
 
-        public void RegistrarDesconto(string nomeUsuario, int quantidadeDescontada)
-        {
-            if (HistoricoDescontos == null)
-                HistoricoDescontos = new List<HistoricoDesconto>();
 
-            var historicoDesconto = new HistoricoDesconto
-            {
-                NomeUsuario = nomeUsuario,
-                DataDesconto = DateTime.Now,
-                ProdutoId = Id.Value,
-                QuantidadeDescontada = quantidadeDescontada
-            };
-
-            HistoricoDescontos.Add(historicoDesconto);
-        }
 
         public Produto()
         {
@@ -82,7 +69,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public Produto(int? id, string? Endereco, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
             Almoxarifado almoxarifado, int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? local, string? linha, string? c_STalisca,
             string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo,
-            int quantidade, string? quantidadeTotalInstalada)
+            int quantidade, string? quantidadeTotalInstalada, byte[] foto)
         {
             Id = id;
             Prateleiras = prateleiras;
@@ -121,8 +108,24 @@ namespace Api_Almoxarifado_Mirvi.Models
             Quantidade = quantidade;
             QuantidadeTotalInstalada = quantidadeTotalInstalada;
             HistoricoDescontos = new List<HistoricoDesconto>();
+            FotoPDF = foto;
         }
 
+        public void RegistrarDesconto(string nomeUsuario, int quantidadeDescontada)
+        {
+            if (HistoricoDescontos == null)
+                HistoricoDescontos = new List<HistoricoDesconto>();
+
+            var historicoDesconto = new HistoricoDesconto
+            {
+                NomeUsuario = nomeUsuario,
+                DataDesconto = DateTime.Now,
+                ProdutoId = Id.Value,
+                QuantidadeDescontada = quantidadeDescontada
+            };
+
+            HistoricoDescontos.Add(historicoDesconto);
+        }
         public void AtualizarStatus()
         {
             if (Quantidade < Minimo)

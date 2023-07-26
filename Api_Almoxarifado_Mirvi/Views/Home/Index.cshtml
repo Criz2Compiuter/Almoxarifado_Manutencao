@@ -36,8 +36,13 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <input type="number" id="quantityInput_@item.Id" class="quantity-input" data-product-id="@item.Id" placeholder="Quantidade">
-                                    <button type="button" class="btn btn-primary" onclick="discountQuantity(@item.Id, 'productList1', @item.Quantidade)">Descontar</button>
+                                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                                    {
+                                        <div class="form-group">
+                                            <input type="number" name="quantidade" class="form-control quantity-input" placeholder="Quantidade">
+                                            <button type="submit" class="btn btn-primary">Descontar</button>
+                                        </div>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -78,8 +83,13 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <input type="number" id="quantityInput_@item.Id" class="quantity-input" data-product-id="@item.Id" placeholder="Quantidade">
-                                    <button type="button" class="btn btn-primary" onclick="discountQuantity(@item.Id, 'productList1', @item.Quantidade)">Descontar</button>
+                                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
+                                    {
+                                        <div class="form-group">
+                                            <input type="number" name="quantidade" class="form-control quantity-input" placeholder="Quantidade">
+                                            <button type="submit" class="btn btn-primary">Descontar</button>
+                                        </div>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -91,46 +101,24 @@
 </div>
 
 <script>
-
-    window.onload = initializePage;
-
     function discountQuantity(productId, productListId, currentQuantity) {
-        var input = document.getElementById('quantityInput_' + productId);
+        var input = document.querySelector(`input[name='quantidade'][data-product='${productId}']`);
         var discountQuantity = parseInt(input.value);
-        if (isNaN(discountQuantity)) {
-            alert("Por favor, insira um valor numérico válido.");
+
+        if (isNaN(discountQuantity) || discountQuantity <= 0) {
+            alert("Por favor, insira um valor numérico válido e maior que zero no campo de quantidade.");
             input.value = '';
             return;
         }
+
         if (discountQuantity > currentQuantity) {
             alert("O valor a ser descontado é maior do que a quantidade atual.");
             input.value = '';
             return;
         }
-        if (discountQuantity < 0) {
-            alert("O valor a ser descontado não pode ser negativo.");
-            input.value = '';
-            return;
-        }
+
         input.value = '';
-
-        var quantidadeElement = document.getElementById('quantidade_' + productId);
-        currentQuantity = parseInt(quantidadeElement.innerText);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/Home/DescontarQuantidade?id=" + productId + "&quantidade=" + discountQuantity, true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    var newQuantity = currentQuantity - discountQuantity;
-                    quantidadeElement.innerHTML = '<a href="/Produtos/Details/' + productId + '">' + newQuantity + '</a>';
-                } else {
-                    console.error("Error: " + xhr.status);
-                }
-            }
-        };
-        xhr.send();
+        console.log(`Product ID: ${productId}, Discounted Quantity: ${discountQuantity}`);
     }
 
     function searchProducts(inputId, resultsId) {
@@ -180,6 +168,19 @@
             input2.value = filter2;
             searchProducts("searchInput2", "search-results2");
         }
+
+        var quantityInputs = document.querySelectorAll(".quantity-input");
+        quantityInputs.forEach(function (input) {
+            input.addEventListener("blur", function () {
+                var value = input.value.trim();
+                if (value !== '' && !isNaN(value)) {
+                    input.value = parseInt(value);
+                } else {
+                    alert("Por favor, informe um número válido no campo de quantidade.");
+                    input.value = '';
+                }
+            });
+        });
     };
 </script>
 <style>

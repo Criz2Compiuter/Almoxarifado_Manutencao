@@ -18,6 +18,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _produtosService = produtosService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var produtos = await _produtosService.FindAllAsync();
@@ -38,6 +39,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
@@ -57,7 +59,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return PartialView("_ProductListPartial", products);
         }
 
-        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
+        [Authorize(Policy = "RequireAdminMacanico")]
         [HttpPost]
         public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
         {

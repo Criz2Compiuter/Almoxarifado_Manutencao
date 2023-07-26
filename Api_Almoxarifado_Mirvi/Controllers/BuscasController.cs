@@ -1,11 +1,13 @@
 ﻿using Api_Almoxarifado_Mirvi.Models.Enums;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
+    [Authorize(Policy = "RequireUserAdminMecanicoRole")]
     public class BuscasController : Controller
     {
 
@@ -22,6 +24,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var produtos = await _produtosService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
             return View(produtos);
         }
+
+        [Authorize(Policy = "RequireAdminMacanico")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

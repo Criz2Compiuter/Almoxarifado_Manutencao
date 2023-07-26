@@ -53,15 +53,6 @@
                 @Html.DisplayFor(model => model.Status)
             </dd>
         }
-        @if (Model.Data != null)
-        {
-            <dt>
-                @Html.DisplayNameFor(model => model.Data)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Data)
-            </dd>
-        }
         @if (Model.CodigoDeCompra != null)
         {
             <dt>
@@ -224,14 +215,21 @@
                 @Html.DisplayFor(model => model.Quantidade)
             </dd>
         }
+        @if (Model.FotoPDF != null)
+        {
+            <dt>Foto </dt>
+            <dd>
+                <img src="data:image;base64,@Convert.ToBase64String(Model.FotoPDF)" alt="Foto do produto">
+            </dd>
+        }
         @if (Model.Almoxarifado != null)
         {
             <dt>
                 @Html.DisplayNameFor(model => model.Almoxarifado)
             </dt>
-            <dt>
+            <dd>
                 @Html.DisplayFor(model => model.Almoxarifado.Nome)
-            </dt>
+            </dd>
         }
     </dl>
 </div>

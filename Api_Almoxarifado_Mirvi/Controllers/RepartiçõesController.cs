@@ -23,6 +23,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _almoxarifadoService = almoxarifadoService;
         }
 
+        [Authorize(Policy = "RequireUserAdminMecanicoRole")]
         public async Task<IActionResult> Index(int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
