@@ -24,7 +24,7 @@
                     {
                         if (item.AlmoxarifadoId == 1)
                         {
-                            <tr>
+                            <tr action="Details" asp-route-id="@item.Id">
                                 <td>
                                     <a href="/Produtos/Details/@item.Id">
                                 @Html.DisplayFor(modelItem => item.Descricao)

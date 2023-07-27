@@ -77,6 +77,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }

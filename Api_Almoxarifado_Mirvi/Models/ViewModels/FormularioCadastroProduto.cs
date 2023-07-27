@@ -1,4 +1,7 @@
-﻿namespace Api_Almoxarifado_Mirvi.Models.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
+
+namespace Api_Almoxarifado_Mirvi.Models.ViewModels
 {
     public class FormularioCadastroProduto
     {
@@ -8,7 +11,8 @@
         public ICollection<Prateleira>? Prateleira { get; set; }
         public ICollection<Maquina>? Maquina { get; set; }
         public ICollection<Repartição>? Repartição { get; set; }
-        public IFormFile File { get; set; }
+        [Display(Name = "Imagem do Produto")]
+        public IFormFile ImagemProduto { get; set; }
         public int IdAlmoxarifado { get; set; }
     }
 }

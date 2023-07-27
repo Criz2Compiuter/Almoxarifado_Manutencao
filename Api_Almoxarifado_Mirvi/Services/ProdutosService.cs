@@ -213,7 +213,26 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .OrderByDescending(h => h.DataDesconto)
                 .ToListAsync();
 
+            var historicosPorDia = historicos.GroupBy(h => h.DataDesconto.Date).ToList();
+
+            var historicosPorMes = historicos.GroupBy(h => new { h.DataDesconto.Year, h.DataDesconto.Month }).ToList();
+
+            var historicosPorAno = historicos.GroupBy(h => h.DataDesconto.Year).ToList();
+
             return historicos;
+        }
+
+        public async Task CleanUpHistorico()
+        {
+            var now = DateTime.Now;
+            var oneYearAgo = now.AddYears(-1);
+
+            var historicosToRemove = await _context.HistoricosDescontos
+                .Where(h => h.DataDesconto < oneYearAgo)
+                .ToListAsync();
+
+            _context.HistoricosDescontos.RemoveRange(historicosToRemove);
+            await _context.SaveChangesAsync();
         }
     }
 }

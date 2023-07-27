@@ -63,27 +63,24 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(FormularioCadastroProduto viewModel, IFormFile file, int almoxarifadoId)
+        public async Task<IActionResult> Create(FormularioCadastroProduto inputViewModel, int almoxarifadoId)
         {
-            if (file != null && file.Length > 0)
+            var produto = inputViewModel.Produto;
+
+            if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0)
             {
-                string fileName = file.FileName;
-                string contentType = file.ContentType;
-                if (Path.GetExtension(viewModel.File.FileName).ToLower() == ".pdf")
+                using (var ms = new MemoryStream())
                 {
-                    using (var ms = new MemoryStream())
-                    {
-                        viewModel.File.CopyTo(ms);
-                        viewModel.Produto.FotoPDF = ms.ToArray();
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "O arquivo deve estar em formato PDF.");
-                    return View(viewModel);
+                    inputViewModel.ImagemProduto.CopyTo(ms);
+                    produto.FotoPDF = ms.ToArray();
                 }
             }
-            await _produtoService.InsertAsync(viewModel.Produto);
+            else
+            {
+                produto.FotoPDF = new byte[0];
+            }
+
+            await _produtoService.InsertAsync(produto);
             return RedirectToAction(nameof(Index), new { almoxarifadoId });
         }
 
@@ -138,6 +135,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(obj);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
         {
@@ -168,32 +166,35 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 Repartição = repartição,
                 IdAlmoxarifado = almoxarifadoId
             };
+
+            if (obj.FotoPDF != null)
+            {
+                ViewBag.FotoPDF = Convert.ToBase64String(obj.FotoPDF);
+            }
+            else
+            {
+                ViewBag.FotoPDF = null;
+            }
+
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, Produto produto, int almoxarifadoId)
+        public async Task<IActionResult> Edit(int id, FormularioCadastroProduto inputViewModel, Produto produto, int almoxarifadoId)
         {
-            if (ModelState.IsValid)
+            if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0)
             {
-                var almoxarifado = await _almoxarifadoService.FindAllAsync();
-                var corredor = await _corredorService.FindAllAsync();
-                var prateleiras = await _prateleiraService.FindAllAsync();
-                var maquina = await _maquinasService.FindAllAsync();
-                var repartição = await _repartiçõesService.FindAllAsync();
-                var viewModel = new FormularioCadastroProduto
+                using (var ms = new MemoryStream())
                 {
-                    Produto = produto,
-                    Almoxarifado = almoxarifado,
-                    Corredor = corredor,
-                    Prateleira = prateleiras,
-                    Maquina = maquina,
-                    Repartição = repartição,
-                    IdAlmoxarifado = almoxarifadoId
-                };
-                return View(viewModel);
+                    inputViewModel.ImagemProduto.CopyTo(ms);
+                    produto.FotoPDF = ms.ToArray();
+                }
+            }
+            else
+            {
+                produto.FotoPDF = new byte[0];
             }
             if (id != produto.Id)
             {
@@ -311,10 +312,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = "RequireAdminMacanico")]
         public async Task<IActionResult> Historico()
         {
             var nomeUsuario = Request.Cookies["NomeUsuario"];
+
+            await _produtoService.CleanUpHistorico();
+
             var historicos = await _produtoService.GetHistoricoByNomeUsuario(nomeUsuario);
 
             var viewModel = new HistoricoDescontosViewModel
