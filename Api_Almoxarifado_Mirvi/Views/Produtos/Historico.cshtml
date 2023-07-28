@@ -2,10 +2,11 @@
 
 @{
     ViewBag.Title = "Histórico";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h3 class="text-center">Histórico de Descontos</h3>
-
+<partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />
 <div class="row">
     <div class="col-md-6 mx-auto">
         <table class="table table-striped">

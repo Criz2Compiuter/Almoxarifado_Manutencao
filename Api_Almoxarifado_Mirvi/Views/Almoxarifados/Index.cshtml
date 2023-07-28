@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Almoxarifados";
+    var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 <h2>@ViewData["Title"]</h2>
 
@@ -33,3 +34,4 @@
 <p>
     <a class="btn btn-success" asp-action="Create">Criar Novo almoxarifado</a>
 </p>
+<partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />

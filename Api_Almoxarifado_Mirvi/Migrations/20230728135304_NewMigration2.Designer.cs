@@ -3,6 +3,7 @@ using System;
 using Api_Almoxarifado_Mirvi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api_Almoxarifado_Mirvi.Migrations
 {
     [DbContext(typeof(Api_Almoxarifado_MirviContext))]
-    partial class Api_Almoxarifado_MirviContextModelSnapshot : ModelSnapshot
+    [Migration("20230728135304_NewMigration2")]
+    partial class NewMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

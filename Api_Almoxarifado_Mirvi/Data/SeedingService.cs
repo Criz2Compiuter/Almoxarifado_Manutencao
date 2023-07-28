@@ -61,9 +61,9 @@ public class SeedingService
         Corredor c2 = new Corredor(2, "B",a1);
         Corredor c3 = new Corredor(3, "C", a1);
 
-        Prateleira p1 = new Prateleira(1, "A1", c1, a1, 1);
-        Prateleira p2 = new Prateleira(2, "A2", c2, a1, 1);
-        Prateleira p3 = new Prateleira(3, "A3", c3, a2, 2);
+        Prateleira p1 = new Prateleira(1, "A1", c1);
+        Prateleira p2 = new Prateleira(2, "A2", c2);
+        Prateleira p3 = new Prateleira(3, "A3", c3);
 
         Produto pr1 = new Produto(1, null, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
         Produto pr2 = new Produto(2, null, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);

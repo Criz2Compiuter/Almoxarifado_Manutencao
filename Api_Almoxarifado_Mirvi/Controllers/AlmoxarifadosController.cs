@@ -25,8 +25,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         // GET: Almoxarifados
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int almoxarifadoId)
         {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
             return _context.Almoxarifado != null ?
                         View(await _context.Almoxarifado.ToListAsync()) :
                         Problem("Entity set 'Api_Almoxarifado_MirviContext.Almoxarifado'  is null.");
@@ -163,7 +164,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
             catch (DbUpdateException e)
             {
-                return RedirectToAction(nameof(Error), new { message = "Esse almoxarifado nao pode ser deletado pois esta cadastro com objetos dentro" });
+                return RedirectToAction(nameof(Error), new { message = "Esse almoxarifado nao pode ser deletado pois contem objetos" });
             }
         }
 

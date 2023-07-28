@@ -246,3 +246,4 @@ C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bi
 C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net7.0\zh-CN\Humanizer.resources.dll
 C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net7.0\zh-Hans\Humanizer.resources.dll
 C:\Users\Cristian\Source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\bin\Debug\net7.0\zh-Hant\Humanizer.resources.dll
+C:\Users\Cristian\source\Repos\Almoxarifado_Manutencao\Api_Almoxarifado_Mirvi\obj\Debug\net7.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css

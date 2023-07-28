@@ -28,4 +28,9 @@
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\lib\Home\Index.cshtml.css" />
+    <None Include="wwwroot\lib\Home\Index.js" />
+  </ItemGroup>
+
 </Project>

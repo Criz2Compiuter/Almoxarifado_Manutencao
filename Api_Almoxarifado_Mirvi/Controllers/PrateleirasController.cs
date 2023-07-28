@@ -38,8 +38,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var viewModel = new FormularioCadastroPrateleira 
             { 
-                Corredores = corredores,
-                Almoxarifados = almoxarifado 
+                Corredores = corredores
             };
             return View(viewModel);
         }
@@ -50,19 +49,19 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var corredores = await _corredorService.FindAllAsync();
-                var almoxarifado = await _almoxarifadoService.FindAllAsync();
-                var viewModel = new FormularioCadastroPrateleira 
-                {
-                    Corredores = corredores,
-                    Prateleira = prateleira,
-                    Almoxarifados = almoxarifado,
-                    AlmoxarifadoId = almoxarifadoId
-                };
-                return View(viewModel);
+                await _prateleiraService.InsertAsync(prateleira);
+                return RedirectToAction(nameof(Index), almoxarifadoId);
             }
-            await _prateleiraService.InsertAsync(prateleira);
-            return RedirectToAction(nameof(Index), new { almoxarifadoId });
+            
+            var corredores = await _corredorService.FindAllAsync();
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var viewModel = new FormularioCadastroPrateleira
+            {
+                Corredores = corredores,
+                Prateleira = prateleira,
+                AlmoxarifadoId = almoxarifadoId
+            };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
@@ -134,8 +133,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             {
                 Prateleira = obj,
                 Corredores = corredores,
-                AlmoxarifadoId = almoxarifadoId,
-                Almoxarifados = almoxarifado 
+                AlmoxarifadoId = almoxarifadoId
             };
             return View(viewModel);
         }
@@ -152,7 +150,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 {
                     Corredores = corredores,
                     Prateleira = prateleira,
-                    Almoxarifados = almoxarifado,
                     AlmoxarifadoId = almoxarifadoId
                 };
                 return View(viewModel);

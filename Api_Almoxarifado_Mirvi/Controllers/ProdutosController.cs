@@ -80,8 +80,27 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 produto.FotoPDF = new byte[0];
             }
 
-            await _produtoService.InsertAsync(produto);
-            return RedirectToAction(nameof(Index), new { almoxarifadoId });
+            if (!ModelState.IsValid)
+            {
+                await _produtoService.InsertAsync(produto);
+                return RedirectToAction(nameof(Index), new { almoxarifadoId });
+            }
+
+            var corredores = await _corredorService.FindAllAsync();
+            var almoxarifado = await _almoxarifadoService.FindAllAsync();
+            var prateleira = await _prateleiraService.FindAllAsync();
+            var maquina = await _maquinasService.FindAllAsync();
+            var reparticao = await _repartiçõesService.FindAllAsync();
+            var viewModel = new FormularioCadastroProduto
+            {
+                Almoxarifado = almoxarifado,
+                Corredor = corredores,
+                Prateleira = prateleira,
+                Maquina = maquina,
+                Repartição = reparticao,
+                Produto = produto
+            };
+            return View(viewModel);
         }
 
         [Authorize(Policy = "RequireUserAdminMecanicoRole")]
@@ -294,7 +313,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 }
                 else if (quantidade <= 0)
                 {
-                    return NotFound();
+                    return RedirectToAction(nameof(Error), new { message = "Descontado um valor igual ou menor a zero " });
                 }
 
                 var nomeUsuario = Request.Cookies["NomeUsuario"];

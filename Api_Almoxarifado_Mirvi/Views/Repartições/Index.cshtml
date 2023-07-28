@@ -7,6 +7,10 @@
 <h1>@ViewData["Title"]</h1>
 
 <table class="table tavle-striped table-hover">
+    <p>
+        <a class="btn btn-success" asp-route-almoxarifadoId="@almoxarifadoId" asp-action="Create">Criar nova Repartição</a>
+    </p>
+    <partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />
     <thead>
         <tr class="success">
             <th>
@@ -36,6 +40,3 @@
         }
     </tbody>
 </table>
-<p>
-    <a class="btn btn-success" asp-route-almoxarifadoId="@almoxarifadoId" asp-action="Create">Criar nova Repartição</a>
-</p>

@@ -28,7 +28,6 @@ namespace Api_Almoxarifado_Mirvi.Services
         {
             return await _context.Prateleira
                 .Include(obj => obj.Corredor)
-                .Include(obj => obj.Almoxarifado)
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
@@ -66,9 +65,7 @@ namespace Api_Almoxarifado_Mirvi.Services
         public async Task<List<Prateleira>> FindAllInAlmoxarifadoAsync(int almoxarifadoId)
         {
             return await _context.Prateleira
-                .Where(obj => obj.AlmoxarifadoId == almoxarifadoId)
                 .Include(obj => obj.Corredor)
-                .Include(obj => obj.Almoxarifado)
                 .ToListAsync();
         }
     }

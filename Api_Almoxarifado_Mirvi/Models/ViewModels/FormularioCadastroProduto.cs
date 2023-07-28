@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
-
 namespace Api_Almoxarifado_Mirvi.Models.ViewModels
 {
     public class FormularioCadastroProduto

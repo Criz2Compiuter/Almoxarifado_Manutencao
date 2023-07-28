@@ -1,0 +1,8 @@
+﻿@model int
+
+@{
+    var action = (Model == 1) ? "MirviBrasil" : "TetraPak";
+}
+<p>
+    <a class="btn btn-success" asp-action="@action" asp-controller="Home" asp-route-almoxarifadoId="@Model">Voltar</a>
+</p>

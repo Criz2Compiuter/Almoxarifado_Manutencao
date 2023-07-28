@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Produto";
-    var almoxarifadoId = ViewBag.AlmoxarifadoId;
+    int almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -14,8 +14,9 @@
     <p>
         <a class="btn btn-success" asp-action="Create" asp-route-almoxarifadoId="@almoxarifadoId">Adicionar Produto</a>
     </p>
+    <partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />
     <div>
-        <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Digite para pesquisar...">
+        <input class="form-control" type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Digite para pesquisar...">
     </div>
     <thead>
         <tr class="success">
@@ -32,7 +33,7 @@
                 @Html.DisplayNameFor(model => model.Data)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
+                @Html.DisplayNameFor(model => model.Quantidade)a
             </th>
             @if (almoxarifadoId == 1)
             {
@@ -99,23 +100,5 @@
             </tr>
         }
     </tbody>
+    <script src="~/lib/Produtos/Index.js" asp-append-version="true"></script>
 </table>
-<script>
-    function searchProducts() {
-        var input = document.getElementById('searchInput');
-        var filter = input.value.toUpperCase();
-        var rows = document.getElementsByClassName('productRow');
-
-        for (var i = 0; i < rows.length; i++) {
-            var td = rows[i].getElementsByTagName('td')[0];
-            if (td) {
-                var txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-    }
-</script>

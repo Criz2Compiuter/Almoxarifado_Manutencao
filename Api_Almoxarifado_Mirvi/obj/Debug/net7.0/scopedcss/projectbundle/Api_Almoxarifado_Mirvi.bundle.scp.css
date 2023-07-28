@@ -1,3 +1,100 @@
+/* _content/Api_Almoxarifado_Mirvi/Areas/Admin/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-kf1ubygboy] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-kf1ubygboy] {
+  color: #0077cc;
+}
+
+.btn-primary[b-kf1ubygboy] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-kf1ubygboy], .nav-pills .show > .nav-link[b-kf1ubygboy] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-kf1ubygboy] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-kf1ubygboy] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-kf1ubygboy] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-kf1ubygboy] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-kf1ubygboy] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml.rz.scp.css */
+.search-container[b-0ne1pa3ep5] {
+    display: flex;
+    justify-content: center;
+    height: 70vh;
+}
+
+.search-box[b-0ne1pa3ep5] {
+    margin: 10px;
+    border: 5px solid #ccc;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+    .search-box h1[b-0ne1pa3ep5] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.search-input[b-0ne1pa3ep5] {
+    padding: 10px;
+    width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 30px 0px 0px 0px;
+}
+
+.search-results[b-0ne1pa3ep5] {
+    width: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+    .search-results a[b-0ne1pa3ep5] {
+        display: block;
+        padding: 5px;
+        text-decoration: none;
+        color: #333;
+    }
+
+        .search-results a:hover[b-0ne1pa3ep5] {
+            background-color: #f0f0f0;
+        }
 /* _content/Api_Almoxarifado_Mirvi/Views/Shared/_Layout.cshtml.rz.scp.css */
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
