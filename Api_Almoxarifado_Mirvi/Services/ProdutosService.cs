@@ -234,5 +234,10 @@ namespace Api_Almoxarifado_Mirvi.Services
             _context.HistoricosDescontos.RemoveRange(historicosToRemove);
             await _context.SaveChangesAsync();
         }
+
+        public List<Produto> GetProdutosDisponiveis() {
+            var produtosDisponiveis = _context.Produto.ToList();
+            return produtosDisponiveis;
+        }
     }
 }

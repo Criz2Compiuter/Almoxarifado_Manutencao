@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\Home\\Index.js",
+      "PackagePath": "staticwebassets\\lib\\Home\\Index.js"
+    },
+    {
+      "Id": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\Produtos\\Index.js",
+      "PackagePath": "staticwebassets\\lib\\Produtos\\Index.js"
+    },
+    {
       "Id": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

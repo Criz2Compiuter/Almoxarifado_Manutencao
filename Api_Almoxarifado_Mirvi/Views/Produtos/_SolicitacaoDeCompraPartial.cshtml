@@ -1,0 +1,16 @@
+﻿@model List<Api_Almoxarifado_Mirvi.Models.Produto>
+
+<h1>Solicitação de Compra</h1>
+
+@if (Model != null && Model.Any()) {
+    <ul>
+        @foreach (var produtoId in Model) {
+            <li>Produto ID: @produtoId</li>
+        }
+    </ul>
+}
+else {
+    <p>Nenhum produto selecionado para a solicitação de compra.</p>
+}
+
+<a href="@Url.Action("Index", "Produtos")">Voltar para a lista de produtos</a>

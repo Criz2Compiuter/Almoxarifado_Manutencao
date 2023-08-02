@@ -60,8 +60,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public byte[] FotoPDF { get; set; }
         public List<HistoricoDesconto> HistoricoDescontos { get; set; }
 
-
-
         public Produto()
         {
         }

@@ -108,10 +108,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29ycmVkb3Jlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/MirviBrasil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNaXJ2aUJyYXNpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -196,6 +192,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcX1Byb2R1Y3RMaXN0UGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Produtos/_SolicitacaoDeCompraPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcX1NvbGljaXRhY2FvRGVDb21wcmFQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Repartições/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwYXJ0acOnw7Vlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -267,6 +267,10 @@ build_metadata.AdditionalFiles.CssScope =
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-kf1ubygboy
+
+[C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-0ne1pa3ep5
 
 [C:/Users/Cristian/source/Repos/Almoxarifado_Manutencao/Api_Almoxarifado_Mirvi/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s

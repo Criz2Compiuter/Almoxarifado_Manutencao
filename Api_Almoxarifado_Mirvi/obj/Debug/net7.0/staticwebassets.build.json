@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JAA7MXiYcUZZ2nuJGf8y2T5NpnWwV/FClSKMpQqmXJg=",
+  "Hash": "HUpM5kJAd0TDLP1Gc/x4kYeZ5NuxzibKxoZ+tJMPIGY=",
   "Source": "Api_Almoxarifado_Mirvi",
   "BasePath": "_content/Api_Almoxarifado_Mirvi",
   "Mode": "Default",
@@ -850,6 +850,23 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
+      "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\Home\\Index.js",
+      "SourceId": "Api_Almoxarifado_Mirvi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
+      "BasePath": "_content/Api_Almoxarifado_Mirvi",
+      "RelativePath": "lib/Home/Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\Home\\Index.js"
+    },
+    {
       "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "Api_Almoxarifado_Mirvi",
       "SourceType": "Discovered",
@@ -1052,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\Produtos\\Index.js",
+      "SourceId": "Api_Almoxarifado_Mirvi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
+      "BasePath": "_content/Api_Almoxarifado_Mirvi",
+      "RelativePath": "lib/Produtos/Index.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\Produtos\\Index.js"
     },
     {
       "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\site.js",
