@@ -174,28 +174,39 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, FormularioCadastroProduto inputViewModel, Produto produto, int almoxarifadoId) {
-            if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0) {
-                using (var ms = new MemoryStream()) {
-                    inputViewModel.ImagemProduto.CopyTo(ms);
-                    produto.FotoPDF = ms.ToArray();
-                }
-            }
-            else {
-                produto.FotoPDF = new byte[0];
-            }
-            if (id != produto.Id) {
+        public async Task<IActionResult> Edit(int id, FormularioCadastroProduto inputViewModel, int almoxarifadoId) {
+            if (id != inputViewModel.Produto.Id) {
                 return RedirectToAction(nameof(Error), new { message = "Os Id fornecido nao correspondem" });
             }
-            try {
-                await _produtoService.UpdateAsync(produto);
-                return RedirectToAction("Index", new { almoxarifadoId });
-            }
-            catch (ApplicationException e) {
-                return RedirectToAction(nameof(Error), new { message = e.Message });
-            }
-        }
 
+            if (!ModelState.IsValid) {
+                try {
+                    var produto = await _produtoService.FindByIdAsync(id);
+
+                    if (produto == null) {
+                        return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
+                    }
+                    produto.Descricao = inputViewModel.Produto.Descricao;
+                    produto.Endereco = inputViewModel.Produto.Endereco;
+                    if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0) {
+                        using (var ms = new MemoryStream()) {
+                            inputViewModel.ImagemProduto.CopyTo(ms);
+                            produto.FotoPDF = ms.ToArray();
+                        }
+                    }
+                    await _produtoService.UpdateAsync(produto);
+                    return RedirectToAction("Index", new { almoxarifadoId });
+                }
+                catch (ApplicationException e) {
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
+            }
+            inputViewModel.Almoxarifado = await _almoxarifadoService.FindAllAsync();
+            inputViewModel.Prateleira = await _prateleiraService.FindAllAsync();
+            inputViewModel.Maquina = await _maquinasService.FindAllAsync();
+            inputViewModel.Repartição = await _repartiçõesService.FindAllAsync();
+            return View(inputViewModel);
+        }
         public async Task<IActionResult> Error(string message) {
             var viewModel = new ErrorViewModel {
                 Message = message,
@@ -263,20 +274,21 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 if (produto == null) {
                     return NotFound();
                 }
-                else if (quantidade <= 0) {
+                else if (quantidade == 0 || quantidade < 0) {
                     return RedirectToAction(nameof(Error), new { message = "Descontado um valor igual ou menor a zero " });
                 }
 
                 var nomeUsuario = Request.Cookies["NomeUsuario"];
-                await _produtoService.DescontarQuantidadeAsync(id, quantidade, nomeUsuario);
-
-                return RedirectToAction("Index", "Home");
+                try {
+                    await _produtoService.DescontarQuantidadeAsync(id, quantidade, nomeUsuario);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (IntegreityException ex) {
+                    return RedirectToAction(nameof(Error), new { message = ex.Message });
+                }
             }
             catch (NotFoundException) {
                 return NotFound();
-            }
-            catch (IntegreityException ex) {
-                return BadRequest(ex.Message);
             }
         }
 
@@ -306,14 +318,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             return RedirectToAction("Historico", "Produtos");
-        }
-
-        [HttpPost]
-        public IActionResult EnviarSolicitacaoDeCompra(List<Api_Almoxarifado_Mirvi.Models.Produto> produtosSelecionados) {
-            if (produtosSelecionados != null && produtosSelecionados.Any()) {
-                return View("SolicitacaoDeCompra", produtosSelecionados);
-            }
-            return RedirectToAction("ProdutosIndisponiveis", "Produtos");
         }
     }
 }

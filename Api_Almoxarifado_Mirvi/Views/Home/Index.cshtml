@@ -20,26 +20,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        if (item.AlmoxarifadoId == 1)
-                        {
-                            <tr action="Details" asp-route-id="@item.Id">
+                    @foreach (var item in Model) {
+                        if (item.AlmoxarifadoId == 1) {
+                            <tr>
                                 <td>
                                     <a href="/Produtos/Details/@item.Id">
-                                @Html.DisplayFor(modelItem => item.Descricao)
+                                        @Html.DisplayFor(modelItem => item.Descricao)
                                     </a>
                                 </td>
                                 <td id="quantidade_@item.Id">
                                     <a href="/Produtos/Details/@item.Id">
-                                @item.Quantidade
+                                        @item.Quantidade
                                     </a>
                                 </td>
                                 <td>
-                                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
-                                    {
+                                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" })) {
                                         <div class="form-group">
-                                            <input type="number" name="quantidade" class="form-control quantity-input" placeholder="Quantidade">
+                                            <input type="number" id="quantidadeInput" name="quantidade" class="form-control" />
                                             <button type="submit" class="btn btn-primary">Descontar</button>
                                         </div>
                                     }
@@ -68,32 +65,32 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
+    {
+        if (item.AlmoxarifadoId == 2)
+        {
+            <tr>
+                <td>
+                    <a href="/Produtos/Details/@item.Id">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </a>
+                </td>
+                <td id="quantidade_@item.Id">
+                    <a href="/Produtos/Details/@item.Id">
+                        @item.Quantidade
+                    </a>
+                </td>
+                <td>
+                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
                     {
-                        if (item.AlmoxarifadoId == 2)
-                        {
-                            <tr>
-                                <td>
-                                    <a href="/Produtos/Details/@item.Id">
-                                @Html.DisplayFor(modelItem => item.Descricao)
-                                    </a>
-                                </td>
-                                <td id="quantidade_@item.Id">
-                                    <a href="/Produtos/Details/@item.Id">
-                                @item.Quantidade
-                                    </a>
-                                </td>
-                                <td>
-                                    @using (Html.BeginForm("DescontarQuantidade", "Produtos", new { id = item.Id }, FormMethod.Post, null, new { @class = "form-inline" }))
-                                    {
-                                        <div class="form-group">
-                                            <input type="number" name="quantidade" class="form-control quantity-input" placeholder="Quantidade">
-                                            <button type="submit" class="btn btn-primary">Descontar</button>
-                                        </div>
-                                    }
-                                </td>
-                            </tr>
-                        }
+                        <div class="form-group">
+                            <input type="number" id="quantidadeInput" name="quantidade" class="form-control" />
+                            <button type="submit" class="btn btn-primary">Descontar</button>
+                        </div>
                     }
+                </td>
+            </tr>
+        }
+    }
                 </tbody>
             </table>
         </div>

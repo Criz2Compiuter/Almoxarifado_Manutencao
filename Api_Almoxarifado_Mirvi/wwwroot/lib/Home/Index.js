@@ -72,6 +72,8 @@ window.onload = function () {
             var value = input.value.trim();
             if (value !== '' && !isNaN(value)) {
                 input.value = parseInt(value);
+            } else if (quantidadeInput > quantidadeDisponivel) {
+                alert("Quantidade excede a quantidade disponível do produto!");
             } else {
                 alert("Por favor, informe um número válido no campo de quantidade.");
                 input.value = '';

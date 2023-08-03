@@ -179,7 +179,7 @@ namespace Api_Almoxarifado_Mirvi.Services
 
             if (produto.Quantidade < quantidade)
             {
-                throw new Exception("Quantidade insuficiente do produto");
+                throw new IntegreityException("Quantidade insuficiente do produto");
             }
 
             produto.Quantidade -= quantidade;

@@ -12,9 +12,6 @@
     <thead>
         <tr class="success">
             <th>
-                Selecionar
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Descricao)
             </th>
             <th>
@@ -34,9 +31,6 @@
     <tbody>
         @foreach (var item in Model) {
             <tr>
-                <td>
-                    <input type="checkbox" name="produtosSelecionados" value="@item.Id" />
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
@@ -69,9 +63,3 @@
         }
     </tbody>
 </table>
-@using (Html.BeginForm("EnviarSolicitacaoDeCompra", "Produtos", new { almoxarifadoId = almoxarifadoId }, FormMethod.Post)) {
-    <input type="submit" value="Enviar Solicitação de Compra" class="btn btn-primary" />
-}
-<div>
-
-    <partial name="~/Views/Produtos/_SolicitacaoDeCompraPartial.cshtml" />

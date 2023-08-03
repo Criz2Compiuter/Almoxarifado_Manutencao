@@ -116,6 +116,18 @@
                 <input asp-for="Produto.Quantidade" class="form-control" />
                 <span asp-validation-for="Produto.Quantidade" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                @if (Model.Produto.FotoPDF != null && Model.Produto.FotoPDF.Length > 0) {
+                    <div>
+                        <label>Imagem Atual:</label>
+                        <img src="data:image;base64,@Convert.ToBase64String(Model.Produto.FotoPDF)" class="img-thumbnail" />
+                    </div>
+                }
+                else {
+                    <label asp-for="ImagemProduto" class="control-label"></label>
+                    <input asp-for="ImagemProduto" type="file" class="form-control" />
+                }
+            </div>
             @if (Model.IdAlmoxarifado == 2)
             {
                 <div class="form-group">
