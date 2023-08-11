@@ -51,6 +51,45 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.ToTable("Almoxarifado");
                 });
 
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartHeader", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CartHeaders");
+                });
+
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartHeaderId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Corredor", b =>
                 {
                     b.Property<int>("Id")
@@ -476,6 +515,25 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartItem", b =>
+                {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.CartHeader", "CartHeader")
+                        .WithMany()
+                        .HasForeignKey("CartHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CartHeader");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Corredor", b =>

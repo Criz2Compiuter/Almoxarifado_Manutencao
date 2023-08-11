@@ -13,6 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("MySQLConnectio
 builder.Services.AddDbContext<Api_Almoxarifado_MirviContext>(options =>
 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<CorredorService>();
 builder.Services.AddScoped<PrateleiraService>();
@@ -21,6 +23,7 @@ builder.Services.AddScoped<BuscasService>();
 builder.Services.AddScoped<AlmoxarifadoService>();
 builder.Services.AddScoped<RepartiçõesService>();
 builder.Services.AddScoped<MaquinasService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

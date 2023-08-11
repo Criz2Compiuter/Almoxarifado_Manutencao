@@ -1,65 +1,29 @@
 ﻿@model IEnumerable<Api_Almoxarifado_Mirvi.Models.Produto>
-
+<link rel="stylesheet" href="/css/ProdutosIndisponiveis.css" asp-append-version="true" />
 @{
     ViewData["Title"] = "Produtos Indisponíveis e Limite Baixo";
     var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
 <h1>@ViewData["Title"]</h1>
+<partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />
 
-<table class="table tavle-striped table-hover">
-    <partial name="~/Views/Shared/_LayoutReturnButton.cshtml" model="almoxarifadoId" />
-    <thead>
-        <tr class="success">
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prateleiras)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prateleiras.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-                <td>
-                    @using (Html.BeginForm("Atualizar", "Produtos", new { id = item.Id, almoxarifadoId = almoxarifadoId, produtoindisponivelId = 1 }, FormMethod.Post, null, new { @class = "form-inline" })) {
-                        <div class="form-group">
-                            @{
-                                var quantidade = item.Quantidade;
-                            }
-                            @Html.EditorFor(modelItem => quantidade, new { htmlAttributes = new { @class = "form-control" } })
-                            <button type="submit" class="btn btn-primary">Atualizar</button>
-                        </div>
-                    }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Editar</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Detalhes</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" asp-route-almoxarifadoId="@almoxarifadoId">Deletar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var product in Model) {
+        <div class="col-md-4 mb-2">
+            <a asp-action="Details" asp-route-id="@product.Id" asp-route-almoxarifadoId="@almoxarifadoId">
+                <div class="card">
+                    <img src="data:image;base64,@Convert.ToBase64String(@product.FotoPDF)" alt="Foto do produto">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">
+                            @product.Descricao
+                        </h5>
+                        <p class="card-text text-black">
+                            <b>@(product.Valor != null ? product.Valor.ToString() : "Valor Indisponível")</b>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

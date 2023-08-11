@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HUpM5kJAd0TDLP1Gc/x4kYeZ5NuxzibKxoZ+tJMPIGY=",
+  "Hash": "ZxjKI6QNnqSuy5qFv8fhnWqxu0zTHSnPu/sX7OsLGJU=",
   "Source": "Api_Almoxarifado_Mirvi",
   "BasePath": "_content/Api_Almoxarifado_Mirvi",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Api_Almoxarifado_Mirvi.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\css\\ProdutosIndisponiveis.css",
+      "SourceId": "Api_Almoxarifado_Mirvi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
+      "BasePath": "_content/Api_Almoxarifado_Mirvi",
+      "RelativePath": "css/ProdutosIndisponiveis.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\ProdutosIndisponiveis.css"
     },
     {
       "Identity": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\css\\site.css",

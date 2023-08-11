@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Api_Almoxarifado_Mirvi.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\css\\ProdutosIndisponiveis.css",
+      "PackagePath": "staticwebassets\\css\\ProdutosIndisponiveis.css"
+    },
+    {
       "Id": "C:\\Users\\Cristian\\source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

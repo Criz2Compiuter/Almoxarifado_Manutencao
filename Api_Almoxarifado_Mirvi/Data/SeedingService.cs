@@ -20,7 +20,7 @@ public class SeedingService
             return;
         }
 
-        string imagePath = "C:\\Users\\Cristian\\Downloads\\fundo-de-ficcao-cientifica-futurista-moderno_35913-2152.pdf";
+        string imagePath = "C:\\Users\\Cristian\\Downloads\\download (3).jpg";
         byte[] fotoBytes = File.ReadAllBytes(imagePath);
 
         Almoxarifado a1 = new Almoxarifado(1, "Mirvi Brasil");
