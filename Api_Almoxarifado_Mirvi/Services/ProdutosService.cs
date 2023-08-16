@@ -239,5 +239,10 @@ namespace Api_Almoxarifado_Mirvi.Services
             var produtosDisponiveis = _context.Produto.ToList();
             return produtosDisponiveis;
         }
+
+        internal Task<Produto> FindByIdAsync(int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

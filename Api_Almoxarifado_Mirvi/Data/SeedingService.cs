@@ -20,7 +20,7 @@ public class SeedingService
             return;
         }
 
-        string imagePath = "C:\\Users\\Cristian\\Downloads\\download (3).jpg";
+        string imagePath = "C:\\Users\\aprendizmnt\\Downloads\\download.jfif";
         byte[] fotoBytes = File.ReadAllBytes(imagePath);
 
         Almoxarifado a1 = new Almoxarifado(1, "Mirvi Brasil");

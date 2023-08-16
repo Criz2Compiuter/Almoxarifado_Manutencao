@@ -23,7 +23,10 @@ builder.Services.AddScoped<BuscasService>();
 builder.Services.AddScoped<AlmoxarifadoService>();
 builder.Services.AddScoped<RepartiçõesService>();
 builder.Services.AddScoped<MaquinasService>();
+builder.Services.AddScoped<Api_Almoxarifado_Mirvi.Services.Contratos.ICartServiceContrato, Api_Almoxarifado_Mirvi.Services.Contratos.CartServiceContrato>();
 builder.Services.AddScoped<ICartService, CartService>();
+
+builder.Services.AddHttpClient();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

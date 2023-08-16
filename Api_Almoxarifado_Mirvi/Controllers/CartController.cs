@@ -1,8 +1,6 @@
 ﻿using Api_Almoxarifado_Mirvi.DTOs;
 using Api_Almoxarifado_Mirvi.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 
 namespace Api_Almoxarifado_Mirvi.Controllers {
     [Route("api/[controller]")]

@@ -1,16 +1,15 @@
 ﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Contratos;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 using System.Diagnostics;
-
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-    public class ProdutosController : Controller {
+    public class ProdutosController : Controller
+    {
 
         private readonly ProdutosService _produtoService;
         private readonly CorredorService _corredorService;
@@ -18,25 +17,32 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly AlmoxarifadoService _almoxarifadoService;
         private readonly RepartiçõesService _repartiçõesService;
         private readonly MaquinasService _maquinasService;
+        private readonly ICartServiceContrato _cartService;
 
-        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService, CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService) {
+        public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService,
+            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, ICartServiceContrato cartService)
+        {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
             _almoxarifadoService = almoxarifadoService;
             _corredorService = corredorService;
             _repartiçõesService = repartiçõesService;
             _maquinasService = maquinasService;
+            _cartService = cartService;
         }
 
         [Authorize(Policy = "RequireUserAdminMecanicoRole")]
-        public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId) {
+        public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var produtos = await _produtoService.FindAllInAlmoxarifadoAsync(almoxarifadoId);
-            if (reparticaoId != null) {
+            if (reparticaoId != null)
+            {
                 var produtosReparticao = await _produtoService.FindAllInReparticaoAsync(reparticaoId);
                 return View(produtosReparticao);
             }
-            else if (maquinaId != null) {
+            else if (maquinaId != null)
+            {
                 var produtosMaquinas = await _produtoService.FindAllInMaquinaAsync(maquinaId);
                 return View(produtosMaquinas);
             }
@@ -44,7 +50,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(int almoxarifadoId) {
+        public async Task<IActionResult> Create(int almoxarifadoId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var almoxarifado = await _almoxarifadoService.FindAllAsync();
             var prateleiras = await _prateleiraService.FindAllAsync();
@@ -57,20 +64,25 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create(FormularioCadastroProduto inputViewModel, int almoxarifadoId) {
+        public async Task<IActionResult> Create(FormularioCadastroProduto inputViewModel, int almoxarifadoId)
+        {
             var produto = inputViewModel.Produto;
 
-            if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0) {
-                using (var ms = new MemoryStream()) {
+            if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
                     inputViewModel.ImagemProduto.CopyTo(ms);
                     produto.FotoPDF = ms.ToArray();
                 }
             }
-            else {
+            else
+            {
                 produto.FotoPDF = new byte[0];
             }
 
-            if (!ModelState.IsValid) {
+            if (!ModelState.IsValid)
+            {
                 await _produtoService.InsertAsync(produto);
                 return RedirectToAction(nameof(Index), new { almoxarifadoId });
             }
@@ -80,7 +92,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             var prateleira = await _prateleiraService.FindAllAsync();
             var maquina = await _maquinasService.FindAllAsync();
             var reparticao = await _repartiçõesService.FindAllAsync();
-            var viewModel = new FormularioCadastroProduto {
+            var viewModel = new FormularioCadastroProduto
+            {
                 Almoxarifado = almoxarifado,
                 Corredor = corredores,
                 Prateleira = prateleira,
@@ -92,14 +105,17 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [Authorize(Policy = "RequireUserAdminMecanicoRole")]
-        public async Task<IActionResult> Delete(int? id, int almoxarifadoId) {
+        public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
-            if (id == null) {
+            if (id == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao foi fornecido" });
             }
 
             var obj = await _produtoService.FindByIdAsync(id.Value);
-            if (obj == null) {
+            if (obj == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
 
@@ -109,24 +125,30 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id, int almoxarifadoId) {
-            try {
+        public async Task<IActionResult> Delete(int id, int almoxarifadoId)
+        {
+            try
+            {
                 await _produtoService.RemoveAsync(id);
                 return RedirectToAction("Index", new { almoxarifadoId });
             }
-            catch (IntegreityException e) {
+            catch (IntegreityException e)
+            {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
 
-        public async Task<IActionResult> Details(int? id, int almoxarifadoId) {
+        public async Task<IActionResult> Details(int? id, int almoxarifadoId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
-            if (id == null) {
+            if (id == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
             var obj = await _produtoService.FindByIdAsync(id.Value);
-            if (obj == null) {
+            if (obj == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
 
@@ -135,14 +157,17 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int? id, int almoxarifadoId) {
+        public async Task<IActionResult> Edit(int? id, int almoxarifadoId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
-            if (id == null) {
+            if (id == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
             }
 
             var obj = await _produtoService.FindByIdAsync(id.Value);
-            if (obj == null) {
+            if (obj == null)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
             }
 
@@ -151,7 +176,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             List<Prateleira> prateleiras = await _prateleiraService.FindAllAsync();
             List<Maquina> maquina = await _maquinasService.FindAllAsync();
             List<Repartição> repartição = await _repartiçõesService.FindAllAsync();
-            FormularioCadastroProduto viewModel = new FormularioCadastroProduto {
+            FormularioCadastroProduto viewModel = new FormularioCadastroProduto
+            {
                 Produto = obj,
                 Almoxarifado = almoxarifado,
                 Corredor = corredor,
@@ -161,10 +187,12 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 IdAlmoxarifado = almoxarifadoId
             };
 
-            if (obj.FotoPDF != null) {
+            if (obj.FotoPDF != null)
+            {
                 ViewBag.FotoPDF = Convert.ToBase64String(obj.FotoPDF);
             }
-            else {
+            else
+            {
                 ViewBag.FotoPDF = null;
             }
 
@@ -174,22 +202,29 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, FormularioCadastroProduto inputViewModel, int almoxarifadoId) {
-            if (id != inputViewModel.Produto.Id) {
+        public async Task<IActionResult> Edit(int id, FormularioCadastroProduto inputViewModel, int almoxarifadoId)
+        {
+            if (id != inputViewModel.Produto.Id)
+            {
                 return RedirectToAction(nameof(Error), new { message = "Os Id fornecido nao correspondem" });
             }
 
-            if (!ModelState.IsValid) {
-                try {
+            if (!ModelState.IsValid)
+            {
+                try
+                {
                     var produto = await _produtoService.FindByIdAsync(id);
 
-                    if (produto == null) {
+                    if (produto == null)
+                    {
                         return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
                     }
                     produto.Descricao = inputViewModel.Produto.Descricao;
                     produto.Endereco = inputViewModel.Produto.Endereco;
-                    if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0) {
-                        using (var ms = new MemoryStream()) {
+                    if (inputViewModel.ImagemProduto != null && inputViewModel.ImagemProduto.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
                             inputViewModel.ImagemProduto.CopyTo(ms);
                             produto.FotoPDF = ms.ToArray();
                         }
@@ -197,7 +232,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                     await _produtoService.UpdateAsync(produto);
                     return RedirectToAction("Index", new { almoxarifadoId });
                 }
-                catch (ApplicationException e) {
+                catch (ApplicationException e)
+                {
                     return RedirectToAction(nameof(Error), new { message = e.Message });
                 }
             }
@@ -207,8 +243,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             inputViewModel.Repartição = await _repartiçõesService.FindAllAsync();
             return View(inputViewModel);
         }
-        public async Task<IActionResult> Error(string message) {
-            var viewModel = new ErrorViewModel {
+        public async Task<IActionResult> Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
                 Message = message,
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             };
@@ -218,10 +256,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId) {
-            try {
+        public async Task<IActionResult> Atualizar(int id, int quantidade, int almoxarifadoId, int produtoindisponivelId)
+        {
+            try
+            {
                 var produto = await _produtoService.FindByIdAsync(id);
-                if (produto == null) {
+                if (produto == null)
+                {
                     return RedirectToAction(nameof(Error), new { message = "Produto não encontrado" });
                 }
 
@@ -229,18 +270,21 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 produto.AtualizarStatus();
 
                 await _produtoService.UpdateAsync(produto);
-                if (produtoindisponivelId == 1) {
+                if (produtoindisponivelId == 1)
+                {
                     return RedirectToAction("Produtosindisponiveis", new { almoxarifadoId });
                 }
                 return RedirectToAction("Index", new { almoxarifadoId });
             }
-            catch (ApplicationException e) {
+            catch (ApplicationException e)
+            {
                 return RedirectToAction(nameof(Error), new { message = e.Message });
             }
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo, int almoxarifadoId) {
+        public async Task<IActionResult> ProdutosIndisponiveis(int minimo, int maximo, int almoxarifadoId)
+        {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
             var unavailableProducts = await _produtoService.ObterProdutosIndisponíveisAsync(minimo, maximo, almoxarifadoId);
             return View(unavailableProducts);
@@ -248,17 +292,20 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpGet]
         [Authorize(Policy = "RequireUserAdminMecanico")]
-        public async Task<IActionResult> Search(int almoxarifadoId, string searchValue) {
+        public async Task<IActionResult> Search(int almoxarifadoId, string searchValue)
+        {
             var products = await _produtoService.SearchByAlmoxarifadoAsync(almoxarifadoId, searchValue);
             return PartialView("_ProductListPartial", products);
         }
 
         [HttpGet]
         [Authorize(Policy = "RequireUserAdminMecanico")]
-        public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue) {
+        public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
+        {
             var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
 
-            if (!string.IsNullOrEmpty(searchValue)) {
+            if (!string.IsNullOrEmpty(searchValue))
+            {
                 products = products.Where(p => p.Descricao.Contains(searchValue)).ToList();
             }
 
@@ -268,39 +315,48 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Policy = "RequireAdminMacanico")]
-        public async Task<IActionResult> DescontarQuantidade(int id, int quantidade) {
-            try {
+        public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
+        {
+            try
+            {
                 var produto = await _produtoService.FindByIdAsync(id);
-                if (produto == null) {
+                if (produto == null)
+                {
                     return NotFound();
                 }
-                else if (quantidade == 0 || quantidade < 0) {
+                else if (quantidade == 0 || quantidade < 0)
+                {
                     return RedirectToAction(nameof(Error), new { message = "Descontado um valor igual ou menor a zero " });
                 }
 
                 var nomeUsuario = Request.Cookies["NomeUsuario"];
-                try {
+                try
+                {
                     await _produtoService.DescontarQuantidadeAsync(id, quantidade, nomeUsuario);
                     return RedirectToAction("Index", "Home");
                 }
-                catch (IntegreityException ex) {
+                catch (IntegreityException ex)
+                {
                     return RedirectToAction(nameof(Error), new { message = ex.Message });
                 }
             }
-            catch (NotFoundException) {
+            catch (NotFoundException)
+            {
                 return NotFound();
             }
         }
 
         [Authorize(Policy = "RequireAdminMacanico")]
-        public async Task<IActionResult> Historico() {
+        public async Task<IActionResult> Historico()
+        {
             var nomeUsuario = Request.Cookies["NomeUsuario"];
 
             await _produtoService.CleanUpHistorico();
 
             var historicos = await _produtoService.GetHistoricoByNomeUsuario(nomeUsuario);
 
-            var viewModel = new HistoricoDescontosViewModel {
+            var viewModel = new HistoricoDescontosViewModel
+            {
                 NomeUsuario = nomeUsuario,
                 HistoricoDescontos = historicos
             };
@@ -309,15 +365,76 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpPost]
-        public IActionResult SalvarNome(string nome) {
-            if (!string.IsNullOrWhiteSpace(nome)) {
-                var cookieOptions = new CookieOptions {
+        public IActionResult SalvarNome(string nome)
+        {
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                var cookieOptions = new CookieOptions
+                {
                     Expires = DateTime.Now.AddDays(7)
                 };
                 Response.Cookies.Append("NomeUsuario", nome, cookieOptions);
             }
 
             return RedirectToAction("Historico", "Produtos");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DetailsIndisponivel(int? id, int almoxarifadoId)
+        {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
+            }
+
+            var obj = await _produtoService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ActionName("DetailsIndisponivel")]
+
+        public async Task<ActionResult<Produto>> DetailsIndisponivelPost
+            (Produto produto, int almoxarifadoId)
+        {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+
+            CartViewModel cart = new CartViewModel()
+            {
+                CartHeader = new CartHeaderViewModel
+                {
+                    UserId = User.Claims.Where(u => u.Type == "Admin")?.FirstOrDefault()?.Value
+                }
+            };
+
+            {
+                CartItemViewModel cartItem = new()
+                {
+                    Quantity = produto.Quantidade,
+                    ProdutoId = (int)produto.Id,
+                    Produto = await _produtoService.FindByIdAsync((int)produto.Id)
+                };
+
+                List<CartItemViewModel> cartItemsVM = new List<CartItemViewModel>();
+                cartItemsVM.Add(cartItem);
+                cart.cartItems = cartItemsVM;
+
+                var result = await _cartService.AddItemToCartAsync(cart);
+                if (result is not null)
+                {
+                    return RedirectToAction("Index", almoxarifadoId);
+                }
+
+                return View("DetailsIndisponivel", produto);
+            }
         }
     }
 }

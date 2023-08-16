@@ -7,6 +7,6 @@ namespace Api_Almoxarifado_Mirvi.DTOs {
         public int Quantity { get; set; }
         public int ProdutoId { get; set; }
         public int CartHeaderId { get; set; }
-        public CartHeader CartHeader { get; set; } = new CartHeader();
+        //public CartHeaderDTO CartHeader { get; set; } = new CartHeader();
     }
 }
