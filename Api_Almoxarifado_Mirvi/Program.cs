@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Services;
+using Api_Almoxarifado_Mirvi.Services.Contratos;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,7 +24,7 @@ builder.Services.AddScoped<BuscasService>();
 builder.Services.AddScoped<AlmoxarifadoService>();
 builder.Services.AddScoped<RepartiçõesService>();
 builder.Services.AddScoped<MaquinasService>();
-builder.Services.AddScoped<Api_Almoxarifado_Mirvi.Services.Contratos.ICartServiceContrato, Api_Almoxarifado_Mirvi.Services.Contratos.CartServiceContrato>();
+builder.Services.AddScoped<ICartServiceContrato,CartServiceContrato>();
 builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddHttpClient();

@@ -17,10 +17,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly AlmoxarifadoService _almoxarifadoService;
         private readonly RepartiçõesService _repartiçõesService;
         private readonly MaquinasService _maquinasService;
-        private readonly ICartServiceContrato _cartService;
+        private readonly ICartService _cartService;
 
         public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService,
-            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, ICartServiceContrato cartService)
+            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, ICartService cartService)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
@@ -427,7 +427,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
                 cartItemsVM.Add(cartItem);
                 cart.cartItems = cartItemsVM;
 
-                var result = await _cartService.AddItemToCartAsync(cart);
+                var result = await _cartService.AddItemToCartAsync(cart, null);
                 if (result is not null)
                 {
                     return RedirectToAction("Index", almoxarifadoId);

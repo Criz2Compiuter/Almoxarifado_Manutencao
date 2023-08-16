@@ -7,6 +7,7 @@ namespace Api_Almoxarifado_Mirvi.DTOs.Mappings {
             CreateMap<CartDTO, Cart>().ReverseMap();
             CreateMap<CartHeaderDTO, CartHeader>().ReverseMap();
             CreateMap<CartItemDTO, CartItem>().ReverseMap();
+            CreateMap<ProdutoDTO, Produto>().ReverseMap();
         }
     }
 }
