@@ -53,7 +53,24 @@ builder.Services.AddAuthorization(options =>
 
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("IsAdminClaimAccess",
+        policy => policy.RequireClaim("CadastradoEm"));
+    
+    options.AddPolicy("IsAdminClaimAccess",
+        policy => policy.RequireClaim("IsAdmin", "true"));
+
+    options.AddPolicy("IsMecanicoClaimAccess",
+        policy => policy.RequireClaim("IsMecanico", "true"));
+
+    options.AddPolicy("IsFuncionarioClaimAccess",
+        policy => policy.RequireClaim("IsFuncionario", "true"));
+
+});
+
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRolesInitial>();
+builder.Services.AddScoped<ISeedUserClaimsInitial, SeedUserClaimsInitial>();
 
 var app = builder.Build();
 
@@ -120,8 +137,11 @@ async Task CriarPerfisUsuariosAsync(WebApplication app)
 
     using (var scope = scopedFactory.CreateScope())
     {
-        var service = scope?.ServiceProvider.GetService<ISeedUserRoleInitial>();
-        await service.SeedRolesAsync();
-        await service.SeedUsersAsync();
+        //var service = scope?.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        //await service.SeedRolesAsync();
+        //await service.SeedUsersAsync();
+
+        var service = scope.ServiceProvider.GetService<ISeedUserClaimsInitial>();
+        await service.SeedUserClaims();
     }
 }

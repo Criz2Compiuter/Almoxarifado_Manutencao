@@ -4,7 +4,7 @@ using Api_Almoxarifado_Mirvi.Services.Contratos;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace VShop.CartApi.Repositories;
+namespace Api_Almoxarifado_Mirvi.Services.Contratos;
 
 public class CartServiceContrato : ICartServiceContrato
 {

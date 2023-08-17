@@ -3,15 +3,13 @@ using Api_Almoxarifado_Mirvi.Services;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using Api_Almoxarifado_Mirvi.Models;
-using Api_Almoxarifado_Mirvi.Services.Contratos;
+using System.Text.Json.Serialization;
 
-namespace VShop.Web.Services;
+namespace Api_Almoxarifado_Mirvi.Services;
 
 public class CartService : ICartService
 {
     private readonly IHttpClientFactory _clientFactory;
-    private readonly JsonSerializerOptions? _options;
     private const string apiEndpoint = "/api/cart";
     private CartViewModel cartVM = new CartViewModel();
     private CartHeaderViewModel cartHeaderVM = new CartHeaderViewModel();
@@ -19,13 +17,11 @@ public class CartService : ICartService
     public CartService(IHttpClientFactory clientFactory)
     {
         _clientFactory = clientFactory;
-        _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
     }
 
-    public async Task<CartViewModel> GetCartByUserIdAsync(string userId, string token)
+    public async Task<CartViewModel> GetCartByUserIdAsync(string userId)
     {
-        var client = _clientFactory.CreateClient("CartApi");
-        PutTokenInHeaderAuthorization(token, client);
+        var client = _clientFactory.CreateClient();
 
         using (var response = await client.GetAsync($"{apiEndpoint}/getcart/{userId}"))
         {
@@ -34,7 +30,7 @@ public class CartService : ICartService
                 var apiResponse = await response.Content.ReadAsStreamAsync();
                 cartVM = await JsonSerializer
                               .DeserializeAsync<CartViewModel>
-                              (apiResponse, _options);
+                              (apiResponse);
             }
             else
             {
@@ -44,13 +40,11 @@ public class CartService : ICartService
         return cartVM;
     }
 
-    public async Task<CartViewModel> AddItemToCartAsync(CartViewModel cartVM, string token)
+    public async Task<CartViewModel> AddItemToCartAsync(CartViewModel cartVM)
     {
-        var client = _clientFactory.CreateClient("CartApi");
-        PutTokenInHeaderAuthorization(token, client);
+        var client = _clientFactory.CreateClient("Api_Almoxarifado_Mirvi");
 
-        StringContent content = new StringContent(JsonSerializer.Serialize(cartVM),
-                                                Encoding.UTF8, "application/json");
+        StringContent content = new StringContent(JsonSerializer.Serialize(cartVM), Encoding.UTF8, "application/json");
 
         using (var response = await client.PostAsync($"{apiEndpoint}/addcart/", content))
         {
@@ -58,7 +52,7 @@ public class CartService : ICartService
             {
                 var apiResponse = await response.Content.ReadAsStreamAsync();
                 cartVM = await JsonSerializer
-                           .DeserializeAsync<CartViewModel>(apiResponse, _options);
+                           .DeserializeAsync<CartViewModel>(apiResponse);
             }
             else
             {
@@ -68,10 +62,9 @@ public class CartService : ICartService
         return cartVM;
     }
 
-    public async Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM, string token)
+    public async Task<CartViewModel> UpdateCartAsync(CartViewModel cartVM)
     {
-        var client = _clientFactory.CreateClient("CartApi");
-        PutTokenInHeaderAuthorization(token, client);
+        var client = _clientFactory.CreateClient();
 
         CartViewModel cartUpdated = new CartViewModel();
 
@@ -82,7 +75,7 @@ public class CartService : ICartService
                 var apiResponse = await response.Content.ReadAsStreamAsync();
                 cartUpdated = await JsonSerializer
                                   .DeserializeAsync<CartViewModel>
-                                  (apiResponse, _options);
+                                  (apiResponse);
             }
             else
             {
@@ -92,10 +85,9 @@ public class CartService : ICartService
         return cartUpdated;
     }
 
-    public async Task<bool> RemoveItemFromCartAsync(int cartId, string token)
+    public async Task<bool> RemoveItemFromCartAsync(int cartId)
     {
-        var client = _clientFactory.CreateClient("CartApi");
-        PutTokenInHeaderAuthorization(token, client);
+        var client = _clientFactory.CreateClient();
 
         using (var response = await client.DeleteAsync($"{apiEndpoint}/deletecart/" + cartId))
         {
@@ -105,37 +97,5 @@ public class CartService : ICartService
             }
         }
         return false;
-    }
-
-    private static void PutTokenInHeaderAuthorization(string token, HttpClient client)
-    {
-        client.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", token);
-    }
-
-
-    public Task<bool> ClearCartAsync(string userId, string token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> ApplyCouponAsync(CartViewModel cartVM, string token)
-    {
-        var client = _clientFactory.CreateClient("CartApi");
-        PutTokenInHeaderAuthorization(token, client);
-
-        StringContent content = new StringContent(JsonSerializer.Serialize(cartVM),
-                                         Encoding.UTF8, "application/json");
-
-        using (var response = await client.PostAsync($"{apiEndpoint}/applycoupon/", content))
-        {
-            if (response.IsSuccessStatusCode)
-            {
-                return true;
-            }
-        }
-
-        return false;
-
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\aprendizmnt\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj": {}
+    "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\aprendizmnt\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj": {
+    "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\aprendizmnt\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+        "projectUniqueName": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
         "projectName": "Api_Almoxarifado_Mirvi",
-        "projectPath": "C:\\Users\\aprendizmnt\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
+        "projectPath": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\Api_Almoxarifado_Mirvi.csproj",
         "packagesPath": "C:\\Users\\aprendizmnt\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\aprendizmnt\\Source\\Repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\obj\\",
+        "outputPath": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
