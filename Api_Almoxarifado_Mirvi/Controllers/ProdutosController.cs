@@ -1,16 +1,16 @@
-﻿using Api_Almoxarifado_Mirvi.Entities;
-using Api_Almoxarifado_Mirvi.Models;
+﻿using Api_Almoxarifado_Mirvi.Models;
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
-using Api_Almoxarifado_Mirvi.Services.Contratos;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
+
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
-[Authorize]
+    [Authorize]
     public class ProdutosController : Controller
     {
 
@@ -20,11 +20,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly AlmoxarifadoService _almoxarifadoService;
         private readonly RepartiçõesService _repartiçõesService;
         private readonly MaquinasService _maquinasService;
-        private readonly ICartService _cartService;
-        private readonly UserManager<IdentityUser> usuario;
+        private readonly UserManager<IdentityUser> _usuario;
 
         public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService,
-            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, ICartService cartService, UserManager<IdentityUser> usuario)
+            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, UserManager<IdentityUser> usuario)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
@@ -32,13 +31,10 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _corredorService = corredorService;
             _repartiçõesService = repartiçõesService;
             _maquinasService = maquinasService;
-            _cartService = cartService;
-            this.usuario = usuario;
+            this._usuario = usuario;
         }
 
-        [Authorize(Policy = "IsAdminClaimAccess")]
-        [Authorize(Policy = "IsMecanicoClaimAccess")]
-        [Authorize(Policy = "IsFuncionarioClaimAccess")]
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int almoxarifadoId, int? reparticaoId, int? maquinaId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -404,44 +400,6 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             return View(obj);
-        }
-
-        [HttpPost]
-        [Authorize(Policy = "IsAdminClaimAccess")]
-        [ActionName("DetailsIndisponivel")]
-        public async Task<ActionResult<Produto>> DetailsIndisponivelPost(Produto produto, int almoxarifadoId)
-        {
-            ViewBag.AlmoxarifadoId = almoxarifadoId;
-
-            CartViewModel cart = new CartViewModel()
-            {
-                CartHeader = new CartHeaderViewModel
-                {
-                    UserId = usuario.Users.ToString()
-                }
-            };
-
-            CartItemViewModel cartItem = new CartItemViewModel
-            {
-                Quantity = produto.Quantidade,
-                ProdutoId = (int)produto.Id,
-                Produto = await _produtoService.FindByIdAsync((int)produto.Id)
-            };
-
-            List<CartItemViewModel> cartItemsVM = new List<CartItemViewModel>
-    {
-        cartItem
-    };
-            cart.cartItems = cartItemsVM;
-
-            var result = await _cartService.AddItemToCartAsync(cart);
-
-            if (result is not null)
-            {
-                return RedirectToAction("Index", new { almoxarifadoId });
-            }
-
-            return View("DetailsIndisponivel", produto);
         }
     }
 }

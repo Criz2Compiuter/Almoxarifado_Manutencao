@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Api_Almoxarifado_Mirvi.Services
 {
@@ -16,53 +17,45 @@ namespace Api_Almoxarifado_Mirvi.Services
             try
             {
                 IdentityUser user1 = await _userManager.FindByNameAsync("Admin");
-                if(user1 is not null)
+                if (user1 is not null)
                 {
-                    var claimsList = (await _userManager.GetClaimsAsync(user1)).Select(p => p.Type);
+                    var claimList = (await _userManager.GetClaimsAsync(user1))
+                        .Select(p => p.Type);
 
-                    if (!claimsList.Contains("CadastradoEm"))
+                    if (!claimList.Contains("CadastradoEm"))
                     {
-                        var claimResult1 = await _userManager.AddClaimAsync(user1, new System.Security.Claims.Claim("CadastradoEm", DateTime.Now.ToString()));
+                        var claimResult1 = await _userManager.AddClaimAsync(user1,
+                                                new Claim("CadastradoEm", "21/07/2023"));
                     }
-                    if (!claimsList.Contains("IsAdmin"))
+                    if (!claimList.Contains("IsAdmin"))
                     {
-                        var claimListResult2 = await _userManager.AddClaimAsync(user1, new System.Security.Claims.Claim("IsAdmin", "true"));
+                        var claimResult2 = await _userManager.AddClaimAsync(user1,
+                                                new Claim("IsAdmin", "true"));
                     }
                 }
 
-                IdentityUser user2 = await _userManager.FindByNameAsync("User");
+                IdentityUser user2 = await _userManager.FindByNameAsync("Usuario");
+
                 if (user2 is not null)
                 {
-                    var claimsList = (await _userManager.GetClaimsAsync(user2)).Select(p => p.Type);
+                    var claimList = (await _userManager.GetClaimsAsync(user2))
+                        .Select(p => p.Type);
 
-                    if (!claimsList.Contains("IsAdmin"))
+                    if (!claimList.Contains("IsAdmin"))
                     {
-                        var claimResult1 = await _userManager.AddClaimAsync(user2, new System.Security.Claims.Claim("IsAdmin", "false"));
+                        var claimResult = await _userManager.AddClaimAsync(user2,
+                                                new Claim("IsAdmin", "false"));
                     }
-                    if (!claimsList.Contains("IsAdmin"))
+                    if (!claimList.Contains("IsAdmin"))
                     {
-                        var claimListresult2 = await _userManager.AddClaimAsync(user2, new System.Security.Claims.Claim("IsFuncionario", "true"));
-                    }
-                }
-
-                IdentityUser user3 = await _userManager.FindByNameAsync("Mecanico");
-                if (user3 is not null)
-                {
-                    var claimsList = (await _userManager.GetClaimsAsync(user3)).Select(p => p.Type);
-
-                    if (!claimsList.Contains("IsAdmin"))
-                    {
-                        var claimResult1 = await _userManager.AddClaimAsync(user2, new System.Security.Claims.Claim("IsAdmin", "false"));
-                    }
-                    if (!claimsList.Contains("IsAdmin"))
-                    {
-                        var claimListresult2 = await _userManager.AddClaimAsync(user2, new System.Security.Claims.Claim("IsMecanico", "true"));
+                        var claimResult = await _userManager.AddClaimAsync(user2,
+                                                new Claim("IsFuncionario", "true"));
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw;
             }
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Api_Almoxarifado_Mirvi.Areas.Admin.Controllers;
+
 [Area("Admin")]
 [Authorize(Roles = "Admin")]
 public class AdminClaimsController : Controller
@@ -25,11 +26,11 @@ public class AdminClaimsController : Controller
     [HttpGet]
     public async Task<IActionResult> EditUser(string id)
     {
-        var user = await _userManager.FindByNameAsync(id);
+        var user = await _userManager.FindByIdAsync(id);
 
-        if(user == null)
+        if (user == null)
         {
-            ModelState.AddModelError("", "Usuário não encontrado");
+            ModelState.AddModelError("", "Usuario nao encontrado");
             return View();
         }
 
@@ -43,6 +44,7 @@ public class AdminClaimsController : Controller
         };
         return View(model);
     }
+
     [HttpPost]
     public async Task<IActionResult> EditUser(EditUserViewModel model)
     {
@@ -50,7 +52,7 @@ public class AdminClaimsController : Controller
 
         if (user is null)
         {
-            ModelState.AddModelError("", "Usuário não encontrado");
+            ModelState.AddModelError("", "Usuario nao encontrado");
             return View(model);
         }
         else
@@ -80,16 +82,13 @@ public class AdminClaimsController : Controller
 
     [HttpPost]
     [ActionName("Create")]
-    public async Task<IActionResult> Create_Post(string claimType, string claimValue,
-                                                  string userId)
-
+    public async Task<IActionResult> Create_Post(string claimType, string claimValue, string userId)
     {
         if (claimType is null || claimValue is null)
         {
-            ModelState.AddModelError("", "Tipo/Valor da Claim deve ser informado");
+            ModelState.AddModelError("", "Tipo/valor da Claim deve ser informado");
             return View();
         }
-
         IdentityUser user = await _userManager.FindByIdAsync(userId);
 
         if (user is not null)
@@ -97,7 +96,7 @@ public class AdminClaimsController : Controller
             var userClaims = await _userManager.GetClaimsAsync(user);
 
             Claim claim = userClaims.FirstOrDefault(x => x.Type.Equals(claimType)
-                          && x.Value.Equals(claimValue));
+                            && x.Value.Equals(claimValue));
 
             if (claim is null)
             {
@@ -106,20 +105,24 @@ public class AdminClaimsController : Controller
                 IdentityResult result = await _userManager.AddClaimAsync(user, newClaim);
 
                 if (result.Succeeded)
+                {
                     return RedirectToAction("Index");
+                }
                 else
+                {
                     Errors(result);
+                }
             }
             else
             {
-                ModelState.AddModelError("", "Claim já existente");
+                ModelState.AddModelError("", "Claim ja existente");
             }
         }
         else
         {
-            ModelState.AddModelError("", "Usuário não encontrado");
+            ModelState.AddModelError("", "Usuario nao encontrado");
         }
-        return View();
+        return View("Index");
     }
 
     [HttpPost]
