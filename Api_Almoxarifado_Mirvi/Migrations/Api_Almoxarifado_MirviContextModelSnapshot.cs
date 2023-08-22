@@ -78,10 +78,12 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartHeaderId");
 
                     b.HasIndex("ProdutoId");
 
@@ -517,11 +519,19 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartItem", b =>
                 {
+                    b.HasOne("Api_Almoxarifado_Mirvi.Models.CartHeader", "CartHeader")
+                        .WithMany()
+                        .HasForeignKey("CartHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CartHeader");
 
                     b.Navigation("Produto");
                 });

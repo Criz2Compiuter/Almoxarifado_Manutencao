@@ -4,7 +4,7 @@ using Api_Almoxarifado_Mirvi.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Api_Almoxarifado_Mirvi.Services.Contratos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,8 @@ options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICartServiceContrato, CartServiceContrato>();
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<CorredorService>();
 builder.Services.AddScoped<PrateleiraService>();
@@ -68,6 +70,10 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRolesInitial>();
 builder.Services.AddScoped<ISeedUserClaimsInitial, SeedUserClaimsInitial>();
+
+builder.Services.AddHttpClient<ICartService, CartService>("CartApi",
+    c => c.BaseAddress = new Uri(builder.Configuration["ServiceUri:CartApi"])
+);
 
 var app = builder.Build();
 

@@ -107,7 +107,9 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(viewModel);
         }
 
-        [Authorize(Policy = "IsUserAdminMecanicoClaimAccess")]
+        [Authorize(Policy = "IsMecanicoClaimAccess")]
+        [Authorize(Policy = "IsAdminClaimAccess")]
+        [Authorize(Policy = "IsFuncionarioClaimAccess")]
         public async Task<IActionResult> Delete(int? id, int almoxarifadoId)
         {
             ViewBag.AlmoxarifadoId = almoxarifadoId;
@@ -303,7 +305,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "IsAdminMecanicoClaimAccess")]
+        [Authorize(Policy = "IsMecanicoClaimAccess")]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> SearchByAlmoxarifado(int almoxarifadoId, string searchValue)
         {
             var products = await _produtoService.FindByAlmoxarifadoAsync(almoxarifadoId);
@@ -318,7 +321,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Policy = "IsAdminMecanicoClaimAccess")]
+        [Authorize(Policy = "IsMecanicoClaimAccess")]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> DescontarQuantidade(int id, int quantidade)
         {
             try
@@ -350,7 +354,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
         }
 
-        [Authorize(Policy = "IsAdminMecanicoClaimAccess")]
+        [Authorize(Policy = "IsMecanicoClaimAccess")]
+        [Authorize(Policy = "IsAdminClaimAccess")]
         public async Task<IActionResult> Historico()
         {
             var nomeUsuario = Request.Cookies["NomeUsuario"];
