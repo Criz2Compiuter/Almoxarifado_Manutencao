@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="WebForm\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 
