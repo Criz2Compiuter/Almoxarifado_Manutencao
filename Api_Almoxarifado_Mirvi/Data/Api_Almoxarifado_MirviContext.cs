@@ -21,5 +21,6 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoDesconto> HistoricosDescontos { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CartHeader> CartHeader { get; set; }
     }
 }

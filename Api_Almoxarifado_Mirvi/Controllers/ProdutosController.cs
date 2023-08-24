@@ -2,11 +2,11 @@
 using Api_Almoxarifado_Mirvi.Models.ViewModels;
 using Api_Almoxarifado_Mirvi.Services;
 using Api_Almoxarifado_Mirvi.Services.Exceptions;
+using Api_Almoxarifado_Mirvi.Services.ViewApi;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Claims;
 
 namespace Api_Almoxarifado_Mirvi.Controllers
 {
@@ -20,10 +20,11 @@ namespace Api_Almoxarifado_Mirvi.Controllers
         private readonly AlmoxarifadoService _almoxarifadoService;
         private readonly RepartiçõesService _repartiçõesService;
         private readonly MaquinasService _maquinasService;
-        private readonly UserManager<IdentityUser> _usuario;
+        private readonly ICartViewService _cartService;
+        private readonly UserManager<IdentityUser> usuario;
 
         public ProdutosController(ProdutosService produtoService, PrateleiraService prateleiraService, AlmoxarifadoService almoxarifadoService,
-            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, UserManager<IdentityUser> usuario)
+            CorredorService corredorService, RepartiçõesService repartiçõesService, MaquinasService maquinasService, ICartViewService cartService, UserManager<IdentityUser> usuario)
         {
             _produtoService = produtoService;
             _prateleiraService = prateleiraService;
@@ -31,7 +32,8 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _corredorService = corredorService;
             _repartiçõesService = repartiçõesService;
             _maquinasService = maquinasService;
-            this._usuario = usuario;
+            _cartService = cartService;
+            this.usuario = usuario;
         }
 
         [AllowAnonymous]
@@ -386,6 +388,62 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             }
 
             return RedirectToAction("Historico", "Produtos");
+        }
+        [HttpGet]
+        [Authorize(Policy = "IsAdminClaimAccess")]
+        public async Task<IActionResult> DetailsIndisponivel(int? id, int almoxarifadoId)
+        {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
+            }
+
+            var obj = await _produtoService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [Authorize(Policy = "IsAdminClaimAccess")]
+        [ActionName("DetailsIndisponivel")]
+        public async Task<ActionResult<Produto>> DetailsIndisponivelPost(Produto produto, int almoxarifadoId)
+        {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+
+            Cart cart = new Cart()
+            {
+                CartHeader = new CartHeader
+                {
+                    UserId = usuario.Users.ToString()
+                }
+            };
+
+            CartItem cartItem = new CartItem
+            {
+                Quantidade = produto.Quantidade,
+                ProdutoId = (int)produto.Id,
+                Produto = await _produtoService.FindByIdAsync((int)produto.Id)
+            };
+
+            List<CartItem> cartItemsVM = new List<CartItem>
+            {
+                cartItem
+    };
+            cart.CartItems = cartItemsVM;
+
+            var result = await _cartService.AddItemToCartAsync(cart);
+
+            if (result is not null)
+            {
+                return RedirectToAction("Index", new { almoxarifadoId });
+            }
+
+            return View("DetailsIndisponivel", produto);
         }
     }
 }

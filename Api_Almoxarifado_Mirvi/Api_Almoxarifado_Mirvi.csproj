@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WebForm\**" />
+    <Content Remove="WebForm\**" />
+    <EmbeddedResource Remove="WebForm\**" />
+    <None Remove="WebForm\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
@@ -26,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="WebForm\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 

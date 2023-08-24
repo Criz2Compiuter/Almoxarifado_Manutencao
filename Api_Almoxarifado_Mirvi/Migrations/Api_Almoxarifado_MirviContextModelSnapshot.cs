@@ -63,17 +63,19 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartHeaders");
+                    b.ToTable("CartHeader");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("CartHeaderId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("ProdutoId")
                         .HasColumnType("int");
