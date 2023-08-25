@@ -4,9 +4,6 @@ using Api_Almoxarifado_Mirvi.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Api_Almoxarifado_Mirvi.Services.CartApi;
-using Api_Almoxarifado_Mirvi.Services.ViewApi;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
@@ -16,8 +13,6 @@ options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped<ICartApiService, CartApiService>();
-builder.Services.AddScoped<ICartViewService, CartViewService>();
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<CorredorService>();
 builder.Services.AddScoped<PrateleiraService>();
