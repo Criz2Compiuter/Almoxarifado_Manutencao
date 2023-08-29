@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wWFOTEA1TspiLvU9dpcjYpm5Dwb8zfUC+MvvgsCKAW0=",
+  "Hash": "tpRBpePD4F7A0eyjkAgXM+0DSSPNfvAu1StYfOPEw3E=",
   "Source": "Api_Almoxarifado_Mirvi",
   "BasePath": "_content/Api_Almoxarifado_Mirvi",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\IMGs\\60992.png",
+      "SourceId": "Api_Almoxarifado_Mirvi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\",
+      "BasePath": "_content/Api_Almoxarifado_Mirvi",
+      "RelativePath": "IMGs/60992.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\IMGs\\60992.png"
     },
     {
       "Identity": "C:\\Users\\aprendizmnt\\source\\repos\\Almoxarifado_Manutencao\\Api_Almoxarifado_Mirvi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-flatly.css",

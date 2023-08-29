@@ -1,0 +1,14 @@
+﻿@using Api_Almoxarifado_Mirvi.Models.ViewModels;
+@model CarrinhoCompraViewModel
+
+@if(Model.CartBuy.CarrinhoCompraItens.Count > 0)
+{
+    <li>
+        <a asp-controller="Cart">
+            <span class="glyphicon "></span>
+            <span id="cart-status">
+                @Model.CartBuy.CarrinhoCompraItens.Count
+            </span>
+        </a>
+    </li>
+}

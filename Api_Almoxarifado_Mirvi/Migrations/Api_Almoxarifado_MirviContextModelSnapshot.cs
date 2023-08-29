@@ -33,6 +33,13 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = 1,
+                            Nome = "Jose"
+                        });
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Almoxarifado", b =>
@@ -53,9 +60,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartBuyItem", b =>
                 {
-                    b.Property<int>("CartBuyItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("CartBuyItemId")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CarrinhoCompraId")
                         .IsRequired()
@@ -271,8 +277,8 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Valor")
-                        .HasColumnType("longtext");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 

@@ -50,7 +50,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? Fabricante { get; set; }
         public string? Marca { get; set; }
         public string? S_N { get; set; }
-        public string? Valor { get; set; }
+        public decimal Valor { get; set; }
         public string? Modelo { get; set; }
         [DisplayFormat(DataFormatString = "{0}")]
         [Range(1, 1000, ErrorMessage = "a {0} do produto deve ter no minimo {1} e no maximo {2}")]
@@ -66,7 +66,7 @@ namespace Api_Almoxarifado_Mirvi.Models
 
         public Produto(int? id, string? Endereco, Prateleira prateleiras, int? prateleirasId, Corredor corredor, int? corredorId, Repartição? repartição, int? repartiçãoId, Maquina? maquina, int? maquinaId,
             Almoxarifado almoxarifado, int? almoxarifadoId, string descricao, string? categoria, ProdutoStatus status, int? minimo, int? maximo, DateTime data, string? codigoDeCompra, string? local, string? linha, string? c_STalisca,
-            string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, string? valor, string? modelo,
+            string? hpn, string? referencia, string? h225_H300, string? fornecedor, string? diametro, string? comprimento, string? conexao, string? medida, string? fabricante, string? marca, string? n, decimal valor, string? modelo,
             int quantidade, string? quantidadeTotalInstalada, byte[] foto)
         {
             Id = id;

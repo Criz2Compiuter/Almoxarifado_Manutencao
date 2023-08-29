@@ -65,12 +65,12 @@ public class SeedingService
         Prateleira p2 = new Prateleira(2, "A2", c2);
         Prateleira p3 = new Prateleira(3, "A3", c3);
 
-        Produto pr1 = new Produto(1, null, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
-        Produto pr2 = new Produto(2, null, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
-        Produto pr3 = new Produto(3, null, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
-        Produto pr4 = new Produto(4, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
-        Produto pr5 = new Produto(5, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
-        Produto pr6 = new Produto(6, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 5, null, fotoBytes);
+        Produto pr1 = new Produto(1, null, p1, 1, c1, 1, r1, 1, m1, 1, a1, 1, "M1", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
+        Produto pr2 = new Produto(2, null, p2, 2, c2, 2, r1, 1, m1, 1, a1, 1, "M2", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
+        Produto pr3 = new Produto(3, null, p3, 3, c3, 3, r1, 1, m1, 1, a1, 1, "M3", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
+        Produto pr4 = new Produto(4, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M4", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
+        Produto pr5 = new Produto(5, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M5", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
+        Produto pr6 = new Produto(6, null, p3, 3, c3, 3, r1, 1, m1, 1, a2, 2, "M6", null, ProdutoStatus.Indisponivel, 1, 5, DateTime.Now, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, null, 5, null, fotoBytes);
 
         _context.Almoxarifado.AddRange(a1);
 

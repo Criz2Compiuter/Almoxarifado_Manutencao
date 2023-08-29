@@ -105,13 +105,6 @@ namespace Api_Almoxarifado_Mirvi.Services
                 .Include(p => p.Prateleiras)
                 .ToListAsync();
         }
-        public async Task<List<Produto>> GetProdutosByAlmoxarifadoAsync(int almoxarifadoId)
-        {
-            var produtos = await _context.Produto
-                .Where(p => p.Almoxarifado.Id == almoxarifadoId)
-                .ToListAsync();
-            return produtos;
-        }
 
         public async Task<List<Produto>> FindAllInAlmoxarifadoAsync(int almoxarifadoId)
         {
@@ -235,14 +228,5 @@ namespace Api_Almoxarifado_Mirvi.Services
             await _context.SaveChangesAsync();
         }
 
-        public List<Produto> GetProdutosDisponiveis() {
-            var produtosDisponiveis = _context.Produto.ToList();
-            return produtosDisponiveis;
-        }
-
-        internal Task<Produto> FindByIdAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

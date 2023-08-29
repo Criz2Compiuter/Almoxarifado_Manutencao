@@ -4,6 +4,7 @@ using Api_Almoxarifado_Mirvi.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
@@ -21,6 +22,10 @@ builder.Services.AddScoped<BuscasService>();
 builder.Services.AddScoped<AlmoxarifadoService>();
 builder.Services.AddScoped<RepartiçõesService>();
 builder.Services.AddScoped<MaquinasService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(cp => CartBuy.GetCart(cp));
+builder.Services.AddMvc();
+
 
 builder.Services.AddHttpClient();
 
@@ -67,6 +72,9 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRolesInitial>();
 builder.Services.AddScoped<ISeedUserClaimsInitial, SeedUserClaimsInitial>();
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -95,6 +103,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

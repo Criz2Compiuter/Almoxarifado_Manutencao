@@ -21,5 +21,16 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoDesconto> HistoricosDescontos { get; set; }
         public DbSet<CartBuyItem> CartBuyItems { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario
+                {
+                    UsuarioId = 1,
+                    Nome = "Jose"
+                });
+        }
     }
 }

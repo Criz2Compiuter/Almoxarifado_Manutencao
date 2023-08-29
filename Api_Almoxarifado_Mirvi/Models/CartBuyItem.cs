@@ -4,7 +4,7 @@ namespace Api_Almoxarifado_Mirvi.Models;
 
 public class CartBuyItem
 {
-    public int CartBuyItemId { get; set; }
+    public string CartBuyItemId { get; set; }
     public Produto Produto { get; set; }
     public int Quantidade { get; set; }
     [StringLength(200)]
