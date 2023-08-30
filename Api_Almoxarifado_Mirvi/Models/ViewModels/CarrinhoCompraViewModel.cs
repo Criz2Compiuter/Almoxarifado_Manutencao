@@ -2,7 +2,7 @@
 {
     public class CarrinhoCompraViewModel
     {
-        public CartBuy CartBuy { get; set; }
+        public CarrinhoCompra CartBuy { get; set; }
         public decimal carrinhoCompraTotal { get; set; }
     }
 }

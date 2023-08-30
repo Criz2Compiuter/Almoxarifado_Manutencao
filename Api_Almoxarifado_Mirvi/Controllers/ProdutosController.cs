@@ -386,5 +386,24 @@ namespace Api_Almoxarifado_Mirvi.Controllers
 
             return RedirectToAction("Historico", "Produtos");
         }
+
+        [HttpGet]
+        [Authorize(Policy = "IsAdminClaimAccess")]
+        public async Task<IActionResult> DetailsIndisponivel(int? id, int almoxarifadoId)
+        {
+            ViewBag.AlmoxarifadoId = almoxarifadoId;
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao fornecido" });
+            }
+
+            var obj = await _produtoService.FindByIdAsync(id.Value);
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id nao encontrado" });
+            }
+
+            return View(obj);
+        }
     }
 }

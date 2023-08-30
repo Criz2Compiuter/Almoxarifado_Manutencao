@@ -4,34 +4,46 @@
     var almoxarifadoId = ViewBag.AlmoxarifadoId;
 }
 
-<form method="post">
-    <input asp-for="Id" hidden />
-    <h3 class="mb-5">Detalhes do Produto</h3>
-    <div class="row">
-        <div class="col-md-4">
-            <img src="data:image;base64,@Convert.ToBase64String(@Model.FotoPDF)" alt="Foto do produto">
+<input asp-for="Id" hidden />
+<h3 class="mb-5">Detalhes do Produto</h3>
+<div class="row">
+    <div class="col-md-4">
+        <img src="data:image;base64,@Convert.ToBase64String(@Model.FotoPDF)" alt="Foto do produto">
+    </div>
+    <div class="col-md-4">
+        <h3>@Model.Descricao</h3>
+        <p class="mb-4">@Model.CodigoDeCompra</p>
+        <p class="mb-4 text-black">
+            <b>
+                @Model.Valor.ToString("C")
+            </b>
+        </p>
+        <div class="row text-black">
+            <label class="col-md-2 control-label">Quantidade</label>
+            <input asp-for="Quantidade" class="form-control" />
+            <span asp-validation-for="Quantidade" class="text-danger"></span>
         </div>
-        <div class="col-md-4">
-            <h3>@Model.Descricao</h3>
-            <p class="mb-4">@Model.CodigoDeCompra</p>
-            <p class="mb-4 text-black">
-                <b>
-                    @Model.Valor;(@Model.Quantidade)
-                </b>
-            </p>
-            <div class="row text-black">
-                <label class="col-md-2 control-label">Quantidade</label>
-                <input asp-for="Quantidade" class="form-control" />
-                <span asp-validation-for="Quantidade" class="text-danger"></span>
+        <div class="row">
+            <div class="col-5 col-md-5 mb-5">
+                <a asp-action="ProdutosIndisponiveis" asp-route-almoxarifadoId="@almoxarifadoId" class="btn btn-outline-info">Voltar para lista</a>
             </div>
-            <div class="row">
-                <div class="col-5 col-md-5 mb-5">
-                    <a asp-action="ProdutosIndisponiveis" asp-route-almoxarifadoId="@almoxarifadoId"  class="btn btn-outline-info">Voltar para lista</a>
-                </div>
-                <div class="col-5 col-md-5">
-                    <button type="submit" class="btn btn-outline-success">add to Cart</button>
-                </div>
-            </div>
+            <a class="btn btn-primary" id="cartButton" asp-controller="Cart" asp-action="AdicionarItemNoCarrinhoCompra" asp-route-id="@Model.Id" asp-route-quantidade=""> Inluir no Carrinho</a>
         </div>
     </div>
-</form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#cartButton').click(function () {
+                var quantidade = $('[name="Quantidade"]').val(); // Captura o valor do input
+                var url = $(this).attr('href'); // Captura a URL do link
+
+                // Adiciona o valor da quantidade como parâmetro na URL
+                var novaUrl = url + (url.indexOf('?') === -1 ? '?' : '&') + 'asp-route-quantidade=' + quantidade;
+
+                $(this).attr('href', novaUrl); // Atualiza o atributo href do link com o novo URL
+            });
+        });
+    </script>
+}

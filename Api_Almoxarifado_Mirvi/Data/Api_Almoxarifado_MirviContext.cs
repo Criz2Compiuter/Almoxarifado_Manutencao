@@ -20,7 +20,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public DbSet<Repartição> Repartição { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<HistoricoDesconto> HistoricosDescontos { get; set; }
-        public DbSet<CartBuyItem> CartBuyItems { get; set; }
+        public DbSet<CarrinhoCompraItem> CarrinhoCompraItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

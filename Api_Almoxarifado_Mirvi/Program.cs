@@ -14,6 +14,9 @@ options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<CorredorService>();
 builder.Services.AddScoped<PrateleiraService>();
@@ -23,9 +26,6 @@ builder.Services.AddScoped<AlmoxarifadoService>();
 builder.Services.AddScoped<RepartiçõesService>();
 builder.Services.AddScoped<MaquinasService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped(cp => CartBuy.GetCart(cp));
-builder.Services.AddMvc();
-
 
 builder.Services.AddHttpClient();
 
@@ -71,9 +71,11 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRolesInitial>();
 builder.Services.AddScoped<ISeedUserClaimsInitial, SeedUserClaimsInitial>();
-
-builder.Services.AddMemoryCache();
-builder.Services.AddSession();
+builder.Services.AddScoped(sp =>
+{
+    var serviceProvider = sp.GetRequiredService<IServiceProvider>();
+    return CarrinhoCompra.GetCart(serviceProvider);
+});
 
 var app = builder.Build();
 

@@ -58,9 +58,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.ToTable("Almoxarifado");
                 });
 
-            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartBuyItem", b =>
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CarrinhoCompraItem", b =>
                 {
-                    b.Property<string>("CartBuyItemId")
+                    b.Property<string>("CarrinhoCompraItemId")
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("CarrinhoCompraId")
@@ -74,11 +74,11 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("CartBuyItemId");
+                    b.HasKey("CarrinhoCompraItemId");
 
                     b.HasIndex("ProdutoId");
 
-                    b.ToTable("CartBuyItems");
+                    b.ToTable("CarrinhoCompraItem");
                 });
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.Corredor", b =>
@@ -508,7 +508,7 @@ namespace Api_Almoxarifado_Mirvi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CartBuyItem", b =>
+            modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CarrinhoCompraItem", b =>
                 {
                     b.HasOne("Api_Almoxarifado_Mirvi.Models.Produto", "Produto")
                         .WithMany()
