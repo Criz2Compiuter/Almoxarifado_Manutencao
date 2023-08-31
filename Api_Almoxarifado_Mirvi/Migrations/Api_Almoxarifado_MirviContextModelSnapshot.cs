@@ -60,8 +60,9 @@ namespace Api_Almoxarifado_Mirvi.Migrations
 
             modelBuilder.Entity("Api_Almoxarifado_Mirvi.Models.CarrinhoCompraItem", b =>
                 {
-                    b.Property<string>("CarrinhoCompraItemId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("CarrinhoCompraItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<string>("CarrinhoCompraId")
                         .IsRequired()

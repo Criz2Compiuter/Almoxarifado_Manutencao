@@ -59,6 +59,7 @@ namespace Api_Almoxarifado_Mirvi.Models
         public string? QuantidadeTotalInstalada { get; set; }
         public byte[] FotoPDF { get; set; }
         public List<HistoricoDesconto> HistoricoDescontos { get; set; }
+        public ICollection<CarrinhoCompraItem>? CarrinhoCompraItem { get; set; }
 
         public Produto()
         {

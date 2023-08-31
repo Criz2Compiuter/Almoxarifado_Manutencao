@@ -29,10 +29,10 @@ public class CarrinhoCompra
         };
     }
 
-    public void AdicionarAoCarrinho(Produto produto, int quantidade)
+    public void AdicionarAoCarrinho(Produto produto)
     {
         var carrinhoCompraItem = _context.CarrinhoCompraItem.SingleOrDefault(
-            s => s.Produto.Id == produto.Id && s.CarrinhoCompraItemId == CarrinhoCompraId);
+            s => s.Produto.Id == produto.Id && s.CarrinhoCompraId == CarrinhoCompraId);
 
         if (carrinhoCompraItem == null)
         {
@@ -40,7 +40,7 @@ public class CarrinhoCompra
             {
                 CarrinhoCompraId = CarrinhoCompraId,
                 Produto = produto,
-                Quantidade = quantidade
+                Quantidade = 1
             };
             _context.CarrinhoCompraItem.Add(carrinhoCompraItem);
         }

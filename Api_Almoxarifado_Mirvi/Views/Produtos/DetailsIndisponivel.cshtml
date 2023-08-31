@@ -27,11 +27,11 @@
             <div class="col-5 col-md-5 mb-5">
                 <a asp-action="ProdutosIndisponiveis" asp-route-almoxarifadoId="@almoxarifadoId" class="btn btn-outline-info">Voltar para lista</a>
             </div>
-            <a class="btn btn-primary" id="cartButton" asp-controller="Cart" asp-action="AdicionarItemNoCarrinhoCompra" asp-route-id="@Model.Id" asp-route-quantidade=""> Inluir no Carrinho</a>
+            <a class="btn btn-primary" id="cartButton" asp-controller="Carrinho" asp-action="AdicionarItemNoCarrinhoCompra" asp-route-id="@Model.Id"> Inluir no Carrinho</a>
         </div>
     </div>
 </div>
-
+@* 
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -46,4 +46,4 @@
             });
         });
     </script>
-}
+} *@

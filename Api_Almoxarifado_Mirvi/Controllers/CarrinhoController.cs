@@ -16,7 +16,7 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             _carrinhoCompra = carrinhoCompra;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var itens = _carrinhoCompra.GetCarrinhoItens();
             _carrinhoCompra.CarrinhoCompraItens = itens;
@@ -30,13 +30,13 @@ namespace Api_Almoxarifado_Mirvi.Controllers
             return View(carrinhoCompraViewModel);
         }
 
-        public async Task<RedirectToActionResult> AdicionarItemNoCarrinhoCompra(int id, int quantidade)
+        public async Task<RedirectToActionResult> AdicionarItemNoCarrinhoCompra(int id)
         {
             var produtoSelecionado = await _produtosService.FindByIdAsync(id);
 
             if (produtoSelecionado != null)
             {
-                _carrinhoCompra.AdicionarAoCarrinho(produtoSelecionado, quantidade);
+                _carrinhoCompra.AdicionarAoCarrinho(produtoSelecionado);
             }
             
             return RedirectToAction("Index");

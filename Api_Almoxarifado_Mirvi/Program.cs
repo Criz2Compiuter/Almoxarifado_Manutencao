@@ -144,11 +144,11 @@ async Task CriarPerfisUsuariosAsync(WebApplication app)
 
     using (var scope = scopedFactory.CreateScope())
     {
-        //var service = scope?.ServiceProvider.GetService<ISeedUserRoleInitial>();
-        //await service.SeedRolesAsync();
-        //await service.SeedUsersAsync();
+        var serviceRoles = scope?.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        await serviceRoles.SeedRolesAsync();
+        await serviceRoles.SeedUsersAsync();
 
-        var service = scope.ServiceProvider.GetService<ISeedUserClaimsInitial>();
-        await service.SeedUserClaims();
+        var serviceClaim = scope.ServiceProvider.GetService<ISeedUserClaimsInitial>();
+        await serviceClaim.SeedUserClaims();
     }
 }
